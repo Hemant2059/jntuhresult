@@ -39,11 +39,11 @@ export const metadata = {
     "JNTU Subject-wise Marks",
   ],
   openGraph: {
-    title: "JNTU Results – Fastest Result Checker",
+    title: "JNTUH Results – Fastest Result Checker",
     description:
-      "Check JNTU B.Tech/M.Tech results instantly with SGPA + CGPA. Accurate, fast, student-friendly.",
+      "Check JNTUH B.Tech/B.Pharmacy results instantly with SGPA + CGPA. Accurate, fast, student-friendly.",
     url: "https://jntuhresultbp.vercel.app",
-    siteName: "JNTU Results Portal",
+    siteName: "JNTUH Results Portal",
     images: [
       {
         url: "/og-image.png",
@@ -56,8 +56,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JNTU Results – Instant Result Checker",
-    description: "Fastest JNTU result lookup.",
+    title: "JNTUH Results – Instant Result Checker",
+    description: "Fastest JNTUH result lookup.",
     images: ["/og-image.png"],
   },
   icons: {
