@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL("https://jntuhresultbp.vercel.app"),
   title: {
-    default: "JNTU Results | Fast & Accurate B.Tech Results Checker",
+    default:
+      "JNTUH Results | Fast & Accurate B.Tech and B.Pharmacy Results Checker",
     template: "%s | JNTU Results",
   },
   description:
