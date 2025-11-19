@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
@@ -14,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://yourwebsite.com"),
+  metadataBase: new URL("https://jntuhresultbp.vercel.app"),
   title: {
     default: "JNTU Results | Fast & Accurate B.Tech Results Checker",
     template: "%s | JNTU Results",
