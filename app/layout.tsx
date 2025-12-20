@@ -102,9 +102,8 @@ export default function RootLayout({
               url: "https://jntuhresultbp.vercel.app",
               potentialAction: {
                 "@type": "SearchAction",
-                target:
-                  "https://jntuhresultbp.vercel.app/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
+                target: "https://jntuhresultbp.vercel.app/academic",
+                "query-input": "required hallticket=search_term_string",
               },
             }),
           }}
