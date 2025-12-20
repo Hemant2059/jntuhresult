@@ -173,6 +173,10 @@ export default function ClassResultForm() {
             Enter your hall ticket number, select a semester, and click search
             to view results
           </p>
+          <div>
+            <p>Starting hallticket number: e.g. 25XXXXXX01</p>
+            <p>Ending hallticket number: e.g. 25XXXXXXA9</p>
+          </div>
         </Card>
       )}
     </div>

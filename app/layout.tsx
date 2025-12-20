@@ -91,23 +91,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "JNTUH Results Portal",
-            url: "https://jntuhresultbp.vercel.app",
-            potentialAction: {
-              "@type": "SearchAction",
-              target:
-                "https://jntuhresultbp.vercel.app/search?q={search_term_string}",
-              "query-input": "required name=search_term_string",
-            },
-          }),
-        }}
-      />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "JNTUH Results Portal",
+              url: "https://jntuhresultbp.vercel.app",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://jntuhresultbp.vercel.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
