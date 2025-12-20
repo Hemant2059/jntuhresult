@@ -36,8 +36,6 @@ export const metadata = {
     "Engineering Results",
     "University Results",
     "Fast Result Checker",
-    "Accurate Results",
-    "Student Portal",
     "JNTU Result Analysis",
     "JNTU Backlog Info",
     "JNTU Subject-wise Marks",
@@ -63,7 +61,7 @@ export const metadata = {
     description:
       "Check JNTUH B.Tech/B.Pharmacy results instantly with SGPA + CGPA. Accurate, fast, student-friendly.",
     url: "https://jntuhresultbp.vercel.app",
-    siteName: "JNTUH Results Portal",
+    siteName: "JNTUH Results Vercel",
     images: [
       {
         url: "/og-image.png",
@@ -102,7 +100,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "JNTUH Results Portal",
+              name: "JNTUH Results Vercel",
               url: "https://jntuhresultbp.vercel.app",
               potentialAction: {
                 "@type": "SearchAction",

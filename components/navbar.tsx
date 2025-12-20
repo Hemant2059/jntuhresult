@@ -18,10 +18,13 @@ const Navbar = () => {
   const closeMenu = () => setOpen(false);
 
   return (
-    <nav className="p-4 flex items-center justify-between mx-4 border-b relative print:hidden">
+    <nav className="p-4 flex items-center justify-between mx-4 border-b relative print:hidden ">
       {/* Logo */}
-      <Link href="/" className="text-2xl font-bold hover:opacity-80 transition">
-        Jntuh Result
+      <Link
+        href="/"
+        className="text-2xl md:text-4xl font-bold hover:opacity-80 transition text-blue-700"
+      >
+        JNTUH RESULT
       </Link>
 
       {/* Desktop Menu */}
