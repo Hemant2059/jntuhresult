@@ -37,6 +37,22 @@ export const metadata = {
     "JNTU Result Analysis",
     "JNTU Backlog Info",
     "JNTU Subject-wise Marks",
+    "btech 1-1 results",
+    "btech 1-2 results",
+    "btech 2-1 results",
+    "btech 2-2 results",
+    "btech 3-1 results",
+    "btech 3-2 results",
+    "btech 4-1 results",
+    "btech 4-2 results",
+    "bpharmcy 1-1 results",
+    "bpharmcy 1-2 results",
+    "bpharmcy 2-1 results",
+    "bpharmcy 2-2 results",
+    "bpharmcy 3-1 results",
+    "bpharmcy 3-2 results",
+    "bpharmcy 4-1 results",
+    "bpharmcy 4-2 results",
   ],
   openGraph: {
     title: "JNTUH Results – Fastest Result Checker",
@@ -63,6 +79,9 @@ export const metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  alternates: {
+    canonical: "https://jntuhresultbp.vercel.app",
+  },
 };
 
 export default function RootLayout({
@@ -77,11 +96,15 @@ export default function RootLayout({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: "JNTU Results Portal",
-            url: "https://yourwebsite.com",
-            logo: "https://yourwebsite.com/logo.png",
-            sameAs: ["https://facebook.com", "https://instagram.com"],
+            "@type": "WebSite",
+            name: "JNTUH Results Portal",
+            url: "https://jntuhresultbp.vercel.app",
+            potentialAction: {
+              "@type": "SearchAction",
+              target:
+                "https://jntuhresultbp.vercel.app/search?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
           }),
         }}
       />
