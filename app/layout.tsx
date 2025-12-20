@@ -16,18 +16,22 @@ export const metadata = {
   metadataBase: new URL("https://jntuhresultbp.vercel.app"),
   title: {
     default:
-      "JNTUH Results | Fast & Accurate B.Tech and B.Pharmacy Results Checker",
-    template: "%s | JNTU Results",
+      "JNTUH Results Vercel | Fast & Accurate B.Tech and B.Pharmacy Results Checker",
+    template: "%s | JNTUH Results",
   },
   description:
-    "Instant JNTU B.Tech and B.Pharmacy results checker with SGPA, CGPA calculator, backlog info, hall ticket search, and subject-wise analysis.",
+    "Instant JNTUH B.Tech and B.Pharmacy results checker with SGPA, CGPA calculator, backlog info, hall ticket search, and subject-wise analysis.",
   keywords: [
+    "jntuh vercel",
+    "jntuh results vercel",
+    "jntuh",
+    "jntuh results",
     "JNTU Results",
     "JNTUH B.Tech Results",
     "JNTUH B.Pharmacy Results",
     "SGPA Calculator",
     "CGPA Calculator",
-    "JNTU Hall Ticket",
+    "JNTUH Hall Ticket",
     "Semester Result Checker",
     "Engineering Results",
     "University Results",
