@@ -1,5 +1,2 @@
 User-agent: *
 Sitemap: https://jntuhresultbp.vercel.app/sitmap.xml
-
-import { MetadataRoute } from 'next'
-
