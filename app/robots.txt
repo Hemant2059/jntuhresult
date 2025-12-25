@@ -1,12 +1,5 @@
+User-agent: *
+Sitemap: https://jntuhresultbp.vercel.app/sitmap.xml
+
 import { MetadataRoute } from 'next'
 
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/api/', '/admin/'], // Don't crawl private backend folders
-    },
-    sitemap: 'https://jntuhresultbp.vercel.app/sitemap.xml',
-  }
-}
