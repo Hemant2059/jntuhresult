@@ -2,7 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, GraduationCap, BookOpen, Users, Search, Download, BarChart3 } from "lucide-react";
+import {
+  ArrowRight,
+  GraduationCap,
+  BookOpen,
+  Users,
+  Search,
+  Download,
+  BarChart3,
+} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -39,7 +47,8 @@ export default function Home() {
   const highlights = [
     {
       title: "Instant Search",
-      description: "Get your results in milliseconds with our optimized engine.",
+      description:
+        "Get your results in milliseconds with our optimized engine.",
       icon: <Search className="h-5 w-5" />,
     },
     {
@@ -106,9 +115,9 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* ------------ HERO SECTION ------------ */}
       <section className="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-32">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.blue.50),white)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-blue-50),white)]" />
         <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-blue-600/10 ring-1 ring-blue-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
-        
+
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <motion.div
@@ -116,40 +125,60 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 mb-6">
-                Official JNTUH Results Portal
-              </span>
+              <Link
+                href={"http://results.jntuh.ac.in"}
+                target="_blank"
+                className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 mb-6"
+              >
+                For Official JNTUH Results Portal Click Here
+              </Link>
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
             >
-              Check Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">JNTUH Results</span> Instantly
+              Check Your{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">
+                JNTUH Results
+              </span>{" "}
+              Instantly
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mt-6 text-lg leading-8 text-gray-600"
             >
-              The fastest way to access your academic performance. Clean, intuitive, and built for B.Tech & B.Pharmacy students.
+              The fastest way to access your academic performance. Clean,
+              intuitive, and built for B.Tech & B.Pharmacy students.
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-10 flex items-center justify-center gap-x-6"
             >
-              <Button asChild size="lg" className="rounded-full px-8 shadow-lg shadow-blue-500/25">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full px-8 shadow-lg shadow-blue-500/25"
+              >
                 <Link href="/academic">Check My Result</Link>
               </Button>
-              <Link href="/classresult" className="text-sm font-semibold leading-6 text-gray-900 flex items-center gap-1 group">
-                Class Ranking <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              <Link
+                href="/classresult"
+                className="text-sm font-semibold leading-6 text-gray-900 flex items-center gap-1 group"
+              >
+                Class Ranking{" "}
+                <ArrowRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </Link>
             </motion.div>
           </div>
@@ -161,7 +190,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-3 lg:gap-x-12">
             {highlights.map((item, index) => (
-              <motion.div 
+              <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -173,8 +202,12 @@ export default function Home() {
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900">{item.title}</h3>
-                  <p className="mt-1 text-xs text-gray-500">{item.description}</p>
+                  <h3 className="text-sm font-semibold text-gray-900">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-gray-500">
+                    {item.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -198,11 +231,17 @@ export default function Home() {
                   href={item.href}
                   className="group relative flex flex-col items-start p-8 border rounded-3xl transition-all hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-500/10 bg-white h-full"
                 >
-                  <div className={`p-3 rounded-2xl bg-${item.color}-50 group-hover:bg-${item.color}-100 transition-colors mb-6`}>
+                  <div
+                    className={`p-3 rounded-2xl bg-${item.color}-50 group-hover:bg-${item.color}-100 transition-colors mb-6`}
+                  >
                     {item.icon}
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{item.title}</h2>
-                  <p className="text-gray-600 leading-relaxed mb-8 flex-grow">{item.description}</p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    {item.title}
+                  </h2>
+                  <p className="text-gray-600 leading-relaxed mb-8 grow">
+                    {item.description}
+                  </p>
 
                   <div className="flex items-center font-bold text-blue-600 group-hover:gap-4 transition-all gap-2">
                     Explore <ArrowRight className="h-4 w-4" />
@@ -257,7 +296,10 @@ export default function Home() {
       {/* ------------ FOOTER ------------ */}
       <footer className="py-12 text-center text-gray-500 text-sm border-t border-gray-100">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} JNTUH Result Dashboard. Built for students with ❤️</p>
+          <p>
+            © {new Date().getFullYear()} JNTUH Result Dashboard. Built for
+            students with ❤️
+          </p>
         </div>
       </footer>
     </div>
