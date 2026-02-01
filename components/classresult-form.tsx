@@ -58,7 +58,7 @@ export default function ClassResultForm() {
   return (
     <div className="space-y-6 my-4 max-w-full px-4 sm:px-6">
       <Card className="max-w-4xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
-        <div className="p-1 bg-gradient-to-r from-purple-600 to-indigo-600" />
+        <div className="p-1 bg-linear-to-r from-purple-600 to-indigo-600" />
         <CardContent className="p-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Class Analysis</h2>
