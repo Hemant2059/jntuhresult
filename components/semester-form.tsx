@@ -3,8 +3,8 @@
 import { useState, useRef, startTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { AlertCircle, Loader2, Search, BookOpen } from "lucide-react";
 import { semesterResult } from "@/action/results";
 import SemesterTable from "./semester-table";
 import { NativeSelect, NativeSelectOption } from "./ui/native-select";
@@ -47,74 +47,90 @@ export default function SemesterForm() {
 
   return (
     <div className="space-y-6 my-4">
-      {/* FORM */}
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="space-y-4 max-w-lg mx-auto print:hidden"
-      >
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Input
-            type="text"
-            placeholder="Enter your hall ticket number"
-            name="hallticket"
-            value={hallticket}
-            onChange={(e) => setHallticket(e.target.value.toUpperCase())}
-            className="flex-1"
-            maxLength={10}
-            minLength={10}
-            disabled={isPending}
-          />
+      <Card className="max-w-2xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
+        <div className="p-1 bg-gradient-to-r from-indigo-600 to-blue-600" />
+        <CardContent className="p-8">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Semester Result</h2>
+            <p className="text-gray-500 text-sm mt-1">Check your performance for a specific semester.</p>
+          </div>
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Hall Ticket No"
+                  name="hallticket"
+                  value={hallticket}
+                  onChange={(e) => setHallticket(e.target.value.toUpperCase())}
+                  className="pl-10 h-12 rounded-xl border-gray-200 focus:border-indigo-500 transition-all"
+                  maxLength={10}
+                  minLength={10}
+                  disabled={isPending}
+                />
+              </div>
 
-          <NativeSelect
-            name="semester"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-            disabled={isPending}
-          >
-            <NativeSelectOption value="">Select a semester</NativeSelectOption>
-            {SEMESTERS.map((sem) => (
-              <NativeSelectOption key={sem.value} value={sem.value}>
-                {sem.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+              <div className="relative">
+                <NativeSelect
+                  name="semester"
+                  value={semester}
+                  onChange={(e) => setSemester(e.target.value)}
+                  disabled={isPending}
+                  className="h-12 w-full rounded-xl border-gray-200 focus:border-indigo-500"
+                >
+                  <NativeSelectOption value="">Select Semester</NativeSelectOption>
+                  {SEMESTERS.map((sem) => (
+                    <NativeSelectOption key={sem.value} value={sem.value}>
+                      {sem.label}
+                    </NativeSelectOption>
+                  ))}
+                </NativeSelect>
+              </div>
+            </div>
 
-          <Button
-            type="submit"
-            disabled={isPending || !isFormValid}
-            className="w-full sm:w-auto"
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Searching...
-              </>
-            ) : (
-              "Search"
-            )}
-          </Button>
-        </div>
-      </form>
+            <Button
+              type="submit"
+              disabled={isPending || !isFormValid}
+              className="w-full h-12 rounded-xl bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 transition-all active:scale-95 text-base font-semibold"
+            >
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Searching Results...
+                </>
+              ) : (
+                "Show Result"
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
 
       {/* Loading */}
       {isPending && (
-        <Card className="p-8 text-center space-y-2">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">
-            Fetching your semester results...
-          </p>
+        <Card className="max-w-2xl mx-auto p-12 text-center space-y-4 border-none shadow-none bg-transparent">
+          <div className="relative inline-block">
+            <div className="absolute inset-0 rounded-full bg-indigo-100 animate-ping opacity-25" />
+            <Loader2 className="h-12 w-12 animate-spin relative text-indigo-600" />
+          </div>
+          <div className="space-y-1">
+            <p className="text-lg font-semibold text-gray-900">Loading semester data</p>
+            <p className="text-gray-500">Checking JNTUH database...</p>
+          </div>
         </Card>
       )}
 
       {/* Error */}
       {!isPending && state.error && (
-        <Card className="p-6 border-destructive/50 bg-destructive/5 max-w-2xl mx-auto">
-          <div className="flex gap-3">
-            <AlertCircle className="h-5 w-5 text-destructive mt-0.5" />
-            <div>
-              <p className="font-semibold text-destructive">Error</p>
-              <p className="text-sm">{state.error}</p>
+        <Card className="max-w-2xl mx-auto p-6 border-red-100 bg-red-50/50 rounded-2xl">
+          <div className="flex gap-4">
+            <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+              <AlertCircle className="h-5 w-5 text-red-600" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-bold text-red-900">Error Occurred</p>
+              <p className="text-sm text-red-700">{state.error}</p>
             </div>
           </div>
         </Card>
@@ -122,19 +138,17 @@ export default function SemesterForm() {
 
       {/* Success */}
       {state.success && state.data && !isPending && (
-        <div className="max-w-2xl mx-auto space-y-4">
+        <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <SemesterTable data={state.data} semester={semester} />
         </div>
       )}
 
       {/* Empty */}
       {!isPending && !state.success && !state.error && (
-        <Card className="p-8 text-center text-muted-foreground max-w-2xl mx-auto">
-          <p>
-            Enter your hall ticket number, select a semester, and click search
-            to view results.
-          </p>
-        </Card>
+        <div className="max-w-2xl mx-auto py-12 text-center opacity-40">
+          <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-4" />
+          <p className="text-gray-500 font-medium">Select semester and enter hall ticket</p>
+        </div>
       )}
     </div>
   );

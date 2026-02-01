@@ -3,8 +3,8 @@
 import { useRef, useState, startTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { AlertCircle, Loader2, Users, Search } from "lucide-react";
 import { classResult } from "@/action/results";
 import {
   NativeSelect,
@@ -32,7 +32,7 @@ export default function ClassResultForm() {
 
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
-  const [semester, setSemester] = useState("");
+  const [semester, setSemester] = useState("1-1");
 
   const [state, formAction, isPending] = useActionState(classResult, {
     success: false,
@@ -40,7 +40,8 @@ export default function ClassResultForm() {
     error: null,
   });
 
-  const isFormValid = start.trim() && end.trim() && semester !== "sem";
+  const isFormValid =
+    start.trim() && end.trim() && semester !== "sem" && semester !== "";
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,90 +56,112 @@ export default function ClassResultForm() {
   };
 
   return (
-    <div className="space-y-6 my-4 max-w-screen px-6">
-      {/* Form */}
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="space-y-4 print:hidden max-w-2xl mx-auto"
-      >
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Input
-            type="text"
-            name="start"
-            placeholder="Enter starting hall ticket number"
-            value={start}
-            onChange={(e) => setStart(e.target.value.toUpperCase())}
-            className="flex-1"
-            maxLength={10}
-            minLength={10}
-            disabled={isPending}
-          />
+    <div className="space-y-6 my-4 max-w-full px-4 sm:px-6">
+      <Card className="max-w-4xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
+        <div className="p-1 bg-gradient-to-r from-purple-600 to-indigo-600" />
+        <CardContent className="p-8">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Class Analysis</h2>
+            <p className="text-gray-500 text-sm mt-1">
+              Generate results and performance charts for an entire class range.
+            </p>
+          </div>
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="relative">
+                <Input
+                  type="text"
+                  name="start"
+                  placeholder="Start Hall Ticket"
+                  value={start}
+                  onChange={(e) => setStart(e.target.value.toUpperCase())}
+                  className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
+                  maxLength={10}
+                  minLength={10}
+                  disabled={isPending}
+                />
+              </div>
 
-          <Input
-            type="text"
-            name="end"
-            placeholder="Enter ending hall ticket number"
-            value={end}
-            onChange={(e) => setEnd(e.target.value.toUpperCase())}
-            className="flex-1"
-            maxLength={10}
-            minLength={10}
-            disabled={isPending}
-          />
+              <div className="relative">
+                <Input
+                  type="text"
+                  name="end"
+                  placeholder="End Hall Ticket"
+                  value={end}
+                  onChange={(e) => setEnd(e.target.value.toUpperCase())}
+                  className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
+                  maxLength={10}
+                  minLength={10}
+                  disabled={isPending}
+                />
+              </div>
 
-          <NativeSelect
-            name="semester"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-            disabled={isPending}
-          >
-            <NativeSelectOption value="sem" disabled>
-              Semester
-            </NativeSelectOption>
+              <div className="relative">
+                <NativeSelect
+                  name="semester"
+                  value={semester}
+                  onChange={(e) => setSemester(e.target.value)}
+                  disabled={isPending}
+                  className="h-12 w-full rounded-xl border-gray-200 focus:border-purple-500"
+                >
+                  <NativeSelectOption value="sem" disabled>
+                    Semester
+                  </NativeSelectOption>
+                  {SEMESTERS.map((sem) => (
+                    <NativeSelectOption key={sem.value} value={sem.value}>
+                      {sem.label}
+                    </NativeSelectOption>
+                  ))}
+                </NativeSelect>
+              </div>
+            </div>
 
-            {SEMESTERS.map((sem) => (
-              <NativeSelectOption key={sem.value} value={sem.value}>
-                {sem.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
-
-          <Button
-            type="submit"
-            disabled={isPending || !isFormValid}
-            className="w-full sm:w-auto"
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Searching...
-              </>
-            ) : (
-              "Search"
-            )}
-          </Button>
-        </div>
-      </form>
+            <Button
+              type="submit"
+              disabled={isPending || !isFormValid}
+              className="w-full h-12 rounded-xl bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-500/20 transition-all text-base font-semibold"
+            >
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Analyzing Class Results...
+                </>
+              ) : (
+                "Run Analysis"
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
 
       {/* Loading */}
       {isPending && (
-        <Card className="p-8 text-center space-y-2">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-          <p className="text-muted-foreground">
-            Fetching your semester results...
-          </p>
+        <Card className="max-w-2xl mx-auto p-12 text-center space-y-4 border-none shadow-none bg-transparent">
+          <div className="relative inline-block">
+            <div className="absolute inset-0 rounded-full bg-purple-100 animate-ping opacity-25" />
+            <Loader2 className="h-12 w-12 animate-spin relative text-purple-600" />
+          </div>
+          <div className="space-y-1">
+            <p className="text-lg font-semibold text-gray-900">
+              Processing range
+            </p>
+            <p className="text-gray-500">
+              This may take longer for large classes...
+            </p>
+          </div>
         </Card>
       )}
 
       {/* Error */}
       {state.error && !isPending && (
-        <Card className="p-6 border-destructive/50 bg-destructive/5 max-w-2xl mx-auto">
-          <div className="flex gap-3">
-            <AlertCircle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+        <Card className="max-w-2xl mx-auto p-6 border-red-100 bg-red-50/50 rounded-2xl">
+          <div className="flex gap-4">
+            <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+              <AlertCircle className="h-5 w-5 text-red-600" />
+            </div>
             <div className="space-y-1">
-              <p className="font-semibold text-destructive">Error</p>
-              <p className="text-sm">{state.error}</p>
+              <p className="font-bold text-red-900">Analysis Error</p>
+              <p className="text-sm text-red-700">{state.error}</p>
             </div>
           </div>
         </Card>
@@ -146,18 +169,37 @@ export default function ClassResultForm() {
 
       {/* Success */}
       {state.success && state.data && !isPending && (
-        <div className="space-y-4">
-          <Tabs defaultValue="classTable">
-            <TabsList>
-              <TabsTrigger value="classTable">Class Result</TabsTrigger>
-              <TabsTrigger value="dataTable">Table Result</TabsTrigger>
-              <TabsTrigger value="datachart">Chart Result</TabsTrigger>
-            </TabsList>
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <Tabs defaultValue="classTable" className="w-full">
+            <div className="flex justify-center mb-6">
+              <TabsList className="bg-gray-100/80 p-1 rounded-2xl border-none h-auto gap-1">
+                <TabsTrigger
+                  value="classTable"
+                  className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                >
+                  Class Result
+                </TabsTrigger>
+                <TabsTrigger
+                  value="dataTable"
+                  className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                >
+                  Table View
+                </TabsTrigger>
+                <TabsTrigger
+                  value="datachart"
+                  className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                >
+                  Visual Chart
+                </TabsTrigger>
+              </TabsList>
+            </div>
             <TabsContent value="classTable">
               <ClassResultTable data={state.data} semester={semester} />
             </TabsContent>
             <TabsContent value="dataTable">
-              <DataTable data={state.data} semester={semester} />
+              <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 w-full max-w-[100vw] overflow-hidden">
+                <DataTable data={state.data} semester={semester} />
+              </div>
             </TabsContent>
             <TabsContent value="datachart">
               <SubjectPassFailChart data={state.data} />
@@ -168,14 +210,20 @@ export default function ClassResultForm() {
 
       {/* Empty */}
       {!isPending && !state.success && !state.error && (
-        <Card className="p-8 text-center text-muted-foreground max-w-2xl mx-auto">
-          <p>
-            Enter your hall ticket number, select a semester, and click search
-            to view results
+        <Card className="max-w-2xl mx-auto p-12 text-center bg-gray-50/50 border-dashed border-2 border-gray-200 rounded-3xl">
+          <Users className="h-12 w-12 mx-auto text-gray-300 mb-4" />
+          <p className="text-gray-500 font-medium mb-6">
+            Enter hall ticket range to start analysis
           </p>
-          <div>
-            <p>Starting hallticket number: e.g. 25XXXXXX01</p>
-            <p>Ending hallticket number: e.g. 25XXXXXXA9</p>
+          <div className="grid grid-cols-2 gap-4 text-xs text-gray-400">
+            <div className="p-3 bg-white rounded-xl border border-gray-100">
+              <p className="font-semibold text-gray-500 mb-1">Starters</p>
+              <p>e.g. 26XXXXXX01</p>
+            </div>
+            <div className="p-3 bg-white rounded-xl border border-gray-100">
+              <p className="font-semibold text-gray-500 mb-1">Enders</p>
+              <p>e.g. 26XXXXXXXXA9</p>
+            </div>
           </div>
         </Card>
       )}

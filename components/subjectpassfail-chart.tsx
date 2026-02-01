@@ -10,6 +10,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Download, Loader2 } from "lucide-react";
+import { downloadAsPDF } from "@/lib/download-pdf";
 
 /* ---------- Types ---------- */
 type Details = {
@@ -84,15 +87,43 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
     return { chartData: subjectStats, toppers };
   }, [data]);
 
+  const [isExporting, setIsExporting] = React.useState(false);
+
+  const handleDownload = async () => {
+    setIsExporting(true);
+    try {
+      await downloadAsPDF("class-chart-analysis", "Class_Performance_Analysis");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   return (
     <Card className="w-full space-y-6 p-4">
-      <CardHeader>
-        <CardTitle className="text-lg font-semibold">
-          Subject-wise Pass & Fail Percentage
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
+        <CardTitle className="text-xl font-bold text-gray-900">
+          Performance Analysis
         </CardTitle>
+        <Button
+          onClick={handleDownload}
+          disabled={isExporting}
+          variant="outline"
+          size="sm"
+          className="rounded-xl gap-2 border-dashed"
+        >
+          {isExporting ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Download className="h-4 w-4" />
+          )}
+          {isExporting ? "Generating..." : "Download as PDF"}
+        </Button>
       </CardHeader>
 
-      <CardContent className="w-full">
+      <CardContent className="w-full" id="class-chart-analysis">
+        <div className="mb-8 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+          <p className="text-sm text-gray-500 font-medium text-center">Subject-wise Pass & Fail Distribution</p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* -------- Pie Charts For Each Subject -------- */}
           {chartData.map((item) => (
@@ -137,24 +168,36 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
         </div>
 
         {/* -------- Top 3 Toppers -------- */}
-        <div className="mt-10">
-          <h2 className="text-lg font-semibold mb-3">Top 3 Toppers</h2>
+        <div className="mt-12">
+          <h2 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-yellow-400" />
+            Class Toppers
+          </h2>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {toppers.map((t, index) => (
               <div
                 key={index}
-                className="bg-primary/5 rounded-lg p-3 flex items-center justify-between shadow"
+                className="relative bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div>
-                  <p className="font-medium">
-                    {index + 1}. {t.name}
+                {index === 0 && (
+                  <div className="absolute -top-3 -right-3 bg-yellow-400 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
+                    RANK 1
+                  </div>
+                )}
+                <div className="text-center">
+                  <p className="font-bold text-gray-900 truncate mb-1">
+                    {t.name}
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    Roll No: {t.rollNo}
+                  <p className="text-xs text-gray-500 mb-4">
+                    {t.rollNo}
                   </p>
+                  <div className={`inline-flex items-center justify-center h-12 w-20 rounded-xl font-bold text-xl ${
+                    index === 0 ? "bg-yellow-50 text-yellow-700" : "bg-blue-50 text-blue-700"
+                  }`}>
+                    {t.sgpa}
+                  </div>
                 </div>
-                <div className="text-primary font-bold text-xl">{t.sgpa}</div>
               </div>
             ))}
           </div>

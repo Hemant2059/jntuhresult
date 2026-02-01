@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -18,77 +19,99 @@ const Navbar = () => {
   const closeMenu = () => setOpen(false);
 
   return (
-    <nav className="p-4 flex items-center justify-between mx-4 border-b relative print:hidden ">
-      {/* Logo */}
-      <Link
-        href="/"
-        className="text-2xl md:text-4xl font-bold hover:opacity-80 transition text-blue-700"
-      >
-        JNTUH RESULT
-      </Link>
-
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex items-center gap-6 font-semibold">
-        {navLinks.map((item) => (
-          <li
-            key={item.href}
-            className={
-              pathname === item.href ? "underline font-bold" : "hover:underline"
-            }
+    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md print:hidden">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 px-6 lg:px-8" aria-label="Global">
+        {/* Logo */}
+        <div className="flex lg:flex-1">
+          <Link
+            href="/"
+            className="-m-1.5 p-1.5 text-2xl font-bold tracking-tight text-blue-600 hover:opacity-90 transition-opacity"
           >
-            <Link href={item.href}>{item.label}</Link>
-          </li>
-        ))}
-      </ul>
+            JNTUH RESULT
+          </Link>
+        </div>
 
-      {/* Mobile Toggle Button */}
-      <button
-        className="md:hidden"
-        onClick={() => setOpen(true)}
-        aria-label="Open menu"
-      >
-        <Menu size={28} />
-      </button>
-
-      {/* Dark background overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
-          onClick={closeMenu}
-        />
-      )}
-
-      {/* Slide-In Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-40 p-6 transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl font-semibold">Menu</h2>
-          <button onClick={closeMenu} aria-label="Close menu">
-            <X size={26} />
+        {/* Mobile Toggle Button */}
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
 
-        <ul className="flex flex-col gap-6 font-semibold">
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex lg:gap-x-8">
           {navLinks.map((item) => (
-            <li
+            <Link
               key={item.href}
-              className={
-                pathname === item.href
-                  ? "underline font-bold"
-                  : "hover:underline"
-              }
+              href={item.href}
+              className={`text-sm font-semibold leading-6 transition-colors hover:text-blue-600 ${
+                pathname === item.href ? "text-blue-600" : "text-gray-900"
+              }`}
             >
-              <Link href={item.href} onClick={closeMenu}>
-                {item.label}
-              </Link>
-            </li>
+              {item.label}
+            </Link>
           ))}
-        </ul>
-      </div>
-    </nav>
+        </div>
+
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Button asChild size="sm" variant="outline" className="rounded-full">
+            <Link href="/academic">Search Result</Link>
+          </Button>
+        </div>
+      </nav>
+
+      {/* Mobile Slide-In Sidebar */}
+      {open && (
+        <div className="lg:hidden">
+          {/* Dark background overlay */}
+          <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={closeMenu} />
+          
+          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="flex items-center justify-between">
+              <Link href="/" className="-m-1.5 p-1.5 text-xl font-bold text-blue-600" onClick={closeMenu}>
+                JNTUH RESULT
+              </Link>
+              <button
+                type="button"
+                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                onClick={closeMenu}
+              >
+                <span className="sr-only">Close menu</span>
+                <X className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="space-y-2 py-6">
+                  {navLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMenu}
+                      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 ${
+                        pathname === item.href ? "text-blue-600" : "text-gray-900"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+                <div className="py-6">
+                  <Button asChild className="w-full rounded-xl">
+                    <Link href="/academic" onClick={closeMenu}>Get Started</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

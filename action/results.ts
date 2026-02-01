@@ -33,7 +33,7 @@ export async function academicResult(prevState: any, formData: FormData) {
 
     const response = await fetch(
       `https://jntuh-api.vercel.app/academic?htno=${hallticket}`,
-      { next: { tags: [tag], revalidate: 3600 } }
+      { next: { tags: [tag], revalidate: 3600 } },
     );
 
     if (!response.ok) {
@@ -91,7 +91,7 @@ export async function semesterResult(prevState: any, formData: FormData) {
 
     const response = await fetch(
       `https://jntuh-api.vercel.app/sem?htno=${hallticket}&sem=${semester}`,
-      { next: { tags: [tag], revalidate: 3600 } }
+      { next: { tags: [tag], revalidate: 3600 } },
     );
 
     if (!response.ok)
@@ -141,7 +141,7 @@ export async function classResult(prevState: any, formData: FormData) {
 
     const response = await fetch(
       `https://jntuh-api.vercel.app/classresult?sem=${semester}&start_htno=${start}&end_htno=${end}`,
-      { next: { tags: [tag], revalidate: 3600 } }
+      { next: { tags: [tag], revalidate: 3600 } },
     );
 
     if (!response.ok)

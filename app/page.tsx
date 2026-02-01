@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GraduationCap, BookOpen, Users, Search, Download, BarChart3 } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const features = [
@@ -16,16 +17,40 @@ export default function Home() {
       title: "Academic Result",
       href: "/academic",
       description: "Complete academic overview including CGPA & grade history.",
+      icon: <GraduationCap className="h-6 w-6 text-blue-600" />,
+      color: "blue",
     },
     {
       title: "Semester Result",
       href: "/semester",
       description: "View SGPA, subject-wise marks, and semester performance.",
+      icon: <BookOpen className="h-6 w-6 text-indigo-600" />,
+      color: "indigo",
     },
     {
       title: "Class Result",
       href: "/classresult",
       description: "Check class toppers, rankings, and statistical charts.",
+      icon: <Users className="h-6 w-6 text-purple-600" />,
+      color: "purple",
+    },
+  ];
+
+  const highlights = [
+    {
+      title: "Instant Search",
+      description: "Get your results in milliseconds with our optimized engine.",
+      icon: <Search className="h-5 w-5" />,
+    },
+    {
+      title: "PDF Downloads",
+      description: "Save your results offline with one-click PDF generation.",
+      icon: <Download className="h-5 w-5" />,
+    },
+    {
+      title: "Result Analysis",
+      description: "Visual charts and statistics for performance tracking.",
+      icon: <BarChart3 className="h-5 w-5" />,
     },
   ];
 
@@ -78,86 +103,163 @@ export default function Home() {
   ];
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-16">
+    <div className="min-h-screen bg-white">
       {/* ------------ HERO SECTION ------------ */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-16"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Check Your <span className="text-blue-600">JNTUH Results</span>{" "}
-          Instantly
-        </h1>
+      <section className="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-32">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.blue.50),white)]" />
+        <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-blue-600/10 ring-1 ring-blue-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 mb-6">
+                Official JNTUH Results Portal
+              </span>
+            </motion.div>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+            >
+              Check Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">JNTUH Results</span> Instantly
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-6 text-lg leading-8 text-gray-600"
+            >
+              The fastest way to access your academic performance. Clean, intuitive, and built for B.Tech & B.Pharmacy students.
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-10 flex items-center justify-center gap-x-6"
+            >
+              <Button asChild size="lg" className="rounded-full px-8 shadow-lg shadow-blue-500/25">
+                <Link href="/academic">Check My Result</Link>
+              </Button>
+              <Link href="/classresult" className="text-sm font-semibold leading-6 text-gray-900 flex items-center gap-1 group">
+                Class Ranking <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-          Fast, accurate, and clean interface for all students. Search your
-          result by roll number or browse by category.
-        </p>
-      </motion.section>
+      {/* ------------ HIGHLIGHTS SECTION ------------ */}
+      <section className="py-12 bg-white sm:py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-3 lg:gap-x-12">
+            {highlights.map((item, index) => (
+              <motion.div 
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-x-4 p-4 rounded-2xl bg-gray-50/50 border border-gray-100"
+              >
+                <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-gray-900/5 text-blue-600">
+                  {item.icon}
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900">{item.title}</h3>
+                  <p className="mt-1 text-xs text-gray-500">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ------------ FEATURE CARDS ------------ */}
-      <section className="grid md:grid-cols-3 gap-6 mt-12">
-        {features.map((item, index) => (
-          <motion.div
-            key={item.href}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.15 }}
-          >
-            <Link
-              href={item.href}
-              className="border rounded-xl p-6 shadow-sm hover:shadow-md transition bg-white block"
-            >
-              <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
-              <p className="text-gray-600 text-sm mb-4">{item.description}</p>
+      <section className="py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((item, index) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+              >
+                <Link
+                  href={item.href}
+                  className="group relative flex flex-col items-start p-8 border rounded-3xl transition-all hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-500/10 bg-white h-full"
+                >
+                  <div className={`p-3 rounded-2xl bg-${item.color}-50 group-hover:bg-${item.color}-100 transition-colors mb-6`}>
+                    {item.icon}
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{item.title}</h2>
+                  <p className="text-gray-600 leading-relaxed mb-8 flex-grow">{item.description}</p>
 
-              <div className="flex items-center font-medium text-blue-600">
-                Explore <ArrowRight className="ml-2 h-4 w-4" />
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+                  <div className="flex items-center font-bold text-blue-600 group-hover:gap-4 transition-all gap-2">
+                    Explore <ArrowRight className="h-4 w-4" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ------------ FAQ SECTION ------------ */}
-      <section className="mt-20">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-4 max-w-3xl mx-auto">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Accordion
-                type="single"
-                collapsible
-                className="border rounded-lg"
+      <section className="py-24 bg-gray-50/50 border-t border-gray-100">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Frequently Asked Questions
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Everything you need to know about checking JNTUH results.
+            </p>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <AccordionItem value={`faq-${index}`}>
-                  <AccordionTrigger className="px-4 py-3 font-medium">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="px-4 py-3 text-gray-600">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </motion.div>
-          ))}
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="bg-white border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <AccordionItem value={`faq-${index}`} className="border-none">
+                    <AccordionTrigger className="px-6 py-4 font-semibold text-left">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-gray-600">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ------------ FOOTER ------------ */}
-      <footer className="text-center text-gray-500 text-sm mt-20 ">
-        © {new Date().getFullYear()} JNTUH Result | All Rights Reserved
+      <footer className="py-12 text-center text-gray-500 text-sm border-t border-gray-100">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <p>© {new Date().getFullYear()} JNTUH Result Dashboard. Built for students with ❤️</p>
+        </div>
       </footer>
-    </main>
+    </div>
   );
 }

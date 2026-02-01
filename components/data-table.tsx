@@ -267,7 +267,7 @@ const DataTable: React.FC<ClassResultTableProps> = ({ data, semester }) => {
 
   /* ----- Render ----- */
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-4 ">
       {/* ----- Abbreviation legend ----- */}
       <div className="text-xs text-muted-foreground mt-2">
         <strong>Abbreviations:</strong>{" "}
@@ -282,9 +282,10 @@ const DataTable: React.FC<ClassResultTableProps> = ({ data, semester }) => {
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
         subjects={subjects}
+        semester={semester}
       />
 
-      <div className="rounded-md border border-border overflow-x-auto">
+      <div className="rounded-md border border-border overflow-x-auto" id="class-data-table">
         <Table>
           <TableHeader className="bg-muted">
             <TableRow className="border-b-2">
