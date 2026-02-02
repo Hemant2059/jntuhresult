@@ -167,3 +167,53 @@ export async function classResult(prevState: any, formData: FormData) {
     };
   }
 }
+
+export async function allResult(prevState: any, formData: FormData) {
+  try {
+    const hallticket = formData.get("hallticket") as string;
+
+    // Validate hallticket
+    const parsed = hallticketSchema.safeParse(hallticket);
+    if (!parsed.success) {
+      return {
+        success: false,
+        data: null,
+        error: parsed.error.issues[0].message,
+      };
+    }
+
+    const tag = `all-results-${hallticket}`;
+
+    const response = await fetch(
+      `https://jntuh-api.vercel.app/allresult?htno=${hallticket}`,
+      { next: { tags: [tag], revalidate: 3600 } },
+    );
+
+    if (!response.ok) {
+      return {
+        success: false,
+        data: null,
+        error: "Failed to fetch results. Check hall ticket.",
+      };
+    }
+
+    const data = await response.json();
+
+    if (!data || !data.Results || Object.keys(data.Results).length === 0) {
+      revalidateTag(tag, "default");
+      return {
+        success: false,
+        data: null,
+        error: `No results found for hall ticket: ${hallticket}`,
+      };
+    }
+
+    return { success: true, data, error: null };
+  } catch (error) {
+    return {
+      success: false,
+      data: null,
+      error: "Failed to fetch results. Try again later.",
+    };
+  }
+}

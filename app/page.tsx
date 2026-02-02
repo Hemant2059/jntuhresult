@@ -36,6 +36,13 @@ export default function Home() {
       color: "indigo",
     },
     {
+      title: "All Exam Results",
+      href: "/allresult",
+      description: "Complete history of all exams you have appeared in.",
+      icon: <BarChart3 className="h-6 w-6 text-green-600" />,
+      color: "green",
+    },
+    {
       title: "Class Result",
       href: "/classresult",
       description: "Check class toppers, rankings, and statistical charts.",
@@ -292,16 +299,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ------------ FOOTER ------------ */}
-      <footer className="py-12 text-center text-gray-500 text-sm border-t border-gray-100">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p>
-            © {new Date().getFullYear()} JNTUH Result Dashboard. Built for
-            students with ❤️
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
