@@ -1,15 +1,18 @@
 import SemesterForm from "@/components/semester-form";
 export const metadata = {
-  title: "JNTUH Semester Results",
+  title: "JNTUH Semester Results & SGPA Checker",
   description:
-    "Check JNTUH results, SGPA, CGPA, and semester results instantly.",
+    "Check your JNTUH semester-wise results and SGPA instantly. Fast, accurate access to B.Tech and B.Pharmacy marks sheets for all regulations.",
   keywords: [
-    "JNTUH",
-    "Semester Results",
-    "SGPA",
-    "CGPA",
-    "Results Checker, JNTU, B.Tech result,BPharm result, Class result, jntuh results , result analysis",
+    "JNTUH Semester Results",
+    "JNTUH SGPA Checker",
+    "JNTUH Marks Sheet",
+    "JNTU Results Vercel",
+    "B.Tech Semester Results",
   ],
+  alternates: {
+    canonical: "https://jntuhresultbp.vercel.app/semester",
+  },
 };
 
 const SemesterPage = () => {

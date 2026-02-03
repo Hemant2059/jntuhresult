@@ -32,9 +32,11 @@ type AcademicData = {
 const SemesterTable = ({
   data,
   semester,
+  hideSGPA = false,
 }: {
   data: AcademicData;
   semester: string;
+  hideSGPA?: boolean;
 }) => {
   const { Details, Result, SGPA } = data;
   const name = Details.NAME;
@@ -93,7 +95,7 @@ const SemesterTable = ({
           <div className="mb-8 p-5 bg-gray-50/50 rounded-2xl border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center sm:text-left">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Student</p>
-              <p className="font-bold text-gray-900 break-words">{name}</p>
+              <p className="font-bold text-gray-900 wrap-break-word">{name}</p>
             </div>
             <div className="text-center sm:text-left">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Roll No</p>
@@ -101,7 +103,7 @@ const SemesterTable = ({
             </div>
             <div className="text-center sm:text-left">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Father's Name</p>
-              <p className="font-bold text-gray-900 break-words">{Details.FATHER_NAME}</p>
+              <p className="font-bold text-gray-900 wrap-break-word">{Details.FATHER_NAME}</p>
             </div>
           </div>
 
@@ -189,7 +191,7 @@ const SemesterTable = ({
              })}
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className={`grid gap-4 ${hideSGPA ? 'grid-cols-2' : 'grid-cols-2 lg:grid-cols-3'}`}>
             <div className="p-5 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col items-center">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Backlogs</p>
               <p className="text-2xl font-black text-gray-900">{failedSubjects.length}</p>
@@ -200,10 +202,12 @@ const SemesterTable = ({
                 {Object.values(data.Result).map((sub) => Number(sub.credits)).reduce((a, b) => a + b, 0)}
               </p>
             </div>
-            <div className="col-span-2 lg:col-span-1 p-5 bg-indigo-600 rounded-2xl flex flex-col items-center text-white shadow-lg shadow-indigo-500/20">
-              <p className="text-indigo-100 text-[10px] font-bold uppercase tracking-widest mb-1">SGPA</p>
-              <p className="text-3xl font-black">{SGPA}</p>
-            </div>
+            {!hideSGPA && (
+              <div className="col-span-2 lg:col-span-1 p-5 bg-indigo-600 rounded-2xl flex flex-col items-center text-white shadow-lg shadow-indigo-500/20">
+                <p className="text-indigo-100 text-[10px] font-bold uppercase tracking-widest mb-1">SGPA</p>
+                <p className="text-3xl font-black">{SGPA}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

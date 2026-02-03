@@ -35,7 +35,7 @@ export default function AllResultsForm() {
                   placeholder="e.g. 26XXXXXX01"
                   name="hallticket"
                   value={hallticket}
-                  onChange={(e) => setHallticket(e.target.value.toUpperCase())}
+                  onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
                   className="pl-10 h-12 rounded-xl border-gray-200 focus:border-blue-500 transition-all"
                   disabled={isPending}
                 />

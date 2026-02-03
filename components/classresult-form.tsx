@@ -74,7 +74,7 @@ export default function ClassResultForm() {
                   name="start"
                   placeholder="Start Hall Ticket"
                   value={start}
-                  onChange={(e) => setStart(e.target.value.toUpperCase())}
+                  onChange={(e) => setStart(e.target.value.toUpperCase().replace(/\s+/g, ""))}
                   className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
                   maxLength={10}
                   minLength={10}
@@ -88,7 +88,7 @@ export default function ClassResultForm() {
                   name="end"
                   placeholder="End Hall Ticket"
                   value={end}
-                  onChange={(e) => setEnd(e.target.value.toUpperCase())}
+                  onChange={(e) => setEnd(e.target.value.toUpperCase().replace(/\s+/g, ""))}
                   className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
                   maxLength={10}
                   minLength={10}

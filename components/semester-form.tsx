@@ -48,7 +48,7 @@ export default function SemesterForm() {
   return (
     <div className="space-y-6 my-4">
       <Card className="max-w-2xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
-        <div className="p-1 bg-gradient-to-r from-indigo-600 to-blue-600" />
+        <div className="p-1 bg-linear-to-r from-indigo-600 to-blue-600" />
         <CardContent className="p-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Semester Result</h2>
@@ -63,7 +63,7 @@ export default function SemesterForm() {
                   placeholder="Hall Ticket No"
                   name="hallticket"
                   value={hallticket}
-                  onChange={(e) => setHallticket(e.target.value.toUpperCase())}
+                  onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
                   className="pl-10 h-12 rounded-xl border-gray-200 focus:border-indigo-500 transition-all"
                   maxLength={10}
                   minLength={10}

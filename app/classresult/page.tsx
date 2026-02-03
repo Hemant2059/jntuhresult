@@ -1,15 +1,19 @@
 import ClassResultForm from "@/components/classresult-form";
 
 export const metadata = {
-  title: "JNTUH Class Results",
-  description: "Check JNTUH results, SGPA, CGPA, and class results instantly.",
+  title: "JNTUH Class Analysis & Batch Performance Results",
+  description:
+    "Analyze JNTUH results for an entire class or hall ticket range. Generate pass/fail charts and subject-wise performance analysis instantly.",
   keywords: [
-    "JNTUH",
-    "Semester Results",
-    "SGPA",
-    "CGPA",
-    "Results Checker, JNTU, B.Tech result,BPharm result, Class result, jntuh results , result analysis",
+    "JNTUH Class Results",
+    "JNTUH Batch Analysis",
+    "College Result Analysis",
+    "Subject-wise Pass Percentage",
+    "JNTUH Statistics",
   ],
+  alternates: {
+    canonical: "https://jntuhresultbp.vercel.app/classresult",
+  },
 };
 const ClassResultPage = () => {
   return (

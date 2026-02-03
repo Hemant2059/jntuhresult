@@ -20,7 +20,7 @@ export default function AcademicForm() {
   return (
     <div className="space-y-6">
       <Card className="max-w-2xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
-        <div className="p-1 bg-gradient-to-r from-blue-600 to-indigo-600" />
+        <div className="p-1 bg-linear-to-r from-blue-600 to-indigo-600" />
         <CardContent className="p-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Academic History</h2>
@@ -35,7 +35,7 @@ export default function AcademicForm() {
                   placeholder="e.g. 20XXXXXXXX"
                   name="hallticket"
                   value={hallticket}
-                  onChange={(e) => setHallticket(e.target.value.toUpperCase())}
+                  onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
                   className="pl-10 h-12 rounded-xl border-gray-200 focus:border-blue-500 transition-all"
                   disabled={isPending}
                 />

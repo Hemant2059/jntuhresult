@@ -1,16 +1,19 @@
 import AcademicForm from "@/components/academic-form";
 
 export const metadata = {
-  title: "JNTUH Academic Results",
+  title: "JNTUH Academic Results & Degree CGPA Checker",
   description:
-    "Check JNTUH results, SGPA, CGPA, and academic results instantly.",
+    "Check your complete JNTUH academic history, including total credits, CGPA, and year-wise marks instantly by entering your roll number.",
   keywords: [
-    "JNTUH",
-    "Semester Results",
-    "SGPA",
-    "CGPA",
-    "Results Checker, JNTU, B.Tech result,BPharm result, Class result, jntuh results , result analysis",
+    "JNTUH Academic Results",
+    "JNTUH CGPA Checker",
+    "JNTUH Credit History",
+    "JNTUH Result Analysis",
+    "JNTUH Hall Ticket Search",
   ],
+  alternates: {
+    canonical: "https://jntuhresultbp.vercel.app/academic",
+  },
 };
 
 export default function AcademicPage() {

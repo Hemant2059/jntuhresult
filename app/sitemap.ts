@@ -45,6 +45,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // Fetch notifications for sitemap
+  let notificationRoutes: any[] = [];
+  try {
+    const res = await fetch("https://jntuh-api.vercel.app/notifications?refresh=true");
+    if (res.ok) {
+      const notifications = await res.json();
+      notificationRoutes = notifications.map((n: any) => ({
+        url: `${baseUrl}/notifications/${n.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "daily" as const,
+        priority: 0.7,
+      }));
+    }
+  } catch (e) {
+    console.error("Failed to fetch notifications for sitemap", e);
+  }
+
   return [
     {
       url: "https://jntuhresultbp.vercel.app/",
@@ -70,6 +87,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.9,
     },
+    {
+      url: "https://jntuhresultbp.vercel.app/notifications",
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
     ...dynamicRoutes,
+    ...notificationRoutes,
   ];
 }
