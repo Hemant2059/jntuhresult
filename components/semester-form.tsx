@@ -51,8 +51,12 @@ export default function SemesterForm() {
         <div className="p-1 bg-linear-to-r from-indigo-600 to-blue-600" />
         <CardContent className="p-8">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Semester Result</h2>
-            <p className="text-gray-500 text-sm mt-1">Check your performance for a specific semester.</p>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Semester Result
+            </h2>
+            <p className="text-gray-500 text-sm mt-1">
+              Check your performance for a specific semester.
+            </p>
           </div>
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -63,7 +67,11 @@ export default function SemesterForm() {
                   placeholder="Hall Ticket No"
                   name="hallticket"
                   value={hallticket}
-                  onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
+                  onChange={(e) =>
+                    setHallticket(
+                      e.target.value.toUpperCase().replace(/\s+/g, ""),
+                    )
+                  }
                   className="pl-10 h-12 rounded-xl border-gray-200 focus:border-indigo-500 transition-all"
                   maxLength={10}
                   minLength={10}
@@ -79,7 +87,9 @@ export default function SemesterForm() {
                   disabled={isPending}
                   className="h-12 w-full rounded-xl border-gray-200 focus:border-indigo-500"
                 >
-                  <NativeSelectOption value="">Select Semester</NativeSelectOption>
+                  <NativeSelectOption value="">
+                    Select Semester
+                  </NativeSelectOption>
                   {SEMESTERS.map((sem) => (
                     <NativeSelectOption key={sem.value} value={sem.value}>
                       {sem.label}
@@ -115,7 +125,9 @@ export default function SemesterForm() {
             <Loader2 className="h-12 w-12 animate-spin relative text-indigo-600" />
           </div>
           <div className="space-y-1">
-            <p className="text-lg font-semibold text-gray-900">Loading semester data</p>
+            <p className="text-lg font-semibold text-gray-900">
+              Loading semester data
+            </p>
             <p className="text-gray-500">Checking JNTUH database...</p>
           </div>
         </Card>
@@ -138,7 +150,7 @@ export default function SemesterForm() {
 
       {/* Success */}
       {state.success && state.data && !isPending && (
-        <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           <SemesterTable data={state.data} semester={semester} />
         </div>
       )}
@@ -147,7 +159,9 @@ export default function SemesterForm() {
       {!isPending && !state.success && !state.error && (
         <div className="max-w-2xl mx-auto py-12 text-center opacity-40">
           <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-500 font-medium">Select semester and enter hall ticket</p>
+          <p className="text-gray-500 font-medium">
+            Select semester and enter hall ticket
+          </p>
         </div>
       )}
     </div>

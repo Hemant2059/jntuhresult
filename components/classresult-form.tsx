@@ -74,7 +74,9 @@ export default function ClassResultForm() {
                   name="start"
                   placeholder="Start Hall Ticket"
                   value={start}
-                  onChange={(e) => setStart(e.target.value.toUpperCase().replace(/\s+/g, ""))}
+                  onChange={(e) =>
+                    setStart(e.target.value.toUpperCase().replace(/\s+/g, ""))
+                  }
                   className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
                   maxLength={10}
                   minLength={10}
@@ -88,7 +90,9 @@ export default function ClassResultForm() {
                   name="end"
                   placeholder="End Hall Ticket"
                   value={end}
-                  onChange={(e) => setEnd(e.target.value.toUpperCase().replace(/\s+/g, ""))}
+                  onChange={(e) =>
+                    setEnd(e.target.value.toUpperCase().replace(/\s+/g, ""))
+                  }
                   className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
                   maxLength={10}
                   minLength={10}
@@ -210,7 +214,7 @@ export default function ClassResultForm() {
 
       {/* Empty */}
       {!isPending && !state.success && !state.error && (
-        <Card className="max-w-2xl mx-auto p-12 text-center bg-gray-50/50 border-dashed border-2 border-gray-200 rounded-3xl">
+        <Card className="max-w-2xl mx-auto p-8 text-center bg-gray-50/50 border-dashed border-2 border-gray-200 rounded-3xl">
           <Users className="h-12 w-12 mx-auto text-gray-300 mb-4" />
           <p className="text-gray-500 font-medium mb-6">
             Enter hall ticket range to start analysis
