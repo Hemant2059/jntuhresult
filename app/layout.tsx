@@ -79,11 +79,12 @@ export const metadata = {
     description: "Fastest JNTUH result lookup.",
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
   alternates: {
     canonical: "https://jntuhresultbp.vercel.app",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
 };
 

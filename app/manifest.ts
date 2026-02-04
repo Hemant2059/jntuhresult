@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "JNTUH Results Vercel",
     short_name: "JNTUH Results",
     description:
-      "Instant JNTUH B.Tech and B.Pharmacy results and SGPA/CGPA calculator.",
+      "Instant JNTUH B.Tech and B.Pharmacy results checker with SGPA, CGPA calculator, backlog info, hall ticket search, and subject-wise analysis.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
