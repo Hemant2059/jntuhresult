@@ -12,8 +12,20 @@ const hallticketSchema = z
 const semesterSchema = z.string().min(1, "Semester is required");
 
 const classResultSchema = z.object({
-  start: z.string().transform((val) => val.replace(/\s+/g, "")).refine((val) => val.length === 10, "Start hall ticket must be 10 characters"),
-  end: z.string().transform((val) => val.replace(/\s+/g, "")).refine((val) => val.length === 10, "End hall ticket must be 10 characters"),
+  start: z
+    .string()
+    .transform((val) => val.replace(/\s+/g, ""))
+    .refine(
+      (val) => val.length === 10,
+      "Start hall ticket must be 10 characters",
+    ),
+  end: z
+    .string()
+    .transform((val) => val.replace(/\s+/g, ""))
+    .refine(
+      (val) => val.length === 10,
+      "End hall ticket must be 10 characters",
+    ),
   semester: z.string().min(1, "Semester is required"),
 });
 
@@ -230,12 +242,12 @@ export async function allResult(prevState: any, formData: FormData) {
 export async function notificationResult(prevState: any, formData: FormData) {
   try {
     const htno = formData.get("htno") as string;
-    const degree = formData.get("degree") as string ;
-    const examCode = formData.get("examCode") as string ;
-    const etype = formData.get("etype") as string ;
-    const type = formData.get("type") as string || "null";
-    const result = formData.get("result") as string || "null";
-    const grad = formData.get("grad") as string || "null";
+    const degree = formData.get("degree") as string;
+    const examCode = formData.get("examCode") as string;
+    const etype = formData.get("etype") as string;
+    const type = (formData.get("type") as string) || "null";
+    const result = (formData.get("result") as string) || "null";
+    const grad = (formData.get("grad") as string) || "null";
 
     // Validate hallticket
     const parsed = hallticketSchema.safeParse(htno);
@@ -275,7 +287,11 @@ export async function notificationResult(prevState: any, formData: FormData) {
 
     const data = await response.json();
 
-    if (!data || Object.keys(data).length === 0 || (data.Results && Object.keys(data.Results).length === 0)) {
+    if (
+      !data ||
+      Object.keys(data).length === 0 ||
+      (data.Results && Object.keys(data.Results).length === 0)
+    ) {
       revalidateTag(tag, "default");
       return {
         success: false,
