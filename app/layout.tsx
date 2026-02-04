@@ -92,30 +92,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteNameSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "JNTUH Results Vercel",
+    alternateName: ["JNTUH Results Vercel", "JNTU Result Checker"],
+    url: "https://jntuhresultbp.vercel.app",
+    potentialAction: {
+      "@type": "SearchAction",
+      target:
+        "https://jntuhresultbp.vercel.app/academic?hallticket={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
   return (
     <html lang="en">
       <head>
+        {/* Structured Data for Site Name */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "JNTUH Results Vercel",
-              url: "https://jntuhresultbp.vercel.app",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://jntuhresultbp.vercel.app/academic",
-                "query-input": "required hallticket=search_term_string",
-              },
-            }),
+            __html: JSON.stringify(siteNameSchema),
           }}
         />
         <meta
           name="google-site-verification"
           content="hb7T1JTtI-p5rLAWqhiYKc3BJySemkcYXlu5PEJspGs"
         />
-        <meta name="google-adsense-account" content="ca-pub-5786755591893406"></meta>
+        <meta name="google-adsense-account" content="ca-pub-5786755591893406" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
