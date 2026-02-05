@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -14,6 +14,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jntuhresultbp.vercel.app"),
@@ -96,7 +101,6 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({

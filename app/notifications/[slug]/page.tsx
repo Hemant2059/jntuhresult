@@ -1,5 +1,5 @@
 import NotificationForm from "@/components/notification-form";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 
 interface NotificationPageProps {
@@ -7,7 +7,9 @@ interface NotificationPageProps {
 }
 
 async function getNotifications() {
-  const res = await fetch("https://jntuh-api.vercel.app/notifications?refresh=false");
+  const res = await fetch(
+    "https://jntuh-api.vercel.app/notifications?refresh=false",
+  );
   if (!res.ok) return [];
   return res.json();
 }
@@ -18,6 +20,10 @@ export async function generateStaticParams() {
     slug: n.slug,
   }));
 }
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 async function getNotificationBySlug(slug: string) {
   try {
@@ -29,7 +35,9 @@ async function getNotificationBySlug(slug: string) {
   }
 }
 
-export async function generateMetadata({ params }: NotificationPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NotificationPageProps): Promise<Metadata> {
   const { slug } = await params;
   const notification = await getNotificationBySlug(slug);
 
@@ -66,7 +74,9 @@ export async function generateMetadata({ params }: NotificationPageProps): Promi
   };
 }
 
-export default async function NotificationDetailPage({ params }: NotificationPageProps) {
+export default async function NotificationDetailPage({
+  params,
+}: NotificationPageProps) {
   const { slug } = await params;
   const notification = await getNotificationBySlug(slug);
 
