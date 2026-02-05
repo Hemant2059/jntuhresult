@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -13,7 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL("https://jntuhresultbp.vercel.app"),
   title: {
     default:
@@ -48,14 +50,14 @@ export const metadata = {
     "btech 3-2 results",
     "btech 4-1 results",
     "btech 4-2 results",
-    "bpharmcy 1-1 results",
-    "bpharmcy 1-2 results",
-    "bpharmcy 2-1 results",
-    "bpharmcy 2-2 results",
-    "bpharmcy 3-1 results",
-    "bpharmcy 3-2 results",
-    "bpharmcy 4-1 results",
-    "bpharmcy 4-2 results",
+    "bpharmacy 1-1 results",
+    "bpharmacy 1-2 results",
+    "bpharmacy 2-1 results",
+    "bpharmacy 2-2 results",
+    "bpharmacy 3-1 results",
+    "bpharmacy 3-2 results",
+    "bpharmacy 4-1 results",
+    "bpharmacy 4-2 results",
   ],
   openGraph: {
     title: "JNTUH Results – Fastest Result Checker",
@@ -86,6 +88,15 @@ export const metadata = {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -93,33 +104,61 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteNameSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "JNTUH Results Vercel",
-    alternateName: ["JNTUH Results Vercel", "JNTU Result Checker"],
-    url: "https://jntuhresultbp.vercel.app",
-    potentialAction: {
-      "@type": "SearchAction",
-      target:
-        "https://jntuhresultbp.vercel.app/academic?hallticket={search_term_string}",
-      "query-input": "required name=search_term_string",
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "JNTUH Results Vercel",
+      alternateName: ["JNTUH Results Vercel", "JNTU Result Checker"],
+      url: "https://jntuhresultbp.vercel.app",
+      potentialAction: {
+        "@type": "SearchAction",
+        target:
+          "https://jntuhresultbp.vercel.app/academic?hallticket={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "JNTUH Results Vercel",
+      url: "https://jntuhresultbp.vercel.app",
+      logo: "https://jntuhresultbp.vercel.app/logo.png",
+    },
+  ];
+
   return (
     <html lang="en">
       <head>
-        {/* Structured Data for Site Name */}
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-N72VLSMGFL"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-N72VLSMGFL');
+          `}
+        </Script>
+
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(siteNameSchema),
+            __html: JSON.stringify(schemaData),
           }}
         />
+
+        {/* Google Verification */}
         <meta
           name="google-site-verification"
           content="hb7T1JTtI-p5rLAWqhiYKc3BJySemkcYXlu5PEJspGs"
         />
+
+        {/* Google AdSense */}
         <meta name="google-adsense-account" content="ca-pub-5786755591893406" />
       </head>
       <body
