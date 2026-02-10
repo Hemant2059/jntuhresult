@@ -29,7 +29,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Email</h3>
-                  <p className="text-gray-600 italic underline">Support email goes here</p>
+                  <p className="text-gray-600 italic underline">hp2059712@gmail.com</p>
                 </div>
               </div>
 

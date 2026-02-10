@@ -28,8 +28,9 @@ const Footer = () => {
     {
       title: "Support",
       links: [
-        { label: "Contact Me", href: "/contact" },
+        { label: "Contact Us", href: "/contact" },
         { label: "Official Results", href: "http://results.jntuh.ac.in", external: true },
+        { label: "About Us", href: "/about" },
       ],
     },
   ];
