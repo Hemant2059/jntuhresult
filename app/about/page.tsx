@@ -126,73 +126,106 @@ export default function AboutPage() {
         </p>
 
         <h3 className="mt-6 mb-3 text-lg font-semibold text-gray-900">
-          B.Pharmacy R22 Grading System
+          B.Pharmacy R22 Grading System (as per UGC/PCI Guidelines)
         </h3>
 
         <div className="mb-6 overflow-x-auto">
           <table className="min-w-full border border-gray-200 text-sm">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-4 py-2 text-left font-semibold border-b">Grade</th>
-                <th className="px-4 py-2 text-left font-semibold border-b">Points</th>
-                <th className="px-4 py-2 text-left font-semibold border-b">Marks Range</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">% of Marks Secured</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Letter Grade</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Grade Points</th>
                 <th className="px-4 py-2 text-left font-semibold border-b">Description</th>
               </tr>
             </thead>
             <tbody className="text-gray-700">
               <tr className="border-b">
+                <td className="px-4 py-2">≥ 90%</td>
                 <td className="px-4 py-2 font-medium">O</td>
                 <td className="px-4 py-2">10</td>
-                <td className="px-4 py-2">≥ 90%</td>
                 <td className="px-4 py-2">Outstanding</td>
               </tr>
               <tr className="border-b">
+                <td className="px-4 py-2">80% - 89.99%</td>
                 <td className="px-4 py-2 font-medium">A+</td>
                 <td className="px-4 py-2">9</td>
-                <td className="px-4 py-2">80% - 89.99%</td>
                 <td className="px-4 py-2">Excellent</td>
               </tr>
               <tr className="border-b">
-                <td className="px-4 py-2 font-medium">A</td>
-                <td className="px-4 py-2">8</td>
                 <td className="px-4 py-2">70% - 79.99%</td>
-                <td className="px-4 py-2">Very Good</td>
+                <td className="px-4 py-2 font-medium">A</td>
+                <td className="px-4 py-2">9</td>
+                <td className="px-4 py-2">Excellent</td>
               </tr>
               <tr className="border-b">
-                <td className="px-4 py-2 font-medium">B+</td>
-                <td className="px-4 py-2">7</td>
                 <td className="px-4 py-2">60% - 69.99%</td>
+                <td className="px-4 py-2 font-medium">B</td>
+                <td className="px-4 py-2">8</td>
                 <td className="px-4 py-2">Good</td>
               </tr>
               <tr className="border-b">
-                <td className="px-4 py-2 font-medium">B</td>
-                <td className="px-4 py-2">6</td>
                 <td className="px-4 py-2">50% - 59.99%</td>
+                <td className="px-4 py-2 font-medium">C</td>
+                <td className="px-4 py-2">7</td>
+                <td className="px-4 py-2">Fair</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2">Below 50%</td>
+                <td className="px-4 py-2 font-medium">D</td>
+                <td className="px-4 py-2">6</td>
                 <td className="px-4 py-2">Average</td>
               </tr>
               <tr className="border-b">
-                <td className="px-4 py-2 font-medium">C</td>
-                <td className="px-4 py-2">5</td>
-                <td className="px-4 py-2">40% - 49.99%</td>
-                <td className="px-4 py-2">Pass</td>
-              </tr>
-              <tr>
+                <td className="px-4 py-2">-</td>
                 <td className="px-4 py-2 font-medium">F</td>
                 <td className="px-4 py-2">0</td>
-                <td className="px-4 py-2">&lt; 40%</td>
                 <td className="px-4 py-2">Fail</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">Absent</td>
+                <td className="px-4 py-2 font-medium">Ab</td>
+                <td className="px-4 py-2">0</td>
+                <td className="px-4 py-2">Absent</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p className="mb-4 text-gray-700 leading-relaxed">
-          <strong>B.Pharmacy R22 Passing Criteria:</strong> Minimum 50% marks in 
-          CIE (Continuous Internal Evaluation) + SEE combined, with minimum 40% 
-          marks in SEE (Semester End Examination) alone. Students must earn 209 
-          credits with SGPA ≥ 6.0 in each semester and CGPA ≥ 6.0 to complete 
-          the B.Pharmacy program.
+          <strong>B.Pharmacy R22 Passing Criteria:</strong> The student passes the 
+          subject/course only when Grade Point (GP) ≥ 6 ('D' grade or above). 
+          Students must earn 209 credits with SGPA ≥ 6.0 in each semester and 
+          CGPA ≥ 6.0 to complete the B.Pharmacy program.
         </p>
+
+        <h4 className="mt-4 mb-2 text-md font-semibold text-gray-900">
+          SGPA & CGPA Calculation Formula
+        </h4>
+
+        <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+          <p className="mb-2 text-gray-700">
+            <strong>SGPA =</strong> (Σ Credit Points) / (Total Credits) for the semester
+          </p>
+          <p className="mb-2 text-gray-700">
+            <strong>CGPA =</strong> (Σ Credit Points from all semesters) / (Total Credits from all semesters)
+          </p>
+          <p className="text-sm text-gray-600">
+            Credit Points (CP) = Grade Point (GP) × Credits for that course
+          </p>
+        </div>
+
+        <h4 className="mt-4 mb-2 text-md font-semibold text-gray-900">
+          Important Notes
+        </h4>
+
+        <ul className="mb-4 list-disc pl-6 text-gray-700 space-y-1">
+          <li>A student obtaining 'F' grade in any subject shall be deemed to have 'failed' and is required to reappear as a 'supplementary student'.</li>
+          <li>A student who has not appeared for examination in any subject, 'Ab' grade will be allocated.</li>
+          <li>A letter grade indicates only the range of percentage of marks, not specific marks.</li>
+          <li>For merit ranking, only the 'rounded off' values of CGPAs will be used.</li>
+          <li>Performance in failed subjects will be taken into account for SGPA and CGPA calculations.</li>
+        </ul>
 
         <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
           Understanding Your Results
