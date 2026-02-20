@@ -47,15 +47,19 @@ export default function AboutPage() {
         </p>
 
         <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
-          JNTUH Grading System
+          JNTUH Grading System (R22)
         </h2>
 
         <p className="mb-4 text-gray-700 leading-relaxed">
-          JNTUH follows a relative grading system. Students are awarded grades 
-          based on their performance in examinations. The grading scale typically 
-          ranges from O (Outstanding) to F (Fail). The Grade Points help calculate 
-          the Semester Grade Point Average (SGPA) and Cumulative Grade Point Average (CGPA).
+          JNTUH follows a 10-point grading system for both B.Tech and B.Pharmacy 
+          programs under R22 regulations. Students are awarded grades based on their 
+          performance in examinations. The Grade Points help calculate the Semester 
+          Grade Point Average (SGPA) and Cumulative Grade Point Average (CGPA).
         </p>
+
+        <h3 className="mt-6 mb-3 text-lg font-semibold text-gray-900">
+          B.Tech R22 Grading System
+        </h3>
 
         <div className="mb-6 overflow-x-auto">
           <table className="min-w-full border border-gray-200 text-sm">
@@ -71,48 +75,124 @@ export default function AboutPage() {
               <tr className="border-b">
                 <td className="px-4 py-2 font-medium">O</td>
                 <td className="px-4 py-2">10</td>
-                <td className="px-4 py-2">90-100</td>
+                <td className="px-4 py-2">≥ 90%</td>
                 <td className="px-4 py-2">Outstanding</td>
               </tr>
               <tr className="border-b">
                 <td className="px-4 py-2 font-medium">A+</td>
                 <td className="px-4 py-2">9</td>
-                <td className="px-4 py-2">80-89</td>
+                <td className="px-4 py-2">80% - 89.99%</td>
                 <td className="px-4 py-2">Excellent</td>
               </tr>
               <tr className="border-b">
                 <td className="px-4 py-2 font-medium">A</td>
                 <td className="px-4 py-2">8</td>
-                <td className="px-4 py-2">70-79</td>
+                <td className="px-4 py-2">70% - 79.99%</td>
                 <td className="px-4 py-2">Very Good</td>
               </tr>
               <tr className="border-b">
                 <td className="px-4 py-2 font-medium">B+</td>
                 <td className="px-4 py-2">7</td>
-                <td className="px-4 py-2">60-69</td>
+                <td className="px-4 py-2">60% - 69.99%</td>
                 <td className="px-4 py-2">Good</td>
               </tr>
               <tr className="border-b">
                 <td className="px-4 py-2 font-medium">B</td>
                 <td className="px-4 py-2">6</td>
-                <td className="px-4 py-2">50-59</td>
+                <td className="px-4 py-2">50% - 59.99%</td>
                 <td className="px-4 py-2">Average</td>
               </tr>
               <tr className="border-b">
                 <td className="px-4 py-2 font-medium">C</td>
                 <td className="px-4 py-2">5</td>
-                <td className="px-4 py-2">40-49</td>
+                <td className="px-4 py-2">40% - 49.99%</td>
                 <td className="px-4 py-2">Pass</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 font-medium">F</td>
                 <td className="px-4 py-2">0</td>
-                <td className="px-4 py-2">Below 40</td>
+                <td className="px-4 py-2">&lt; 40%</td>
                 <td className="px-4 py-2">Fail</td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          <strong>B.Tech R22 Passing Criteria:</strong> Minimum 35% in CIE (Continuous 
+          Internal Evaluation), 35% in SEE (Semester End Examination), and 40% overall 
+          (both CIE + SEE combined). Students must secure SGPA ≥ 5.0 in each semester 
+          and CGPA ≥ 5.0 to complete the program.
+        </p>
+
+        <h3 className="mt-6 mb-3 text-lg font-semibold text-gray-900">
+          B.Pharmacy R22 Grading System
+        </h3>
+
+        <div className="mb-6 overflow-x-auto">
+          <table className="min-w-full border border-gray-200 text-sm">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="px-4 py-2 text-left font-semibold border-b">Grade</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Points</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Marks Range</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Description</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">O</td>
+                <td className="px-4 py-2">10</td>
+                <td className="px-4 py-2">≥ 90%</td>
+                <td className="px-4 py-2">Outstanding</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">A+</td>
+                <td className="px-4 py-2">9</td>
+                <td className="px-4 py-2">80% - 89.99%</td>
+                <td className="px-4 py-2">Excellent</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">A</td>
+                <td className="px-4 py-2">8</td>
+                <td className="px-4 py-2">70% - 79.99%</td>
+                <td className="px-4 py-2">Very Good</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">B+</td>
+                <td className="px-4 py-2">7</td>
+                <td className="px-4 py-2">60% - 69.99%</td>
+                <td className="px-4 py-2">Good</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">B</td>
+                <td className="px-4 py-2">6</td>
+                <td className="px-4 py-2">50% - 59.99%</td>
+                <td className="px-4 py-2">Average</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">C</td>
+                <td className="px-4 py-2">5</td>
+                <td className="px-4 py-2">40% - 49.99%</td>
+                <td className="px-4 py-2">Pass</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 font-medium">F</td>
+                <td className="px-4 py-2">0</td>
+                <td className="px-4 py-2">&lt; 40%</td>
+                <td className="px-4 py-2">Fail</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          <strong>B.Pharmacy R22 Passing Criteria:</strong> Minimum 50% marks in 
+          CIE (Continuous Internal Evaluation) + SEE combined, with minimum 40% 
+          marks in SEE (Semester End Examination) alone. Students must earn 209 
+          credits with SGPA ≥ 6.0 in each semester and CGPA ≥ 6.0 to complete 
+          the B.Pharmacy program.
+        </p>
 
         <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
           Understanding Your Results
