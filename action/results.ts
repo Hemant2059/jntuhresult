@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 // Zod schemas
@@ -44,11 +43,9 @@ export async function academicResult(prevState: any, formData: FormData) {
     }
     const validatedHtno = parsed.data;
 
-    const tag = `result-${validatedHtno}`;
-
     const response = await fetch(
       `https://jntuh-api.vercel.app/academic?htno=${validatedHtno}`,
-      { next: { tags: [tag], revalidate: 3600 } },
+      { cache: 'no-store' },
     );
 
     if (!response.ok) {
@@ -62,7 +59,6 @@ export async function academicResult(prevState: any, formData: FormData) {
     const data = await response.json();
 
     if (!data || Object.keys(data).length === 0) {
-      revalidateTag(tag, "default");
       return {
         success: false,
         data: null,
@@ -104,11 +100,9 @@ export async function semesterResult(prevState: any, formData: FormData) {
         error: parsedSem.error.issues[0].message,
       };
 
-    const tag = `result-${validatedHtno}-sem-${semester}`;
-
     const response = await fetch(
       `https://jntuh-api.vercel.app/sem?htno=${validatedHtno}&sem=${semester}`,
-      { next: { tags: [tag], revalidate: 3600 } },
+      { cache: 'no-store' },
     );
 
     if (!response.ok)
@@ -121,7 +115,6 @@ export async function semesterResult(prevState: any, formData: FormData) {
     const data = await response.json();
 
     if (!data || Object.keys(data).length === 0) {
-      revalidateTag(tag, "default");
       return {
         success: false,
         data: null,
@@ -156,11 +149,9 @@ export async function classResult(prevState: any, formData: FormData) {
 
     const { start: validatedStart, end: validatedEnd } = parsed.data;
 
-    const tag = `result-${validatedStart}-${validatedEnd}-sem-${semester}`;
-
     const response = await fetch(
       `https://jntuh-api.vercel.app/classresult?sem=${semester}&start_htno=${validatedStart}&end_htno=${validatedEnd}`,
-      { next: { tags: [tag], revalidate: 3600 } },
+      { cache: 'no-store' },
     );
 
     if (!response.ok)
@@ -173,7 +164,6 @@ export async function classResult(prevState: any, formData: FormData) {
     const data = await response.json();
 
     if (!data || Object.keys(data).length === 0) {
-      revalidateTag(tag, "default");
       return { success: false, data: null, error: "No results found" };
     }
 
@@ -203,11 +193,9 @@ export async function allResult(prevState: any, formData: FormData) {
 
     const validatedHtno = parsed.data;
 
-    const tag = `all-results-${validatedHtno}`;
-
     const response = await fetch(
       `https://jntuh-api.vercel.app/allresult?htno=${validatedHtno}`,
-      { next: { tags: [tag], revalidate: 3600 } },
+      { cache: 'no-store' },
     );
 
     if (!response.ok) {
@@ -221,7 +209,6 @@ export async function allResult(prevState: any, formData: FormData) {
     const data = await response.json();
 
     if (!data || !data.Results || Object.keys(data.Results).length === 0) {
-      revalidateTag(tag, "default");
       return {
         success: false,
         data: null,
@@ -260,9 +247,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
     }
 
     const validatedHtno = parsed.data;
-    const tag = `notif-result-${validatedHtno}-${examCode}`;
 
-    // Construct URL with parameters
     const params = new URLSearchParams();
     params.append("htno", validatedHtno);
     if (degree) params.append("degree", degree);
@@ -274,7 +259,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
 
     const response = await fetch(
       `https://jntuh-api.vercel.app/specificresult?${params.toString()}`,
-      { next: { tags: [tag], revalidate: 3600 } },
+      { cache: 'no-store' },
     );
 
     if (!response.ok) {
@@ -292,7 +277,6 @@ export async function notificationResult(prevState: any, formData: FormData) {
       Object.keys(data).length === 0 ||
       (data.Results && Object.keys(data.Results).length === 0)
     ) {
-      revalidateTag(tag, "default");
       return {
         success: false,
         data: null,
