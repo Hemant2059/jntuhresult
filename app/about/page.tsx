@@ -30,6 +30,167 @@ export default function AboutPage() {
         </ul>
 
         <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          About JNTUH
+        </h2>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          Jawaharlal Nehru Technological University Hyderabad (JNTUH) is one of 
+          India's leading technical universities, established in 1972. The university 
+          offers undergraduate and postgraduate programs in various disciplines 
+          including Engineering, Pharmacy, Management, and Computer Applications.
+        </p>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          JNTUH conducts examinations twice a year for B.Tech, B.Pharmacy, 
+          M.Tech, M.Pharmacy, MBA, MCA, and other programs across its 
+          affiliated colleges in Hyderabad and Telangana region.
+        </p>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          JNTUH Grading System
+        </h2>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          JNTUH follows a relative grading system. Students are awarded grades 
+          based on their performance in examinations. The grading scale typically 
+          ranges from O (Outstanding) to F (Fail). The Grade Points help calculate 
+          the Semester Grade Point Average (SGPA) and Cumulative Grade Point Average (CGPA).
+        </p>
+
+        <div className="mb-6 overflow-x-auto">
+          <table className="min-w-full border border-gray-200 text-sm">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="px-4 py-2 text-left font-semibold border-b">Grade</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Points</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Marks Range</th>
+                <th className="px-4 py-2 text-left font-semibold border-b">Description</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">O</td>
+                <td className="px-4 py-2">10</td>
+                <td className="px-4 py-2">90-100</td>
+                <td className="px-4 py-2">Outstanding</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">A+</td>
+                <td className="px-4 py-2">9</td>
+                <td className="px-4 py-2">80-89</td>
+                <td className="px-4 py-2">Excellent</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">A</td>
+                <td className="px-4 py-2">8</td>
+                <td className="px-4 py-2">70-79</td>
+                <td className="px-4 py-2">Very Good</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">B+</td>
+                <td className="px-4 py-2">7</td>
+                <td className="px-4 py-2">60-69</td>
+                <td className="px-4 py-2">Good</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">B</td>
+                <td className="px-4 py-2">6</td>
+                <td className="px-4 py-2">50-59</td>
+                <td className="px-4 py-2">Average</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-4 py-2 font-medium">C</td>
+                <td className="px-4 py-2">5</td>
+                <td className="px-4 py-2">40-49</td>
+                <td className="px-4 py-2">Pass</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 font-medium">F</td>
+                <td className="px-4 py-2">0</td>
+                <td className="px-4 py-2">Below 40</td>
+                <td className="px-4 py-2">Fail</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          Understanding Your Results
+        </h2>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          When you check your JNTUH results, you will see various details including 
+          your hall ticket number, name, semester, subjects appeared, marks obtained 
+          in each subject, grades, SGPA for that semester, and your cumulative CGPA.
+        </p>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          <strong>SGPA (Semester Grade Point Average):</strong> This is the weighted 
+          average of grade points obtained in all subjects during a particular semester. 
+          It indicates your performance for that specific semester.
+        </p>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          <strong>CGPA (Cumulative Grade Point Average):</strong> This is the cumulative 
+          average of grade points obtained in all semesters till date. It reflects your 
+          overall academic performance throughout your course.
+        </p>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          Types of JNTUH Examinations
+        </h2>
+
+        <ul className="mb-6 list-disc pl-6 text-gray-700 space-y-2">
+          <li><strong>Regular Examinations:</strong> Conducted at the end of each semester for students in their normal course duration.</li>
+          <li><strong>Supplementary/Improvement Examinations:</strong> Offered for students who wish to improve their grades in subjects they have already passed or to clear backlogs.</li>
+          <li><strong>Mid-Term Examinations:</strong> Conducted internally during the semester by affiliated colleges.</li>
+          <li><strong>Lab Examinations:</strong> Practical examinations conducted separately for laboratory courses.</li>
+        </ul>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          JNTUH Academic Regulations
+        </h2>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          JNTUH follows different academic regulations for various programs. 
+          The common regulations include R18 (2018), R22 (2022) for B.Tech, 
+          and corresponding regulations for other courses. Each regulation 
+          has specific credit requirements, grading procedures, and pass criteria.
+        </p>
+
+        <p className="mb-4 text-gray-700 leading-relaxed">
+          Students must earn a minimum required credits and maintain a satisfactory 
+          CGPA to successfully complete their program. The university also has 
+          provisions for credit transfer, bridge courses, and academic probation 
+          for students who need additional support.
+        </p>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          How to Check Your Results
+        </h2>
+
+        <ol className="mb-6 list-decimal pl-6 text-gray-700 space-y-2">
+          <li>Visit the JNTUH Results portal on our website</li>
+          <li>Select the type of result you want to check (Academic, Semester, All Results, etc.)</li>
+          <li>Enter your 10-digit hall ticket number</li>
+          <li>For semester results, select the appropriate semester</li>
+          <li>Click on the Search or Submit button</li>
+          <li>View your results and download them for future reference</li>
+        </ol>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
+          Important Notes
+        </h2>
+
+        <ul className="mb-6 list-disc pl-6 text-gray-700 space-y-2">
+          <li>Always verify your results with the official JNTUH results portal</li>
+          <li>Keep printed or digital copies of your mark sheets for future use</li>
+          <li>In case of discrepancies, contact your college examination cell immediately</li>
+          <li>Results are typically published 2-3 weeks after the completion of examinations</li>
+          <li>Supplementary results are usually announced within a month after the regular results</li>
+        </ul>
+
+        <h2 className="mt-8 mb-3 text-xl font-semibold text-gray-900">
           Disclaimer
         </h2>
 
