@@ -1,2 +1,4 @@
 User-agent: *
-Sitemap: https://jntuhresultbp.vercel.app/sitmap.xml
+Allow: /
+Disallow: /api/
+Sitemap: https://jntuhresultbp.vercel.app/sitemap.xml

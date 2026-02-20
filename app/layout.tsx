@@ -24,26 +24,42 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://jntuhresultbp.vercel.app"),
   title: {
     default:
-      "JNTUH Results Vercel | Fast & Accurate B.Tech and B.Pharmacy Results Checker",
+      "JNTUH Results 2026 | Fast B.Tech, B.Pharmacy R22, R25 Results Checker",
     template: "%s | JNTUH Results",
   },
   description:
-    "Instant JNTUH B.Tech and B.Pharmacy results checker with SGPA, CGPA calculator, backlog info, hall ticket search, and subject-wise analysis.",
+    "Instant JNTUH B.Tech, B.Pharmacy results checker for R22, R25 regulations. Check semester results, SGPA, CGPA, backlog info, supplementary results. Fast, accurate, free.",
   keywords: [
-    "jntuh vercel",
-    "jntuh results vercel",
-    "jntuh",
     "jntuh results",
+    "jntuh results 2026",
+    "jntuh vercel",
+    "jntuh btech results",
+    "jntuh bpharmacy results",
+    "jntuh r22 results",
+    "jntuh r25 results",
+    "jntuh btech r22 results",
+    "jntuh bpharmacy r22 results",
+    "jntuh btech r25 results",
+    "jntuh bpharmacy r25 results",
     "JNTU Results",
     "JNTUH B.Tech Results",
     "JNTUH B.Pharmacy Results",
     "JNTUH M.Tech Results",
     "JNTUH MBA Results",
     "JNTUH MCA Results",
+    "JNTUH R22 Results",
+    "JNTUH R25 Results",
+    "JNTUH R18 Results",
     "SGPA Calculator",
     "CGPA Calculator",
+    "JNTUH SGPA",
+    "JNTUH CGPA",
     "JNTUH Hall Ticket",
-    "Semester Result Checker",
+    "JNTUH Semester Results",
+    "JNTUH Supplementary Results",
+    "JNTUH Revaluation Results",
+    "JNTUH Backlog Results",
+    "JNTUH RC RV Results",
     "Engineering Results",
     "Pharmacy Results",
     "University Results",
@@ -54,57 +70,76 @@ export const metadata: Metadata = {
     "JNTUH Grade Points",
     "JNTUH Academic Records",
     "JNTUH Transcript",
-    "JNTUH Supplementary Results",
-    "JNTUH Revaluation Results",
     "JNTUH Online Results",
     "JNTUH Exam Results",
     "How to check JNTUH results",
     "JNTUH result portal",
-    "btech 1-1 results",
-    "btech 1-2 results",
-    "btech 2-1 results",
-    "btech 2-2 results",
-    "btech 3-1 results",
-    "btech 3-2 results",
-    "btech 4-1 results",
-    "btech 4-2 results",
-    "bpharmacy 1-1 results",
-    "bpharmacy 1-2 results",
-    "bpharmacy 2-1 results",
-    "bpharmacy 2-2 results",
-    "bpharmacy 3-1 results",
-    "bpharmacy 3-2 results",
-    "bpharmacy 4-1 results",
-    "bpharmacy 4-2 results",
+    "jntuh results jntuhac.in",
+    "btech 1-1 results jntuh",
+    "btech 1-2 results jntuh",
+    "btech 2-1 results jntuh",
+    "btech 2-2 results jntuh",
+    "btech 3-1 results jntuh",
+    "btech 3-2 results jntuh",
+    "btech 4-1 results jntuh",
+    "btech 4-2 results jntuh",
+    "bpharmacy 1-1 results jntuh",
+    "bpharmacy 1-2 results jntuh",
+    "bpharmacy 2-1 results jntuh",
+    "bpharmacy 2-2 results jntuh",
+    "bpharmacy 3-1 results jntuh",
+    "bpharmacy 3-2 results jntuh",
+    "bpharmacy 4-1 results jntuh",
+    "bpharmacy 4-2 results jntuh",
+    "jntuh results login",
+    "jntuh results direct link",
+    "jntuh exam results 2026",
+    "jntuh regular results",
+    "jntuh supply results",
   ],
+  authors: [{ name: "JNTUH Results" }],
+  creator: "JNTUH Results",
+  publisher: "JNTUH Results",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "JNTUH Results – Fastest Result Checker",
+    title: "JNTUH Results 2026 | B.Tech B.Pharmacy R22 R25 Results Checker",
     description:
-      "Check JNTUH B.Tech/B.Pharmacy results instantly with SGPA + CGPA. Accurate, fast, student-friendly.",
+      "Check JNTUH B.Tech/B.Pharmacy R22, R25 results instantly with SGPA, CGPA. Fast, accurate, free. Also check supplementary, revaluation results.",
     url: "https://jntuhresultbp.vercel.app",
-    siteName: "JNTUH Results Vercel",
+    siteName: "JNTUH Results",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
+        alt: "JNTUH Results - Fast B.Tech B.Pharmacy Results Checker",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
+    alternateLocale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "JNTUH Results – Instant Result Checker",
-    description: "Fastest JNTUH result lookup.",
+    title: "JNTUH Results 2026 | B.Tech B.Pharmacy R22 R25",
+    description:
+      "Instant JNTUH B.Tech B.Pharmacy results checker. Fast, free, accurate.",
     images: ["/og-image.png"],
   },
   alternates: {
     canonical: "https://jntuhresultbp.vercel.app",
+    languages: {
+      en: "https://jntuhresultbp.vercel.app",
+    },
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
+    shortcut: "/favicon.ico",
   },
   robots: {
     index: true,
@@ -112,6 +147,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };
@@ -125,31 +163,73 @@ export default function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: "JNTUH Results Vercel",
-      alternateName: ["JNTUH Results Vercel", "JNTU Result Checker"],
+      name: "JNTUH Results",
+      alternateName: ["JNTUH Results", "JNTU Result Checker", "JNTUH B.Tech Results", "JNTUH B.Pharmacy Results"],
       url: "https://jntuhresultbp.vercel.app",
+      description: "Fast and accurate JNTUH B.Tech, B.Pharmacy results checker for R22, R25 regulations. Check semester results, SGPA, CGPA, supplementary results.",
+      publisher: {
+        "@type": "Organization",
+        name: "JNTUH Results",
+      },
       potentialAction: {
         "@type": "SearchAction",
-        target:
-          "https://jntuhresultbp.vercel.app/academic?hallticket={search_term_string}",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://jntuhresultbp.vercel.app/academic?hallticket={search_term_string}",
+        },
         "query-input": "required name=search_term_string",
       },
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "JNTUH Results Vercel",
+      name: "JNTUH Results",
       url: "https://jntuhresultbp.vercel.app",
       logo: "https://jntuhresultbp.vercel.app/logo.png",
+      sameAs: [
+        "https://twitter.com/jntuhresults",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: "hp2059712@gmail.com",
+        contactType: "customer service",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How to check JNTUH results?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Visit jntuhresultbp.vercel.app, enter your 10-digit hall ticket number, and click search to view your results instantly.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What regulations are supported?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We support JNTUH B.Tech and B.Pharmacy results for R22, R25, R18, R16, R15, and R13 regulations.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Are the results accurate?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, we fetch results directly from the official JNTUH API. However, always verify with the official university portal.",
+          },
+        },
+      ],
     },
   ];
 
   return (
     <html lang="en">
       <head>
-        {/* Google Analytics */}
-
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -157,13 +237,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google Verification */}
         <meta
           name="google-site-verification"
           content="hb7T1JTtI-p5rLAWqhiYKc3BJySemkcYXlu5PEJspGs"
         />
 
-        {/* Google AdSense */}
         <meta name="google-adsense-account" content="ca-pub-5786755591893406" />
       </head>
       <body
