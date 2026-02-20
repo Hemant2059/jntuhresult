@@ -32,16 +32,20 @@ export default function NotificationList({ notifications }: NotificationListProp
   const [typeFilter, setTypeFilter] = useState<string>("all");
 
   const filteredNotifications = useMemo(() => {
+    if (!notifications || !Array.isArray(notifications)) return [];
     return notifications.filter((notif) => {
-      const matchesSearch = notif.title.toLowerCase().includes(search.toLowerCase());
-      const matchesDegree = degreeFilter === "all" || notif.degree.toLowerCase() === degreeFilter.toLowerCase();
-      const matchesType = typeFilter === "all" || notif.type.toLowerCase() === typeFilter.toLowerCase();
+      const title = notif?.title || "";
+      const degree = notif?.degree || "";
+      const type = notif?.type || "";
+      const matchesSearch = title.toLowerCase().includes(search.toLowerCase());
+      const matchesDegree = degreeFilter === "all" || degree.toLowerCase() === degreeFilter.toLowerCase();
+      const matchesType = typeFilter === "all" || type.toLowerCase() === typeFilter.toLowerCase();
       return matchesSearch && matchesDegree && matchesType;
     });
   }, [notifications, search, degreeFilter, typeFilter]);
 
-  const degrees = Array.from(new Set(notifications.map(n => n.degree))).filter(Boolean);
-  const types = Array.from(new Set(notifications.map(n => n.type))).filter(Boolean);
+  const degrees = Array.isArray(notifications) ? Array.from(new Set(notifications.map(n => n?.degree).filter(Boolean))) : [];
+  const types = Array.isArray(notifications) ? Array.from(new Set(notifications.map(n => n?.type).filter(Boolean))) : [];
 
   return (
     <div className="space-y-8">
@@ -68,7 +72,7 @@ export default function NotificationList({ notifications }: NotificationListProp
                 >
                   <option value="all">All Degrees</option>
                   {degrees.map(d => (
-                    <option key={d} value={d}>{d.toUpperCase()}</option>
+                    <option key={d} value={d}>{String(d).toUpperCase()}</option>
                   ))}
                 </select>
                 <Filter className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
@@ -82,7 +86,7 @@ export default function NotificationList({ notifications }: NotificationListProp
                 >
                   <option value="all">All Types</option>
                   {types.map(t => (
-                    <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
+                    <option key={t} value={t}>{String(t).charAt(0).toUpperCase() + String(t).slice(1)}</option>
                   ))}
                 </select>
                 <Filter className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
@@ -113,7 +117,7 @@ export default function NotificationList({ notifications }: NotificationListProp
       <div className="grid grid-cols-1 gap-3 md:gap-4">
         {filteredNotifications.length > 0 ? (
           filteredNotifications.map((notif, index) => (
-            <Link key={notif.slug + index} href={`/notifications/${notif.slug}`}>
+            <Link key={`${notif?.slug || index}-${index}`} href={`/notifications/${notif?.slug}`}>
               <Card className="group border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 rounded-3xl overflow-hidden bg-white">
                 <CardContent className="p-0">
                   <div className="flex">
@@ -123,31 +127,31 @@ export default function NotificationList({ notifications }: NotificationListProp
                         <div className="space-y-1.5 md:space-y-3">
                           <div className="flex flex-wrap gap-2">
                             <span className="px-2 md:px-3 py-0.5 md:py-1 rounded-full bg-blue-50 text-blue-700 text-[9px] md:text-[10px] font-bold uppercase tracking-wider">
-                              {notif.degree}
+                              {notif?.degree || "N/A"}
                             </span>
                             <span className="px-2 md:px-3 py-0.5 md:py-1 rounded-full bg-indigo-50 text-indigo-700 text-[9px] md:text-[10px] font-bold uppercase tracking-wider">
-                              {notif.regulation}
+                              {notif?.regulation || "N/A"}
                             </span>
-                            {notif.is_rcrv && (
+                            {notif?.is_rcrv && (
                               <span className="px-2 md:px-3 py-0.5 md:py-1 rounded-full bg-amber-50 text-amber-700 text-[9px] md:text-[10px] font-bold uppercase tracking-wider">
                                 RC/RV
                               </span>
                             )}
                             <span className="px-2 md:px-3 py-0.5 md:py-1 rounded-full bg-gray-50 text-gray-700 text-[9px] md:text-[10px] font-bold uppercase tracking-wider">
-                              {notif.type}
+                              {notif?.type || "N/A"}
                             </span>
                           </div>
                           
                           <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
-                            {notif.title}
+                            {notif?.title || "Untitled"}
                           </h3>
                           
                           <div className="flex items-center gap-3 md:gap-4 text-[11px] md:text-sm text-gray-500">
                             <div className="flex items-center gap-1.5">
                               <Calendar className="h-3.5 w-3.5 md:h-4 w-4" />
-                              <span>{notif.publish_date}</span>
+                              <span>{notif?.publish_date || "N/A"}</span>
                             </div>
-                            {notif.exam_date && (
+                            {notif?.exam_date && (
                               <div className="flex items-center gap-1.5">
                                 <Info className="h-3.5 w-3.5 md:h-4 w-4" />
                                 <span>Exam: {notif.exam_date}</span>

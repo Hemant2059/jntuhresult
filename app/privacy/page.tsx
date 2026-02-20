@@ -74,6 +74,48 @@ export default function PrivacyPolicy() {
             <p>
               JNTUH Results Vercel does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.
             </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">8. Information We Collect</h2>
+            <p>
+              JNTUH Results Vercel is designed to help students access their examination results quickly and easily. When you use our website to search for results, we may collect the following information:
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Hall Ticket Number:</strong> You voluntarily enter your JNTUH hall ticket number to search for your results. This information is processed temporarily and is not stored on our servers.</li>
+              <li><strong>Browser Information:</strong> We collect standard browser and device information to improve our services and for analytics purposes.</li>
+              <li><strong>Cookies:</strong> We use cookies to enhance user experience and analyze website traffic.</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">9. How We Use Your Information</h2>
+            <p>
+              The information we collect is used for the following purposes:
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>To provide you with examination results quickly and accurately</li>
+              <li>To improve our website and user experience</li>
+              <li>To analyze website traffic and usage patterns</li>
+              <li>To respond to your questions and provide customer support</li>
+              <li>To comply with legal obligations</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">10. Data Security</h2>
+            <p>
+              We implement appropriate security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">11. Third-Party Links</h2>
+            <p>
+              Our website may contain links to third-party websites. We have no control over the content, privacy policies, or practices of any third-party websites. We encourage you to review the privacy policies of those websites before providing any information.
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">12. Changes to This Privacy Policy</h2>
+            <p>
+              We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">13. Contact Information</h2>
+            <p>
+              If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <strong>hp2059712@gmail.com</strong>.
+            </p>
           </section>
         </motion.div>
       </div>

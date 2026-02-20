@@ -46,6 +46,31 @@ export default function Disclaimer() {
             <p>
               All information in the Site is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information, and without warranty of any kind, express or implied, including, but not limited to warranties of performance, merchantability and fitness for a particular purpose.
             </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">6. No Responsibility for Decisions</h2>
+            <p>
+              The information provided on this website should not be used as the sole basis for making important decisions. Any reliance on the material on this site is at your own risk. We shall not be liable for any losses or damages arising from the use of this website or reliance on any information provided herein.
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">7. Result Verification</h2>
+            <p>
+              Students are strongly advised to verify their examination results from the official JNTUH university portal. While we strive to provide accurate and up-to-date information, we cannot guarantee that all results displayed on this website are 100% accurate. Always cross-check with the official university records before making any decisions based on the results.
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">8. Copyright and Trademark</h2>
+            <p>
+              This website and its content are protected by copyright laws. The JNTUH logo, university names, and other trademarks are property of their respective owners. This website is not affiliated with, endorsed by, or sponsored by Jawaharlal Nehru Technological University Hyderabad (JNTUH).
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">9. Limitation of Liability</h2>
+            <p>
+              In no event shall JNTUH Results Vercel be liable for any special or consequential damages arising out of or in any way connected with your use of this website. This includes, but is not limited to, loss of data, loss of profits, or any other financial losses resulting from the use or inability to use the information on this website.
+            </p>
+
+            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">10. Changes to Disclaimer</h2>
+            <p>
+              We reserve the right to modify this disclaimer at any time without prior notice. Your continued use of this website constitutes your acceptance of any changes to this disclaimer.
+            </p>
           </section>
         </motion.div>
       </div>

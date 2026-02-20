@@ -52,6 +52,24 @@ export default function ContactPage() {
                   <p className="text-gray-600">Usually responds within 24 hours</p>
                 </div>
               </div>
+
+              <div className="pt-6 border-t">
+                <h3 className="font-bold text-gray-900 mb-3">Additional Information</h3>
+                <p className="text-gray-600 text-sm">
+                  JNTUH Results Vercel is an independent platform designed to help students 
+                  easily access their examination results. We are not affiliated with JNTUH 
+                  or any official university authority.
+                </p>
+              </div>
+
+              <div className="pt-4">
+                <h3 className="font-bold text-gray-900 mb-3">For Business Inquiries</h3>
+                <p className="text-gray-600 text-sm">
+                  For advertising opportunities or partnership inquiries, please mention 
+                  "Business Inquiry" in your email subject line. We welcome collaborations 
+                  that align with our mission of helping students.
+                </p>
+              </div>
             </div>
           </motion.div>
 
