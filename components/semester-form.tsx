@@ -4,11 +4,22 @@ import { useState, useRef, startTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Loader2, Search, BookOpen } from "lucide-react";
+import { AlertCircle, Loader2, Search, BookOpen, RefreshCw } from "lucide-react";
 import { semesterResult } from "@/action/results";
 import SemesterTable from "./semester-table";
 import { NativeSelect, NativeSelectOption } from "./ui/native-select";
 import { useActionState } from "react";
+
+async function clearCacheAndRetry(formData: FormData, retryAction: (formData: FormData) => void) {
+  try {
+    await fetch("https://jntuh-api.vercel.app/refresh-cache", { cache: 'no-store' });
+  } catch (e) {
+    console.error("Failed to clear cache");
+  }
+  startTransition(() => {
+    retryAction(formData);
+  });
+}
 
 const SEMESTERS = [
   { value: "1-1", label: "Year 1, Semester 1" },
@@ -140,9 +151,24 @@ export default function SemesterForm() {
             <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
               <AlertCircle className="h-5 w-5 text-red-600" />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 flex-1">
               <p className="font-bold text-red-900">Error Occurred</p>
               <p className="text-sm text-red-700">{state.error}</p>
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-3 border-red-200 text-red-700 hover:bg-red-100 hover:text-red-800"
+                onClick={() => {
+                  const form = formRef.current;
+                  if (form) {
+                    const fd = new FormData(form);
+                    clearCacheAndRetry(fd, formAction);
+                  }
+                }}
+              >
+                <RefreshCw className="h-3.5 w-3.5 mr-2" />
+                Clear Cache & Retry
+              </Button>
             </div>
           </div>
         </Card>

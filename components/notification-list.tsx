@@ -2,10 +2,12 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Search, Calendar, ChevronRight, Filter, Info, Bell } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Search, Calendar, ChevronRight, Filter, Info, Bell, RefreshCw, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { refreshNotifications } from "@/action/results";
 
 interface Notification {
   title: string;
@@ -26,10 +28,22 @@ interface NotificationListProps {
   notifications: Notification[];
 }
 
-export default function NotificationList({ notifications }: NotificationListProps) {
+export default function NotificationList({ notifications: initialNotifications }: NotificationListProps) {
   const [search, setSearch] = useState("");
   const [degreeFilter, setDegreeFilter] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [notifications, setNotifications] = useState(initialNotifications);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const router = useRouter();
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    const result = await refreshNotifications();
+    if (result.success && result.data) {
+      setNotifications(result.data);
+    }
+    setIsRefreshing(false);
+  };
 
   const filteredNotifications = useMemo(() => {
     if (!notifications || !Array.isArray(notifications)) return [];

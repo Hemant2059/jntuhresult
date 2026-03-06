@@ -293,3 +293,60 @@ export async function notificationResult(prevState: any, formData: FormData) {
     };
   }
 }
+
+export async function refreshNotifications() {
+  try {
+    const response = await fetch(
+      "https://jntuh-api.vercel.app/notifications?refresh=true",
+      { cache: 'no-store' },
+    );
+    if (!response.ok) throw new Error("Failed to fetch notifications");
+    const data = await response.json();
+    return { success: true, data, error: null };
+  } catch (error) {
+    return {
+      success: false,
+      data: null,
+      error: "Failed to refresh notifications. Try again later.",
+    };
+  }
+}
+
+export async function clearCacheAndRetry(htno: string, type: "academic" | "semester" | "allresult" | "specificresult", extraParams?: Record<string, string>) {
+  try {
+    await fetch("https://jntuh-api.vercel.app/refresh-cache", { cache: 'no-store' });
+    
+    let url = "";
+    switch (type) {
+      case "academic":
+        url = `https://jntuh-api.vercel.app/academic?htno=${htno}`;
+        break;
+      case "semester":
+        url = `https://jntuh-api.vercel.app/sem?htno=${htno}&sem=${extraParams?.sem || "1-1"}`;
+        break;
+      case "allresult":
+        url = `https://jntuh-api.vercel.app/allresult?htno=${htno}`;
+        break;
+      case "specificresult":
+        const params = new URLSearchParams();
+        params.set("htno", htno);
+        if (extraParams) {
+          Object.entries(extraParams).forEach(([key, value]) => params.set(key, value));
+        }
+        url = `https://jntuh-api.vercel.app/specificresult?${params.toString()}`;
+        break;
+    }
+
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) throw new Error("Failed to fetch results");
+    
+    const data = await response.json();
+    return { success: true, data, error: null };
+  } catch (error) {
+    return {
+      success: false,
+      data: null,
+      error: "Failed to refresh results. Try again later.",
+    };
+  }
+}
