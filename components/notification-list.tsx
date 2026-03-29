@@ -130,8 +130,16 @@ export default function NotificationList({ notifications: initialNotifications }
       {/* Notifications Grid */}
       <div className="grid grid-cols-1 gap-3 md:gap-4">
         {filteredNotifications.length > 0 ? (
-          filteredNotifications.map((notif, index) => (
-            <Link key={`${notif?.slug || index}-${index}`} href={`/notifications/${notif?.slug}`}>
+          filteredNotifications.map((notif, index) => {
+            const searchParams = new URLSearchParams({
+              title: notif?.title || "",
+              url: notif?.url || "",
+              degree: notif?.degree || "",
+              regulation: notif?.regulation || "",
+              semester: notif?.semester || "",
+            });
+            return (
+            <Link key={`${notif?.slug || index}-${index}`} href={`/notifications/${notif?.slug}?${searchParams.toString()}`}>
               <Card className="group border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 rounded-3xl overflow-hidden bg-white">
                 <CardContent className="p-0">
                   <div className="flex">
@@ -185,7 +193,8 @@ export default function NotificationList({ notifications: initialNotifications }
                 </CardContent>
               </Card>
             </Link>
-          ))
+          );
+          })
         ) : (
           <Card className="border-dashed border-2 border-gray-100 rounded-3xl p-20 text-center bg-gray-50/30">
             <div className="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg mb-6">

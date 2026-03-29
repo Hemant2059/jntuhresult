@@ -4,11 +4,13 @@ import { notFound } from "next/navigation";
 
 interface NotificationPageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ title?: string; url?: string; degree?: string; regulation?: string; semester?: string }>;
 }
 
 async function getNotifications() {
   const res = await fetch(
     "https://jntuh-api.vercel.app/notifications?refresh=false",
+    { cache: 'no-store' }
   );
   if (!res.ok) return [];
   return res.json();
@@ -76,9 +78,26 @@ export async function generateMetadata({
 
 export default async function NotificationDetailPage({
   params,
+  searchParams,
 }: NotificationPageProps) {
   const { slug } = await params;
-  const notification = await getNotificationBySlug(slug);
+  const sp = await searchParams;
+
+  let notification;
+  
+  // Use search params if available (fast path - no API call needed)
+  if (sp.title && sp.url && sp.degree) {
+    notification = {
+      title: sp.title,
+      url: sp.url,
+      degree: sp.degree,
+      regulation: sp.regulation || "N/A",
+      semester: sp.semester || "N/A",
+    };
+  } else {
+    // Fallback to API fetch
+    notification = await getNotificationBySlug(slug);
+  }
 
   if (!notification) {
     notFound();
