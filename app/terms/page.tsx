@@ -1,77 +1,63 @@
-"use client";
+import { FileText } from "lucide-react";
 
-import { motion } from "framer-motion";
+export const metadata = {
+  title: "Terms and Conditions",
+  description: "Terms and conditions for using JNTUH Results.",
+};
 
 export default function TermsAndConditions() {
   return (
-    <main className="min-h-screen bg-white py-20 px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.5 }}
-           className="space-y-8"
-        >
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl mb-4">Terms and Conditions</h1>
-            <p className="text-gray-500">Welcome to JNTUH Results Vercel</p>
+    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div className="max-w-4xl mx-auto px-6 py-14 sm:py-20">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600">
+              <FileText className="h-6 w-6" />
+            </div>
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Terms &amp; Conditions</h1>
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Welcome to JNTUH Results</p>
+            </div>
           </div>
+        </div>
+      </div>
 
-          <section className="prose prose-blue max-w-none text-gray-600 space-y-6">
-            <p>
-              These terms and conditions outline the rules and regulations for the use of JNTUH Results Vercel's Website, located at https://jntuhresultbp.vercel.app.
-            </p>
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 p-8 sm:p-12 shadow-sm space-y-10">
+          <Section title="1. Acceptance of Terms">
+            <p>By accessing this website you accept these terms and conditions. Do not continue to use JNTUH Results if you do not agree to all of the terms and conditions stated on this page.</p>
+          </Section>
 
-            <p>
-              By accessing this website we assume you accept these terms and conditions. Do not continue to use JNTUH Results Vercel if you do not agree to take all of the terms and conditions stated on this page.
-            </p>
+          <Section title="2. License">
+            <p>Unless otherwise stated, JNTUH Results and/or its licensors own the intellectual property rights for all material on this website. All intellectual property rights are reserved.</p>
+          </Section>
 
-            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">1. License</h2>
-            <p>
-              Unless otherwise stated, JNTUH Results Vercel and/or its licensors own the intellectual property rights for all material on JNTUH Results Vercel. All intellectual property rights are reserved. You may access this from JNTUH Results Vercel for your own personal use subjected to restrictions set in these terms and conditions.
-            </p>
-            <p>You must not:</p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Republish material from JNTUH Results Vercel</li>
-              <li>Sell, rent or sub-license material from JNTUH Results Vercel</li>
-              <li>Reproduce, duplicate or copy material from JNTUH Results Vercel</li>
-              <li>Redistribute content from JNTUH Results Vercel</li>
-            </ul>
+          <Section title="3. Accuracy of Information">
+            <p>The information provided on this website is for general informational purposes only. While we strive to keep the information up-to-date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, or suitability of the information.</p>
+          </Section>
 
-            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">2. Accuracy of Information</h2>
-            <p>
-              The information provided on this website is for general informational purposes only. While we strive to keep the information up-to-date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.
-            </p>
+          <Section title="4. Disclaimer">
+            <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will limit or exclude our or your liability for death or personal injury, fraud, or any liabilities in any way that is not permitted under applicable law.</p>
+          </Section>
 
-            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">3. Hyperlinking to our Content</h2>
-            <p>
-              The following organizations may link to our Website without prior written approval:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Government agencies;</li>
-              <li>Search engines;</li>
-              <li>News organizations;</li>
-              <li>Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses.</li>
-            </ul>
+          <Section title="5. External Links">
+            <p>Our website may contain links to third-party websites. We have no control over the content, privacy policies, or practices of any third-party websites.</p>
+          </Section>
 
-            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">4. Content Liability</h2>
-            <p>
-              We shall not be hold responsible for any content that appears on our Website. You agree to protect and defend us against all claims that is rising on our Website.
-            </p>
-
-            <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4 border-b pb-2">5. Disclaimer</h2>
-            <p>
-              To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>limit or exclude our or your liability for death or personal injury;</li>
-              <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
-              <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>
-              <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>
-            </ul>
-          </section>
-        </motion.div>
+          <Section title="6. Contact">
+            <p>If you have any questions about these terms, please contact us at <strong className="text-blue-600">hp2059712@gmail.com</strong>.</p>
+          </Section>
+        </div>
       </div>
     </main>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{title}</h2>
+      <div className="text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">{children}</div>
+    </section>
   );
 }

@@ -12,9 +12,9 @@ import { useActionState } from "react";
 
 async function clearCacheAndRetry(formData: FormData, retryAction: (formData: FormData) => void) {
   try {
-    await fetch("https://jntuh-api.vercel.app/refresh-cache", { cache: 'no-store' });
-  } catch (e) {
-    console.error("Failed to clear cache");
+    await fetch("https://jntuh-api.onrender.com/refresh-cache", { cache: 'no-store' });
+  } catch {
+    // silently fail
   }
   startTransition(() => {
     retryAction(formData);
@@ -48,7 +48,6 @@ export default function SemesterForm() {
     e.preventDefault();
     const form = formRef.current ?? e.currentTarget;
     const fd = new FormData(form);
-
     startTransition(() => {
       formAction(fd);
     });
@@ -58,32 +57,29 @@ export default function SemesterForm() {
 
   return (
     <div className="space-y-6 my-4">
-      <Card className="max-w-2xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
-        <div className="p-1 bg-linear-to-r from-indigo-600 to-blue-600" />
-        <CardContent className="p-8">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">
-              Semester Result
-            </h2>
-            <p className="text-gray-500 text-sm mt-1">
+      <Card className="max-w-2xl mx-auto shadow-sm overflow-hidden print:hidden">
+        <div className="h-1 bg-linear-to-r from-indigo-600 to-blue-600" />
+        <CardContent className="p-5 sm:p-6">
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-0.5">
+              <BookOpen className="h-4 w-4 text-indigo-600" />
+              <h2 className="text-xl font-bold">Semester Result</h2>
+            </div>
+            <p className="text-muted-foreground text-xs">
               Check your performance for a specific semester.
             </p>
           </div>
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
                 <Input
                   type="text"
                   placeholder="Hall Ticket No"
                   name="hallticket"
                   value={hallticket}
-                  onChange={(e) =>
-                    setHallticket(
-                      e.target.value.toUpperCase().replace(/\s+/g, ""),
-                    )
-                  }
-                  className="pl-10 h-12 rounded-xl border-gray-200 focus:border-indigo-500 transition-all"
+                  onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
+                  className="pl-9 h-10 rounded-xl text-sm"
                   maxLength={10}
                   minLength={10}
                   disabled={isPending}
@@ -96,7 +92,7 @@ export default function SemesterForm() {
                   value={semester}
                   onChange={(e) => setSemester(e.target.value)}
                   disabled={isPending}
-                  className="h-12 w-full rounded-xl border-gray-200 focus:border-indigo-500"
+                  className="h-10 w-full rounded-xl text-sm"
                 >
                   <NativeSelectOption value="">
                     Select Semester
@@ -113,11 +109,11 @@ export default function SemesterForm() {
             <Button
               type="submit"
               disabled={isPending || !isFormValid}
-              className="w-full h-12 rounded-xl bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 transition-all active:scale-95 text-base font-semibold"
+              className="w-full h-10 rounded-xl bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 transition-all active:scale-95 text-sm font-semibold"
             >
               {isPending ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
                   Searching Results...
                 </>
               ) : (
@@ -128,45 +124,36 @@ export default function SemesterForm() {
         </CardContent>
       </Card>
 
-      {/* Loading */}
       {isPending && (
-        <Card className="max-w-2xl mx-auto p-12 text-center space-y-4 border-none shadow-none bg-transparent">
+        <Card className="max-w-2xl mx-auto p-8 text-center space-y-3 border-none shadow-none bg-transparent">
           <div className="relative inline-block">
-            <div className="absolute inset-0 rounded-full bg-indigo-100 animate-ping opacity-25" />
-            <Loader2 className="h-12 w-12 animate-spin relative text-indigo-600" />
+            <div className="absolute inset-0 rounded-full bg-indigo-100 dark:bg-indigo-900/30 animate-ping opacity-25" />
+            <Loader2 className="h-8 w-8 animate-spin relative text-indigo-600" />
           </div>
-          <div className="space-y-1">
-            <p className="text-lg font-semibold text-gray-900">
-              Loading semester data
-            </p>
-            <p className="text-gray-500">Checking JNTUH database...</p>
+          <div className="space-y-0.5">
+            <p className="text-base font-semibold">Loading semester data</p>
+            <p className="text-muted-foreground text-sm">Checking JNTUH database...</p>
           </div>
         </Card>
       )}
 
-      {/* Error */}
       {!isPending && state.error && (
-        <Card className="max-w-2xl mx-auto p-6 border-red-100 bg-red-50/50 rounded-2xl">
-          <div className="flex gap-4">
-            <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-              <AlertCircle className="h-5 w-5 text-red-600" />
+        <Card className="max-w-2xl mx-auto p-4 border-destructive/20 bg-destructive/5 rounded-xl">
+          <div className="flex gap-3">
+            <div className="h-8 w-8 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
+              <AlertCircle className="h-4 w-4 text-destructive" />
             </div>
-            <div className="space-y-1 flex-1">
-              <p className="font-bold text-red-900">Error Occurred</p>
-              <p className="text-sm text-red-700">{state.error}</p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="mt-3 border-red-200 text-red-700 hover:bg-red-100 hover:text-red-800"
-                onClick={() => {
+            <div className="space-y-0.5 flex-1">
+              <p className="font-bold text-destructive text-sm">Error Occurred</p>
+              <p className="text-xs text-destructive/80">{state.error}</p>
+              <Button variant="outline" size="sm" className="mt-2 h-8 text-xs" onClick={() => {
                   const form = formRef.current;
                   if (form) {
                     const fd = new FormData(form);
                     clearCacheAndRetry(fd, formAction);
                   }
-                }}
-              >
-                <RefreshCw className="h-3.5 w-3.5 mr-2" />
+                }}>
+                <RefreshCw className="h-3 w-3 mr-1.5" />
                 Clear Cache & Retry
               </Button>
             </div>
@@ -174,18 +161,16 @@ export default function SemesterForm() {
         </Card>
       )}
 
-      {/* Success */}
       {state.success && state.data && !isPending && (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           <SemesterTable data={state.data} semester={semester} />
         </div>
       )}
 
-      {/* Empty */}
       {!isPending && !state.success && !state.error && (
         <div className="max-w-2xl mx-auto py-12 text-center opacity-40">
-          <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-500 font-medium">
+          <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+          <p className="text-muted-foreground font-medium">
             Select semester and enter hall ticket
           </p>
         </div>

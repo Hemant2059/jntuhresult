@@ -125,7 +125,7 @@ const DataTable: React.FC<ClassResultTableProps> = ({ data, semester }) => {
       const base: Record<string, any> = {
         rollNo: student.Details?.Roll_No ?? "",
         name: student.Details?.NAME ?? "",
-        sgpa: parseFloat(student.SGPA ?? "0"),
+        sgpa: parseFloat(student.SGPA ?? "0") || 0,
       };
 
       subjectOrder.forEach(({ code }) => {

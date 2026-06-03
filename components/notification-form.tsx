@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Loader2, Search, ArrowLeft, GraduationCap, ClipboardList, Send } from "lucide-react";
 import { notificationResult } from "@/action/results";
 import Link from "next/link";
-import AllResultsView from "./allresult-view"; // Assuming this can display the result structure
+import AllResultsView from "./allresult-view";
 import SemesterTable from "./semester-table";
 
 interface NotificationFormProps {
@@ -23,13 +23,11 @@ interface NotificationFormProps {
 export default function NotificationForm({ notification }: NotificationFormProps) {
   const [hallticket, setHallticket] = useState("");
 
-  // Extract params from URL
   const getParam = (url: string, param: string) => {
     try {
       const urlObj = new URL(url);
       return urlObj.searchParams.get(param) || "null";
-    } catch (e) {
-      // If URL is invalid, try manual parsing
+    } catch {
       const match = url.match(new RegExp(`[?&]${param}=([^&]*)`));
       return match ? decodeURIComponent(match[1]) : "null";
     }
@@ -48,78 +46,74 @@ export default function NotificationForm({ notification }: NotificationFormProps
     error: null,
   });
 
-  // Determine which view to use based on data structure
   const isAllResults = state.success && state.data && state.data.Results && !state.data.Result;
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <Link 
-        href="/notifications" 
-        className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors group"
+      <Link
+        href="/notifications"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-blue-600 transition-colors group"
       >
-        <div className="h-8 w-8 rounded-full bg-white border border-gray-100 flex items-center justify-center group-hover:bg-blue-50 group-hover:border-blue-100 transition-all">
+        <div className="h-8 w-8 rounded-full bg-card border flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 group-hover:border-blue-100 transition-all">
           <ArrowLeft size={16} />
         </div>
         Back to Notifications
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Info Card - Hide when showing results to give more space */}
         {(!state.success || isPending) && (
-          <div className="lg:col-span-1 space-y-6">
-            <Card className="border-none shadow-2xl shadow-blue-500/10 rounded-[2.5rem] overflow-hidden bg-white">
-              <div className="h-2 bg-linear-to-r from-blue-600 to-indigo-600" />
-              <CardContent className="p-8">
-                <div className="h-14 w-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-6">
-                  <ClipboardList size={32} />
+          <div className="lg:col-span-1 space-y-4">
+            <Card className="shadow-md overflow-hidden">
+              <div className="h-1.5 bg-linear-to-r from-blue-600 to-indigo-600" />
+              <CardContent className="p-5">
+                <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-4">
+                  <ClipboardList size={22} />
                 </div>
-                <h2 className="text-xl font-black text-gray-900 leading-tight mb-4">
+                <h2 className="text-base font-black leading-tight mb-3">
                   {notification.title}
                 </h2>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="h-2 w-2 rounded-full bg-blue-600" />
-                    <span className="text-gray-500 font-medium">Degree:</span>
-                    <span className="text-gray-900 font-bold uppercase">{notification.degree}</span>
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
+                    <span className="text-muted-foreground font-medium">Degree:</span>
+                    <span className="font-bold uppercase">{notification.degree}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="h-2 w-2 rounded-full bg-indigo-600" />
-                    <span className="text-gray-500 font-medium">Regulation:</span>
-                    <span className="text-gray-900 font-bold uppercase">{notification.regulation}</span>
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 shrink-0" />
+                    <span className="text-muted-foreground font-medium">Regulation:</span>
+                    <span className="font-bold uppercase">{notification.regulation}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="h-2 w-2 rounded-full bg-purple-600" />
-                    <span className="text-gray-500 font-medium">Semester:</span>
-                    <span className="text-gray-900 font-bold uppercase">{notification.semester}</span>
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-purple-600 shrink-0" />
+                    <span className="text-muted-foreground font-medium">Semester:</span>
+                    <span className="font-bold uppercase">{notification.semester}</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <div className="p-6 bg-blue-50/50 rounded-3xl border border-blue-100/50">
-              <h4 className="flex items-center gap-2 text-blue-800 font-bold text-sm mb-2">
-                <GraduationCap size={16} />
+            <div className="p-4 bg-blue-50/50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800">
+              <h4 className="flex items-center gap-1.5 text-blue-800 dark:text-blue-300 font-bold text-xs mb-1.5">
+                <GraduationCap size={13} />
                 Need Help?
               </h4>
-              <p className="text-xs text-blue-700/70 leading-relaxed">
-                Ensure you have your 10-digit hall ticket number ready. If results are not available, they might be under maintenance officially.
+              <p className="text-[11px] text-blue-700/70 dark:text-blue-300/70 leading-relaxed">
+                Ensure you have your 10-digit hall ticket number ready. If results are not available, they might be under maintenance.
               </p>
             </div>
           </div>
         )}
 
-        {/* Form Card */}
-        <div className={`${!state.success || isPending ? 'lg:col-span-2' : 'lg:col-span-3'} space-y-6`}>
+        <div className={`${!state.success || isPending ? "lg:col-span-2" : "lg:col-span-3"} space-y-6`}>
           {!state.success || isPending ? (
-            <Card className="border-none shadow-2xl shadow-blue-500/10 rounded-[2.5rem] overflow-hidden bg-white">
-              <CardContent className="p-8 md:p-12">
-                <div className="mb-10 text-center md:text-left">
-                  <h2 className="text-3xl font-black text-gray-900 mb-3">View Results</h2>
-                  <p className="text-gray-500 font-medium">Enter your credentials to access your detailed result sheet.</p>
+            <Card className="shadow-md overflow-hidden">
+              <CardContent className="p-5 sm:p-6">
+                <div className="mb-5 text-center md:text-left">
+                  <h2 className="text-xl font-black mb-1.5">View Results</h2>
+                  <p className="text-muted-foreground text-xs font-medium">Enter your credentials to access your detailed result sheet.</p>
                 </div>
 
-                <form action={formAction} className="space-y-8">
-                  {/* Hidden fields for extraction parameters */}
+                <form action={formAction} className="space-y-4">
                   <input type="hidden" name="degree" value={degree} />
                   <input type="hidden" name="examCode" value={examCode} />
                   <input type="hidden" name="etype" value={etype} />
@@ -127,11 +121,11 @@ export default function NotificationForm({ notification }: NotificationFormProps
                   <input type="hidden" name="result" value={result} />
                   <input type="hidden" name="grad" value={grad} />
 
-                  <div className="space-y-3">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Hall Ticket Number</label>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold ml-1">Hall Ticket Number</label>
                     <div className="relative group">
-                      <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                        <Search className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                      <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+                        <Search className="h-4 w-4 text-muted-foreground group-focus-within:text-blue-500 transition-colors" />
                       </div>
                       <Input
                         type="text"
@@ -139,7 +133,7 @@ export default function NotificationForm({ notification }: NotificationFormProps
                         name="htno"
                         value={hallticket}
                         onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
-                        className="pl-12 h-16 rounded-2xl border-gray-100 bg-gray-50/50 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition-all text-lg font-bold tracking-widest placeholder:tracking-normal placeholder:font-normal"
+                        className="pl-10 h-11 rounded-xl bg-muted/30 focus:bg-card focus:ring-4 focus:ring-blue-500/10 transition-all text-base font-bold tracking-widest placeholder:tracking-normal placeholder:font-normal"
                         disabled={isPending}
                         maxLength={10}
                       />
@@ -149,30 +143,30 @@ export default function NotificationForm({ notification }: NotificationFormProps
                   <Button
                     type="submit"
                     disabled={isPending || hallticket.length !== 10}
-                    className="w-full h-16 rounded-2xl bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-600/20 text-lg font-bold transition-all active:scale-[0.98] group"
+                    className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 text-sm font-bold transition-all active:scale-[0.98] group"
                   >
                     {isPending ? (
-                      <div className="flex items-center gap-3">
-                        <Loader2 className="h-6 w-6 animate-spin" />
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
                         <span>Searching API...</span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <span>Check Performance</span>
-                        <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </div>
                     )}
                   </Button>
                 </form>
 
                 {state.error && !isPending && (
-                  <div className="mt-8 p-6 border-red-100 bg-red-50/50 rounded-2xl flex gap-4 animate-in shake-1">
-                    <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-                      <AlertCircle className="h-5 w-5 text-red-600" />
+                  <div className="mt-4 p-3 border-destructive/20 bg-destructive/5 rounded-xl flex gap-3">
+                    <div className="h-7 w-7 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
+                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
                     </div>
-                    <div className="space-y-1">
-                      <p className="font-bold text-red-900 leading-tight">Request Failed</p>
-                      <p className="text-sm text-red-700/80 font-medium">{state.error}</p>
+                    <div className="space-y-0.5">
+                      <p className="font-bold text-destructive text-xs leading-tight">Request Failed</p>
+                      <p className="text-xs text-destructive/80 font-medium">{state.error}</p>
                     </div>
                   </div>
                 )}
@@ -180,23 +174,22 @@ export default function NotificationForm({ notification }: NotificationFormProps
             </Card>
           ) : null}
 
-          {/* Result View */}
           {state.success && state.data && !isPending && (
             <div className="animate-in zoom-in-95 duration-500">
-               {isAllResults ? (
-                 <AllResultsView data={state.data} />
-               ) : (
-                 <SemesterTable data={state.data} semester={notification.semester} hideSGPA={true} />
-               )}
-               <div className="mt-8 flex justify-center print:hidden">
-                 <Button 
-                   variant="outline" 
-                   onClick={() => window.location.reload()}
-                   className="rounded-2xl border-gray-200 px-8"
-                 >
-                   Clear and Search Again
-                 </Button>
-               </div>
+              {isAllResults ? (
+                <AllResultsView data={state.data} />
+              ) : (
+                <SemesterTable data={state.data} semester={notification.semester} hideSGPA={true} />
+              )}
+              <div className="mt-8 flex justify-center print:hidden">
+                <Button
+                  variant="outline"
+                  onClick={() => window.location.reload()}
+                  className="rounded-2xl px-8"
+                >
+                  Clear and Search Again
+                </Button>
+              </div>
             </div>
           )}
         </div>

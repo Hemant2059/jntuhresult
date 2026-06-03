@@ -7,9 +7,10 @@ import {
   GraduationCap,
   BookOpen,
   Users,
+  BarChart3,
   Search,
   Download,
-  BarChart3,
+  Zap,
 } from "lucide-react";
 import {
   Accordion,
@@ -24,39 +25,42 @@ export default function Home() {
     {
       title: "Academic Result",
       href: "/academic",
-      description: "Complete academic overview including CGPA & grade history.",
-      icon: <GraduationCap className="h-6 w-6 text-blue-600" />,
-      color: "blue",
+      description: "Complete academic overview including CGPA & grade history across all semesters.",
+      icon: <GraduationCap className="h-6 w-6" />,
+      gradient: "from-blue-600 to-indigo-600",
+      bgLight: "bg-blue-50 dark:bg-blue-900/20",
     },
     {
       title: "Semester Result",
       href: "/semester",
-      description: "View SGPA, subject-wise marks, and semester performance.",
-      icon: <BookOpen className="h-6 w-6 text-indigo-600" />,
-      color: "indigo",
+      description: "View SGPA, subject-wise marks, and detailed semester performance reports.",
+      icon: <BookOpen className="h-6 w-6" />,
+      gradient: "from-indigo-600 to-blue-600",
+      bgLight: "bg-indigo-50 dark:bg-indigo-900/20",
     },
     {
       title: "All Exam Results",
       href: "/allresult",
-      description: "Complete history of all exams you have appeared in.",
-      icon: <BarChart3 className="h-6 w-6 text-green-600" />,
-      color: "green",
+      description: "Complete history of all exams — regular, supply, and revaluation results.",
+      icon: <BarChart3 className="h-6 w-6" />,
+      gradient: "from-emerald-600 to-green-600",
+      bgLight: "bg-green-50 dark:bg-green-900/20",
     },
     {
-      title: "Class Result",
+      title: "Class Analysis",
       href: "/classresult",
-      description: "Check class toppers, rankings, and statistical charts.",
-      icon: <Users className="h-6 w-6 text-purple-600" />,
-      color: "purple",
+      description: "Check class toppers, rankings, subject pass/fail stats, and performance charts.",
+      icon: <Users className="h-6 w-6" />,
+      gradient: "from-purple-600 to-indigo-600",
+      bgLight: "bg-purple-50 dark:bg-purple-900/20",
     },
   ];
 
   const highlights = [
     {
-      title: "Instant Search",
-      description:
-        "Get your results in milliseconds with our optimized engine.",
-      icon: <Search className="h-5 w-5" />,
+      title: "Lightning Fast",
+      description: "Get your results in milliseconds with our optimized engine.",
+      icon: <Zap className="h-5 w-5" />,
     },
     {
       title: "PDF Downloads",
@@ -64,66 +68,58 @@ export default function Home() {
       icon: <Download className="h-5 w-5" />,
     },
     {
-      title: "Result Analysis",
+      title: "Result Analytics",
       description: "Visual charts and statistics for performance tracking.",
       icon: <BarChart3 className="h-5 w-5" />,
+    },
+    {
+      title: "No Login Required",
+      description: "Simply enter your roll number — no account or sign-up needed.",
+      icon: <Search className="h-5 w-5" />,
     },
   ];
 
   const faqs = [
     {
       question: "How can I check my results?",
-      answer:
-        "Simply enter your roll number in the search box on the respective page or browse by category to view your results instantly.",
+      answer: "Simply enter your roll number in the search box on the respective page or browse by category to view your results instantly.",
     },
     {
       question: "What if I forget my roll number?",
-      answer:
-        "No worries! You can ask your class representative or check your admit card to find your roll number.",
+      answer: "You can ask your class representative or check your admit card/exam hall ticket to find your roll number.",
     },
     {
       question: "Can I download my results?",
-      answer:
-        "Yes! All results can be easily downloaded in PDF format for your records.",
+      answer: "Yes! All results can be easily downloaded in PDF format for your records with a single click.",
     },
     {
       question: "Is my data safe?",
-      answer:
-        "Absolutely. We only display official academic results and do not store any personal information beyond what is required to fetch your results.",
+      answer: "Absolutely. We only display official academic results and do not store any personal information beyond what is required to fetch your results.",
     },
     {
       question: "How often are results updated?",
-      answer:
-        "Results are updated as soon as they are officially released by JNTUH, so you always get the latest information.",
+      answer: "Results are updated as soon as they are officially released by JNTUH, so you always get the latest information.",
     },
     {
       question: "Can I check results for multiple semesters?",
-      answer:
-        "Of course! You can view both your semester-wise results and cumulative academic results with CGPA and grades.",
+      answer: "Yes! You can view both your semester-wise results and cumulative academic results with CGPA and grades.",
     },
     {
-      question: "Do I need to create an account to check results?",
-      answer:
-        "No need! Simply enter your roll number and view your results immediately without signing up.",
+      question: "Do I need to create an account?",
+      answer: "No need! Simply enter your roll number and view your results immediately without signing up.",
     },
     {
       question: "What if I notice a mistake in my result?",
-      answer:
-        "In that case, please contact your college examination cell to report discrepancies and get it resolved officially.",
-    },
-    {
-      question: "Can I access results on my phone?",
-      answer:
-        "Yes! Our website is mobile-friendly, so you can check your results anytime, anywhere, right from your phone.",
+      answer: "Please contact your college examination cell to report discrepancies and get it resolved officially.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* ------------ HERO SECTION ------------ */}
+    <div className="min-h-screen bg-white dark:bg-gray-950">
+      {/* HERO */}
       <section className="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-32">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-blue-50),white)]" />
-        <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-blue-600/10 ring-1 ring-blue-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-blue-50),transparent)] dark:bg-[radial-gradient(45rem_50rem_at_top,var(--color-blue-950),transparent)]" />
+        <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white/80 dark:bg-gray-950/80 shadow-xl shadow-blue-600/5 ring-1 ring-blue-50 dark:ring-blue-950 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
 
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
@@ -133,11 +129,11 @@ export default function Home() {
               transition={{ duration: 0.5 }}
             >
               <Link
-                href={"http://results.jntuh.ac.in"}
+                href="http://results.jntuh.ac.in"
                 target="_blank"
-                className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 mb-6"
+                className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-900/30 px-4 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10 mb-6"
               >
-                For Official JNTUH Results Portal Click Here
+                Official JNTUH Results Portal &rarr;
               </Link>
             </motion.div>
 
@@ -145,7 +141,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+              className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl"
             >
               Check Your{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">
@@ -158,10 +154,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-6 text-lg leading-8 text-gray-600"
+              className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400"
             >
-              The fastest way to access your academic performance. Clean,
-              intuitive, and built for B.Tech & B.Pharmacy students.
+              The fastest way to access your academic performance. Clean, intuitive, and built for B.Tech &amp; B.Pharmacy students.
             </motion.p>
 
             <motion.div
@@ -173,29 +168,26 @@ export default function Home() {
               <Button
                 asChild
                 size="lg"
-                className="rounded-full px-8 shadow-lg shadow-blue-500/25"
+                className="rounded-full px-8 shadow-lg shadow-blue-500/25 h-12"
               >
                 <Link href="/academic">Check My Result</Link>
               </Button>
               <Link
                 href="/classresult"
-                className="text-sm font-semibold leading-6 text-gray-900 flex items-center gap-1 group"
+                className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 flex items-center gap-1 group hover:text-blue-600 transition-colors"
               >
                 Class Ranking{" "}
-                <ArrowRight
-                  size={16}
-                  className="transition-transform group-hover:translate-x-1"
-                />
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ------------ HIGHLIGHTS SECTION ------------ */}
-      <section className="py-12 bg-white sm:py-16">
+      {/* HIGHLIGHTS */}
+      <section className="py-12 sm:py-16 bg-gray-50/50 dark:bg-gray-900/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-3 lg:gap-x-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {highlights.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -203,18 +195,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-center gap-x-4 p-4 rounded-2xl bg-gray-50/50 border border-gray-100"
+                className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm"
               >
-                <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-gray-900/5 text-blue-600">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-gray-500">
-                    {item.description}
-                  </p>
+                  <h3 className="text-sm font-bold text-gray-900 dark:text-white">{item.title}</h3>
+                  <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -222,36 +210,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------ FEATURE CARDS ------------ */}
-      <section className="py-20">
+      {/* FEATURE CARDS */}
+      <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Everything you need
+            </h2>
+            <p className="mt-3 text-lg text-gray-500 dark:text-gray-400">
+              Choose the result type that matches what you&apos;re looking for.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((item, index) => (
               <motion.div
                 key={item.href}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
+                transition={{ delay: index * 0.1 }}
               >
                 <Link
                   href={item.href}
-                  className="group relative flex flex-col items-start p-8 border rounded-3xl transition-all hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-500/10 bg-white h-full"
+                  className="group relative flex flex-col items-start p-6 sm:p-8 border border-gray-100 dark:border-gray-800 rounded-3xl transition-all hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-2xl hover:shadow-blue-500/10 bg-white dark:bg-gray-900 h-full"
                 >
-                  <div
-                    className={`p-3 rounded-2xl bg-${item.color}-50 group-hover:bg-${item.color}-100 transition-colors mb-6`}
-                  >
-                    {item.icon}
+                  <div className={`p-3 rounded-2xl ${item.bgLight} group-hover:scale-110 transition-transform mb-5`}>
+                    <div className={`text-transparent bg-clip-text bg-linear-to-r ${item.gradient}`}>
+                      {item.icon}
+                    </div>
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">
                     {item.title}
                   </h2>
-                  <p className="text-gray-600 leading-relaxed mb-8 grow">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6 grow">
                     {item.description}
                   </p>
-
-                  <div className="flex items-center font-bold text-blue-600 group-hover:gap-4 transition-all gap-2">
-                    Explore <ArrowRight className="h-4 w-4" />
+                  <div className="flex items-center font-semibold text-blue-600 group-hover:gap-3 transition-all gap-2 text-sm">
+                    Get Started <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
               </motion.div>
@@ -260,36 +255,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------ FAQ SECTION ------------ */}
-      <section className="py-24 bg-gray-50/50 border-t border-gray-100">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      {/* FAQ */}
+      <section className="py-24 bg-gray-50/50 dark:bg-gray-900/50 border-t border-gray-100 dark:border-gray-800">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
               Frequently Asked Questions
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-3 text-lg text-gray-500 dark:text-gray-400">
               Everything you need to know about checking JNTUH results.
             </p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                transition={{ duration: 0.4, delay: index * 0.03 }}
               >
                 <Accordion
                   type="single"
                   collapsible
-                  className="bg-white border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
                   <AccordionItem value={`faq-${index}`} className="border-none">
-                    <AccordionTrigger className="px-6 py-4 font-semibold text-left">
+                    <AccordionTrigger className="px-6 py-4 font-semibold text-left text-gray-900 dark:text-white hover:no-underline">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 text-gray-600">
+                    <AccordionContent className="px-6 pb-4 text-gray-600 dark:text-gray-400 leading-relaxed">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

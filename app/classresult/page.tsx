@@ -1,31 +1,22 @@
 import ClassResultForm from "@/components/classresult-form";
 
 export const metadata = {
-  title: "JNTUH Class Analysis & Batch Performance Results",
+  title: "Class Analysis & Batch Performance",
   description:
     "Analyze JNTUH results for an entire class or hall ticket range. Generate pass/fail charts and subject-wise performance analysis instantly.",
   keywords: [
-    "JNTUH Class Results",
-    "JNTUH Batch Analysis",
-    "College Result Analysis",
-    "Subject-wise Pass Percentage",
-    "JNTUH Statistics",
+    "JNTUH Class Results", "JNTUH Batch Analysis", "College Result Analysis",
+    "Subject-wise Pass Percentage", "JNTUH Statistics",
   ],
-  alternates: {
-    canonical: "https://jntuhresultbp.vercel.app/classresult",
-  },
-};
-const ClassResultPage = () => {
-  return (
-    <div className="flex justify-center">
-      <h1 className="hidden">
-        Class Results of a Particular Semester of a Particular College
-      </h1>
-      <div>
-        <ClassResultForm />
-      </div>
-    </div>
-  );
+  alternates: { canonical: "https://jntuhresultbp.vercel.app/classresult" },
 };
 
-export default ClassResultPage;
+export default function ClassResultPage() {
+  return (
+    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
+        <ClassResultForm />
+      </div>
+    </main>
+  );
+}

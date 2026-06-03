@@ -4,7 +4,7 @@ import { useRef, useState, startTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Loader2, Users, Search } from "lucide-react";
+import { AlertCircle, Loader2, Users } from "lucide-react";
 import { classResult } from "@/action/results";
 import {
   NativeSelect,
@@ -40,44 +40,41 @@ export default function ClassResultForm() {
     error: null,
   });
 
-  const isFormValid =
-    start.trim() && end.trim() && semester !== "sem" && semester !== "";
+  const isFormValid = start.trim() && end.trim() && semester !== "sem" && semester !== "";
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = formRef.current ?? e.currentTarget;
     const fd = new FormData(form);
-
-    // Prevent the warning and handle async correctly
     startTransition(() => {
       formAction(fd);
     });
   };
 
   return (
-    <div className="space-y-6 my-4 max-w-full px-4 sm:px-6">
-      <Card className="max-w-4xl mx-auto shadow-md border-gray-100 overflow-hidden print:hidden">
-        <div className="p-1 bg-linear-to-r from-purple-600 to-indigo-600" />
-        <CardContent className="p-8">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Class Analysis</h2>
-            <p className="text-gray-500 text-sm mt-1">
+    <div className="space-y-6 my-4 max-w-full px-0 sm:px-0">
+      <Card className="max-w-4xl mx-auto shadow-sm overflow-hidden print:hidden">
+        <div className="h-1 bg-linear-to-r from-purple-600 to-indigo-600" />
+        <CardContent className="p-5 sm:p-6">
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-0.5">
+              <Users className="h-4 w-4 text-purple-600" />
+              <h2 className="text-xl font-bold">Class Analysis</h2>
+            </div>
+            <p className="text-muted-foreground text-xs">
               Generate results and performance charts for an entire class range.
             </p>
           </div>
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div className="relative">
                 <Input
                   type="text"
                   name="start"
                   placeholder="Start Hall Ticket"
                   value={start}
-                  onChange={(e) =>
-                    setStart(e.target.value.toUpperCase().replace(/\s+/g, ""))
-                  }
-                  className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
+                  onChange={(e) => setStart(e.target.value.toUpperCase().replace(/\s+/g, ""))}
+                  className="h-10 rounded-xl text-sm"
                   maxLength={10}
                   minLength={10}
                   disabled={isPending}
@@ -90,10 +87,8 @@ export default function ClassResultForm() {
                   name="end"
                   placeholder="End Hall Ticket"
                   value={end}
-                  onChange={(e) =>
-                    setEnd(e.target.value.toUpperCase().replace(/\s+/g, ""))
-                  }
-                  className="h-12 rounded-xl border-gray-200 focus:border-purple-500"
+                  onChange={(e) => setEnd(e.target.value.toUpperCase().replace(/\s+/g, ""))}
+                  className="h-10 rounded-xl text-sm"
                   maxLength={10}
                   minLength={10}
                   disabled={isPending}
@@ -106,7 +101,7 @@ export default function ClassResultForm() {
                   value={semester}
                   onChange={(e) => setSemester(e.target.value)}
                   disabled={isPending}
-                  className="h-12 w-full rounded-xl border-gray-200 focus:border-purple-500"
+                  className="h-10 w-full rounded-xl text-sm"
                 >
                   <NativeSelectOption value="sem" disabled>
                     Semester
@@ -123,11 +118,11 @@ export default function ClassResultForm() {
             <Button
               type="submit"
               disabled={isPending || !isFormValid}
-              className="w-full h-12 rounded-xl bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-500/20 transition-all text-base font-semibold"
+              className="w-full h-10 rounded-xl bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-500/20 transition-all text-sm font-semibold"
             >
               {isPending ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
                   Analyzing Class Results...
                 </>
               ) : (
@@ -138,60 +133,53 @@ export default function ClassResultForm() {
         </CardContent>
       </Card>
 
-      {/* Loading */}
       {isPending && (
-        <Card className="max-w-2xl mx-auto p-12 text-center space-y-4 border-none shadow-none bg-transparent">
+        <Card className="max-w-4xl mx-auto p-8 text-center space-y-3 border-none shadow-none bg-transparent">
           <div className="relative inline-block">
-            <div className="absolute inset-0 rounded-full bg-purple-100 animate-ping opacity-25" />
-            <Loader2 className="h-12 w-12 animate-spin relative text-purple-600" />
+            <div className="absolute inset-0 rounded-full bg-purple-100 dark:bg-purple-900/30 animate-ping opacity-25" />
+            <Loader2 className="h-8 w-8 animate-spin relative text-purple-600" />
           </div>
-          <div className="space-y-1">
-            <p className="text-lg font-semibold text-gray-900">
-              Processing range
-            </p>
-            <p className="text-gray-500">
-              This may take longer for large classes...
-            </p>
+          <div className="space-y-0.5">
+            <p className="text-base font-semibold">Processing range</p>
+            <p className="text-muted-foreground text-sm">May take longer for large classes...</p>
           </div>
         </Card>
       )}
 
-      {/* Error */}
       {state.error && !isPending && (
-        <Card className="max-w-2xl mx-auto p-6 border-red-100 bg-red-50/50 rounded-2xl">
-          <div className="flex gap-4">
-            <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-              <AlertCircle className="h-5 w-5 text-red-600" />
+        <Card className="max-w-4xl mx-auto p-4 border-destructive/20 bg-destructive/5 rounded-xl">
+          <div className="flex gap-3">
+            <div className="h-8 w-8 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
+              <AlertCircle className="h-4 w-4 text-destructive" />
             </div>
-            <div className="space-y-1">
-              <p className="font-bold text-red-900">Analysis Error</p>
-              <p className="text-sm text-red-700">{state.error}</p>
+            <div className="space-y-0.5">
+              <p className="font-bold text-destructive text-sm">Analysis Error</p>
+              <p className="text-xs text-destructive/80">{state.error}</p>
             </div>
           </div>
         </Card>
       )}
 
-      {/* Success */}
       {state.success && state.data && !isPending && (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <Tabs defaultValue="classTable" className="w-full">
             <div className="flex justify-center mb-6">
-              <TabsList className="bg-gray-100/80 p-1 rounded-2xl border-none h-auto gap-1">
+              <TabsList className="bg-muted/80 p-1 rounded-2xl border-none h-auto gap-1">
                 <TabsTrigger
                   value="classTable"
-                  className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                  className="rounded-xl px-6 py-2.5"
                 >
                   Class Result
                 </TabsTrigger>
                 <TabsTrigger
                   value="dataTable"
-                  className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                  className="rounded-xl px-6 py-2.5"
                 >
                   Table View
                 </TabsTrigger>
                 <TabsTrigger
                   value="datachart"
-                  className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                  className="rounded-xl px-6 py-2.5"
                 >
                   Visual Chart
                 </TabsTrigger>
@@ -201,7 +189,7 @@ export default function ClassResultForm() {
               <ClassResultTable data={state.data} semester={semester} />
             </TabsContent>
             <TabsContent value="dataTable">
-              <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 w-full max-w-[100vw] overflow-hidden">
+              <div className="bg-card rounded-3xl border shadow-sm p-6 w-full max-w-[100vw] overflow-hidden">
                 <DataTable data={state.data} semester={semester} />
               </div>
             </TabsContent>
@@ -212,20 +200,19 @@ export default function ClassResultForm() {
         </div>
       )}
 
-      {/* Empty */}
       {!isPending && !state.success && !state.error && (
-        <Card className="max-w-2xl mx-auto p-8 text-center bg-gray-50/50 border-dashed border-2 border-gray-200 rounded-3xl">
-          <Users className="h-12 w-12 mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-500 font-medium mb-6">
+        <Card className="max-w-4xl mx-auto p-6 text-center bg-muted/30 border-dashed border-2 rounded-2xl">
+          <Users className="h-8 w-8 mx-auto text-muted-foreground mb-3" />
+          <p className="text-muted-foreground font-medium text-sm mb-4">
             Enter hall ticket range to start analysis
           </p>
-          <div className="grid grid-cols-2 gap-4 text-xs text-gray-400">
-            <div className="p-3 bg-white rounded-xl border border-gray-100">
-              <p className="font-semibold text-gray-500 mb-1">Starters</p>
+          <div className="grid grid-cols-2 gap-3 text-xs text-muted-foreground">
+            <div className="p-2.5 bg-card rounded-xl border">
+              <p className="font-semibold mb-0.5">Start</p>
               <p>e.g. 26XXXXXX01</p>
             </div>
-            <div className="p-3 bg-white rounded-xl border border-gray-100">
-              <p className="font-semibold text-gray-500 mb-1">Enders</p>
+            <div className="p-2.5 bg-card rounded-xl border">
+              <p className="font-semibold mb-0.5">End</p>
               <p>e.g. 26XXXXXXXXA9</p>
             </div>
           </div>

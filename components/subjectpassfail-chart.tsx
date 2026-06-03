@@ -76,7 +76,7 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
 
     // Sort toppers by SGPA
     const toppers = [...students]
-      .sort((a, b) => parseFloat(b.SGPA) - parseFloat(a.SGPA))
+      .sort((a, b) => (parseFloat(b.SGPA) || 0) - (parseFloat(a.SGPA) || 0))
       .slice(0, 3)
       .map((t) => ({
         name: t.Details.NAME,

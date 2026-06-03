@@ -2,6 +2,64 @@
 
 import { z } from "zod";
 
+// Helper: convert sgpa/cgpa string to number, defaulting to 0
+function toGpa(v: any): number {
+  const n = parseFloat(v);
+  return isNaN(n) ? 0 : n;
+}
+
+// Helper: capitalize top-level keys (details→Details, semesters→Semesters, etc.)
+function transformAcademicResponse(d: any) {
+  if (!d || typeof d !== 'object') return d;
+  const semesters: Record<string, any> = {};
+  for (const [sem, sd] of Object.entries(d.semesters || {})) {
+    semesters[sem] = {
+      Result: (sd as any).result,
+      SGPA: toGpa((sd as any).sgpa),
+      Failed_Subjects: (sd as any).failed_subjects ?? [],
+      History: (sd as any).history ?? [],
+    };
+  }
+  return { Details: d.details, Semesters: semesters, CGPA: toGpa(d.cgpa) };
+}
+
+function transformSemesterResponse(d: any) {
+  if (!d || typeof d !== 'object') return d;
+  return { Details: d.details, Result: d.result, SGPA: d.sgpa ?? "", History: d.history ?? [] };
+}
+
+function transformAllResultResponse(d: any) {
+  if (!d || typeof d !== 'object') return d;
+  const results: Record<string, any[]> = {};
+  for (const [sem, entries] of Object.entries(d.results || {})) {
+    results[sem] = (entries as any[]).map((e: any) => ({
+      exam_code: e.exam_code, type: e.type, result_url: e.result_url, Result: e.result,
+    }));
+  }
+  return { Details: d.details, Results: results };
+}
+
+function transformClassResultResponse(d: any) {
+  if (!d || typeof d !== 'object') return d;
+  const out: Record<string, any> = {};
+  for (const [rollNo, entry] of Object.entries(d)) {
+    out[rollNo] = {
+      Details: (entry as any).details,
+      Result: (entry as any).result,
+      SGPA: (entry as any).sgpa ?? "",
+      History: (entry as any).history ?? [],
+    };
+  }
+  return out;
+}
+
+function transformSpecificResultResponse(d: any) {
+  if (!d || typeof d !== 'object') return d;
+  if (d.results) return transformAllResultResponse(d);
+  if (d.result) return transformSemesterResponse(d);
+  return d;
+}
+
 // Zod schemas
 const hallticketSchema = z
   .string()
@@ -44,7 +102,7 @@ export async function academicResult(prevState: any, formData: FormData) {
     const validatedHtno = parsed.data;
 
     const response = await fetch(
-      `https://jntuh-api.vercel.app/academic?htno=${validatedHtno}`,
+      `https://jntuh-api.onrender.com/academic?htno=${validatedHtno}`,
       { cache: 'no-store' },
     );
 
@@ -66,7 +124,7 @@ export async function academicResult(prevState: any, formData: FormData) {
       };
     }
 
-    return { success: true, data, error: null };
+    return { success: true, data: transformAcademicResponse(data), error: null };
   } catch (error) {
     return {
       success: false,
@@ -101,7 +159,7 @@ export async function semesterResult(prevState: any, formData: FormData) {
       };
 
     const response = await fetch(
-      `https://jntuh-api.vercel.app/sem?htno=${validatedHtno}&sem=${semester}`,
+      `https://jntuh-api.onrender.com/sem?htno=${validatedHtno}&sem=${semester}`,
       { cache: 'no-store' },
     );
 
@@ -122,7 +180,7 @@ export async function semesterResult(prevState: any, formData: FormData) {
       };
     }
 
-    return { success: true, data, error: null };
+    return { success: true, data: transformSemesterResponse(data), error: null };
   } catch (error) {
     return {
       success: false,
@@ -150,7 +208,7 @@ export async function classResult(prevState: any, formData: FormData) {
     const { start: validatedStart, end: validatedEnd } = parsed.data;
 
     const response = await fetch(
-      `https://jntuh-api.vercel.app/classresult?sem=${semester}&start_htno=${validatedStart}&end_htno=${validatedEnd}`,
+      `https://jntuh-api.onrender.com/classresult?sem=${semester}&start_htno=${validatedStart}&end_htno=${validatedEnd}`,
       { cache: 'no-store' },
     );
 
@@ -167,7 +225,7 @@ export async function classResult(prevState: any, formData: FormData) {
       return { success: false, data: null, error: "No results found" };
     }
 
-    return { success: true, data, error: null };
+    return { success: true, data: transformClassResultResponse(data), error: null };
   } catch (error) {
     return {
       success: false,
@@ -194,7 +252,7 @@ export async function allResult(prevState: any, formData: FormData) {
     const validatedHtno = parsed.data;
 
     const response = await fetch(
-      `https://jntuh-api.vercel.app/allresult?htno=${validatedHtno}`,
+      `https://jntuh-api.onrender.com/allresult?htno=${validatedHtno}`,
       { cache: 'no-store' },
     );
 
@@ -206,7 +264,7 @@ export async function allResult(prevState: any, formData: FormData) {
       };
     }
 
-    const data = await response.json();
+    const data = transformAllResultResponse(await response.json());
 
     if (!data || !data.Results || Object.keys(data.Results).length === 0) {
       return {
@@ -258,7 +316,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
     if (grad) params.append("grad", grad);
 
     const response = await fetch(
-      `https://jntuh-api.vercel.app/specificresult?${params.toString()}`,
+      `https://jntuh-api.onrender.com/specificresult?${params.toString()}`,
       { cache: 'no-store' },
     );
 
@@ -270,7 +328,8 @@ export async function notificationResult(prevState: any, formData: FormData) {
       };
     }
 
-    const data = await response.json();
+    const raw = await response.json();
+    const data = transformSpecificResultResponse(raw);
 
     if (
       !data ||
@@ -297,7 +356,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
 export async function refreshNotifications() {
   try {
     const response = await fetch(
-      "https://jntuh-api.vercel.app/notifications?refresh=true",
+      "https://jntuh-api.onrender.com/notifications?refresh=true",
       { cache: 'no-store' },
     );
     if (!response.ok) throw new Error("Failed to fetch notifications");
@@ -314,18 +373,18 @@ export async function refreshNotifications() {
 
 export async function clearCacheAndRetry(htno: string, type: "academic" | "semester" | "allresult" | "specificresult", extraParams?: Record<string, string>) {
   try {
-    await fetch("https://jntuh-api.vercel.app/refresh-cache", { cache: 'no-store' });
+    await fetch("https://jntuh-api.onrender.com/refresh-cache", { cache: 'no-store' });
     
     let url = "";
     switch (type) {
       case "academic":
-        url = `https://jntuh-api.vercel.app/academic?htno=${htno}`;
+        url = `https://jntuh-api.onrender.com/academic?htno=${htno}`;
         break;
       case "semester":
-        url = `https://jntuh-api.vercel.app/sem?htno=${htno}&sem=${extraParams?.sem || "1-1"}`;
+        url = `https://jntuh-api.onrender.com/sem?htno=${htno}&sem=${extraParams?.sem || "1-1"}`;
         break;
       case "allresult":
-        url = `https://jntuh-api.vercel.app/allresult?htno=${htno}`;
+        url = `https://jntuh-api.onrender.com/allresult?htno=${htno}`;
         break;
       case "specificresult":
         const params = new URLSearchParams();
@@ -333,15 +392,19 @@ export async function clearCacheAndRetry(htno: string, type: "academic" | "semes
         if (extraParams) {
           Object.entries(extraParams).forEach(([key, value]) => params.set(key, value));
         }
-        url = `https://jntuh-api.vercel.app/specificresult?${params.toString()}`;
+        url = `https://jntuh-api.onrender.com/specificresult?${params.toString()}`;
         break;
     }
 
     const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) throw new Error("Failed to fetch results");
     
-    const data = await response.json();
-    return { success: true, data, error: null };
+    const raw = await response.json();
+    const fn = type === "academic" ? transformAcademicResponse
+      : type === "semester" ? transformSemesterResponse
+      : type === "allresult" ? transformAllResultResponse
+      : transformSpecificResultResponse;
+    return { success: true, data: fn(raw), error: null };
   } catch (error) {
     return {
       success: false,

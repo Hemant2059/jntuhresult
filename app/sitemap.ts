@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch notifications for sitemap
   let notificationRoutes: any[] = [];
   try {
-    const res = await fetch("https://jntuh-api.vercel.app/notifications?refresh=true");
+    const res = await fetch("https://jntuh-api.onrender.com/notifications?refresh=true");
     if (res.ok) {
       const notifications = await res.json();
       notificationRoutes = notifications.map((n: any) => ({
