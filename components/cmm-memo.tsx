@@ -2,8 +2,6 @@
 
 import branches from "@/lib/branch";
 import colleges from "@/lib/college";
-import { toJpeg } from "html-to-image";
-import jsPDF from "jspdf";
 import { useRef, useMemo } from "react";
 
 function getAwardClass(cgpa: number, hasFailed: boolean, clearHistory: boolean): { label: string; short: string } {
@@ -99,7 +97,7 @@ function Content({ data }: { data: CmmMemoProps["data"] }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-[9px] mb-2 z-10 relative">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-[9px] mb-4 z-10 relative">
           <div className="flex items-end"><span className="font-bold w-20 shrink-0 pb-0.5">Hall Ticket No:</span><span className="font-mono font-bold text-[10px] border-b border-gray-500 flex-1 pb-0.5">{rollno}</span></div>
           <div className="flex items-end"><span className="font-bold w-20 shrink-0 pb-0.5">Course:</span><span className="border-b border-gray-500 flex-1 font-semibold pb-0.5">{branches[branchKey] || ""}</span></div>
           <div className="flex items-end"><span className="font-bold w-20 shrink-0 pb-0.5">Student Name:</span><span className="font-bold text-[10px] border-b border-gray-500 flex-1 uppercase pb-0.5">{d.NAME}</span></div>
@@ -107,7 +105,7 @@ function Content({ data }: { data: CmmMemoProps["data"] }) {
           <div className="flex items-end col-span-2"><span className="font-bold w-20 shrink-0 pb-0.5">College:</span><span className="border-b border-gray-500 flex-1 font-semibold pb-0.5">{colleges[collegeCode] || collegeCode}</span></div>
         </div>
 
-        <div className="flex-1 overflow-hidden space-y-1.5 z-10 relative">
+        <div className="flex-1 space-y-1.5 z-10 relative">
           {years.map((year: any) => {
             if (!year) return null;
             if (year.isLateralEntryBlank) {
@@ -231,19 +229,6 @@ function Content({ data }: { data: CmmMemoProps["data"] }) {
 export default function CmmMemo({ data, onClose }: CmmMemoProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleDownloadPdf = async () => {
-    if (!ref.current) return;
-    try {
-      const dataUrl = await toJpeg(ref.current, { quality: 0.95, backgroundColor: "#ffffff", pixelRatio: 2 });
-      const img = new Image();
-      img.src = dataUrl;
-      await new Promise((resolve) => { img.onload = resolve; });
-      const pdf = new jsPDF({ orientation: "portrait", unit: "px", format: [794, 1123] });
-      pdf.addImage(dataUrl, "JPEG", 0, 0, 794, 1123);
-      pdf.save(`${data.Details.Roll_No}_CMM.pdf`);
-    } catch { alert("PDF generation failed. Try printing instead."); }
-  };
-
   const handlePrint = () => {
     const printWindow = window.open("", "_blank");
     if (!printWindow) { window.print(); return; }
@@ -259,17 +244,18 @@ export default function CmmMemo({ data, onClose }: CmmMemoProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-auto max-h-screen">
-        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b dark:border-gray-700 flex items-center justify-between px-6 py-3 z-20 shrink-0">
-          <h3 className="font-bold text-sm dark:text-white">CMM Preview</h3>
-          <div className="flex items-center gap-2">
-            <button onClick={handleDownloadPdf} className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">Download PDF</button>
-            <button onClick={handlePrint} className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white text-xs font-bold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">Print</button>
-            {onClose && <button onClick={onClose} className="px-3 py-2 text-gray-500 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 text-xs font-bold">Close</button>}
-          </div>
+    <div className="fixed inset-0 z-50 bg-black/60 flex flex-col" onClick={onClose}>
+      <div className="bg-white dark:bg-gray-900 border-b dark:border-gray-700 flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 z-20 shrink-0" onClick={(e) => e.stopPropagation()}>
+        <h3 className="font-bold text-xs sm:text-sm dark:text-white">CMM Preview</h3>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <button onClick={handlePrint} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 text-white text-[10px] sm:text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">Print</button>
+          {onClose && <button onClick={onClose} className="px-2 sm:px-3 py-1.5 sm:py-2 text-gray-500 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 text-[10px] sm:text-xs font-bold">Close</button>}
         </div>
-        <div ref={ref}><Content data={data} /></div>
+      </div>
+      <div className="flex-1 overflow-auto bg-white dark:bg-gray-900" onClick={(e) => e.stopPropagation()}>
+        <div className="inline-block p-2 sm:p-4" ref={ref}>
+          <Content data={data} />
+        </div>
       </div>
     </div>
   );
