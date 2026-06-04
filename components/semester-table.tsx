@@ -2,9 +2,9 @@
 import branches from "@/lib/branch";
 import colleges from "@/lib/college";
 import React from "react";
-import { Download, Loader2 } from "lucide-react";
+import { ScrollText } from "lucide-react";
 import { Button } from "./ui/button";
-import { downloadAsPDF } from "@/lib/download-pdf";
+import MmMemo from "./mm-memo";
 
 type Details = {
   NAME: string;
@@ -50,32 +50,22 @@ const SemesterTable = ({
     .filter(([_, sub]) => sub.grade === "F")
     .map(([subCode]) => subCode);
 
-  const [isExporting, setIsExporting] = React.useState(false);
-
-  const handleDownload = async () => {
-    setIsExporting(true);
-    try {
-      await downloadAsPDF(`semester-result-${rollno}`, `Semester_Result_${rollno}`);
-    } finally {
-      setIsExporting(false);
-    }
-  };
+  const [showMemo, setShowMemo] = React.useState(false);
 
   return (
     name && (
-      <div className="max-w-5xl md:mx-auto space-y-6 pb-16 mx-0 px-1">
+      <><div className="max-w-5xl md:mx-auto space-y-6 pb-16 mx-0 px-1">
         <div className="flex flex-col sm:flex-row justify-between items-center bg-card p-4 sm:p-5 rounded-2xl border shadow-sm gap-3 print:hidden">
           <div>
             <h2 className="text-base sm:text-lg font-bold">Semester Results</h2>
             <p className="text-muted-foreground text-xs">Semester performance report</p>
           </div>
           <Button
-            onClick={handleDownload}
-            disabled={isExporting}
+            onClick={() => setShowMemo(true)}
             className="rounded-full px-5 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 w-full sm:w-auto"
           >
-            {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
-            {isExporting ? "Generating PDF..." : "Download as PDF"}
+            <ScrollText className="h-3.5 w-3.5" />
+            Download Memo
           </Button>
         </div>
 
@@ -239,6 +229,10 @@ const SemesterTable = ({
           </div>
         </div>
       </div>
+      {showMemo && (
+        <MmMemo data={data} semester={semester} onClose={() => setShowMemo(false)} />
+      )}
+      </>
     )
   );
 };

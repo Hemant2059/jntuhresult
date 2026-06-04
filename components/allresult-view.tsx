@@ -3,9 +3,10 @@
 import branches from "@/lib/branch";
 import colleges from "@/lib/college";
 import React from "react";
-import { Download, Loader2, Award } from "lucide-react";
+import { Download, Loader2, Award, FileText } from "lucide-react";
 import { Button } from "./ui/button";
 import { downloadAsPDF } from "@/lib/download-pdf";
+import AllResultMemo from "./allresult-memo";
 
 type SubjectData = {
   name: string;
@@ -45,6 +46,7 @@ const AllResultsView = ({ data }: { data: AllResultsData }) => {
   const branch = branches[branchKey] || "Unknown Branch";
 
   const [isExporting, setIsExporting] = React.useState(false);
+  const [showMemo, setShowMemo] = React.useState(false);
 
   const handleDownload = async () => {
     setIsExporting(true);
@@ -69,14 +71,23 @@ const AllResultsView = ({ data }: { data: AllResultsData }) => {
             <h2 className="text-base sm:text-lg font-bold">Academic History</h2>
             <p className="text-muted-foreground text-xs">Review your complete examination history across all sessions.</p>
           </div>
-          <Button
-            onClick={handleDownload}
-            disabled={isExporting}
-            className="rounded-full px-5 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 w-full sm:w-auto"
-          >
-            {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
-            {isExporting ? "Generating PDF..." : "Download Full PDF"}
-          </Button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Button
+              onClick={() => setShowMemo(true)}
+              className="rounded-full px-5 bg-amber-600 hover:bg-amber-700 shadow-lg shadow-amber-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 flex-1 sm:flex-none"
+            >
+              <FileText className="h-3.5 w-3.5" />
+              Transcript
+            </Button>
+            <Button
+              onClick={handleDownload}
+              disabled={isExporting}
+              className="rounded-full px-5 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 flex-1 sm:flex-none"
+            >
+              {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+              {isExporting ? "Generating PDF..." : "Download PDF"}
+            </Button>
+          </div>
         </div>
 
         <div
@@ -234,14 +245,17 @@ const AllResultsView = ({ data }: { data: AllResultsData }) => {
         </div>
 
         <div className="mt-8 sm:mt-10 bg-blue-600 rounded-2xl p-4 sm:p-5 text-white shadow-lg shadow-blue-500/20 text-center">
-          <p className="text-blue-100 text-[9px] font-bold uppercase tracking-widest mb-1 italic">Official Academic Transcript Record</p>
+          <p className="text-blue-100 text-[9px] font-bold uppercase tracking-widest mb-1 italic">Academic History Record</p>
           <div className="h-px w-12 bg-blue-400/30 mx-auto mb-2" />
           <p className="text-xs font-medium text-blue-50 leading-relaxed max-w-2xl mx-auto">
-            Official record for hall ticket{" "}
+            Results for hall ticket{" "}
             <span className="font-bold underline">{rollno}</span>
           </p>
         </div>
       </div>
+      {showMemo && (
+        <AllResultMemo data={data} onClose={() => setShowMemo(false)} />
+      )}
     </div>
   );
 };
