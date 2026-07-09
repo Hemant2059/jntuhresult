@@ -1,130 +1,123 @@
-# JNTUH Results Portal
+# JNTUH Results
 
-[![Next.js](https://img.shields.io/badge/Next.js-13-blue?logo=next.js&logoColor=white)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-4.9-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3-blue?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-7.6-pink?logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-blue?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-blue?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Rust](https://img.shields.io/badge/Backend-Rust-orange?logo=rust&logoColor=white)](https://www.rust-lang.org/)
 
----
+A fast, student-friendly portal to check **JNTUH B.Tech and B.Pharmacy results** instantly. Built with **Next.js 16**, **Rust API**, and **ShadCN UI**.
 
-A fast, friendly, and clean interface to check **JNTUH academic, semester, and class results** instantly. Built with **Next.js**, **ShadCN UI**, and **Framer Motion**, this portal is mobile-friendly and student-oriented.
+> **Live:** [jntuhresultbp.vercel.app](https://jntuhresultbp.vercel.app)
 
 ---
 
 ## Features
 
-### Hero Section
+### Result Checking
+- **Semester Results** — subject-wise marks, grades, credits, SGPA
+- **Academic Results** — full history, CGPA, semester-wise breakdown
+- **Class Results** — toppers, rankings, statistical charts
+- **All Results Transcript** — combined view across all semesters
+- **Notifications** — latest JNTUH result notifications with hall ticket lookup
 
-- Eye-catching heading with animation.
-- Brief description explaining the portal.
-- Highlights quick and easy result checking.
+### Tools
+- **SGPA Calculator** — regulation & degree aware, with visual grade breakdown
+- **CGPA Calculator** — weighted & simple average methods, semester management
+- **Grading System** — complete grade reference for all regulations
 
-### Feature Cards
+### Content
+- **8 Blog Articles** — step-by-step guides, tips, regulation explanations
+- **About, Contact, Privacy, Terms, Disclaimer** pages
 
-- **Academic Result**: Complete academic overview including CGPA and grade history.
-- **Semester Result**: View SGPA, subject-wise marks, and semester performance.
-- **Class Result**: Check class toppers, rankings, and statistical charts.
-- Interactive hover effects with smooth animations.
-
-### FAQ Section
-
-- Student-friendly Frequently Asked Questions.
-- Collapsible accordion style using **ShadCN UI**.
-- Smooth **fade-in animations** on scroll with **Framer Motion**.
-- Covers common queries:
-
-  - How to check results
-  - Downloading results
-  - Mobile access
-  - Data safety
-  - Handling discrepancies
-
-### Footer
-
-- Clean and minimal footer showing copyright.
+### Technical
+- Dark/light theme with eye-friendly color palette
+- Mobile-first responsive design
+- Framer Motion animations
+- SEO optimized with JSON-LD structured data, canonical URLs, sitemap
+- Google AdSense & Analytics integration
+- Custom 404 and error boundary pages
 
 ---
 
-## Technologies Used
+## Tech Stack
 
-- [Next.js 13/14](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [ShadCN UI](https://ui.shadcn.com/)
-- [Lucide Icons](https://lucide.dev/)
-- Tailwind CSS
-
----
-
-## Installation
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/your-username/jntuh-results-portal.git
-cd jntuh-results-portal
-```
-
-2. **Install dependencies**
-
-```bash
-pnpm install
-# or
-npm install
-```
-
-3. **Run the development server**
-
-```bash
-pnpm dev
-# or
-npm run dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 16, React 19, TypeScript |
+| Styling | Tailwind CSS 4, ShadCN UI, Framer Motion |
+| Backend | Rust (Actix-web), scraping JNTUH official results |
+| Deployment | Vercel (frontend), Render (backend) |
 
 ---
 
 ## Project Structure
 
 ```
-.
 ├── app/
-│   └── page.tsx         # Home page with hero, feature cards, and FAQ
+│   ├── page.tsx                    # Homepage
+│   ├── semester/page.tsx           # Semester result form
+│   ├── academic/page.tsx           # Academic result form
+│   ├── classresult/page.tsx        # Class result form
+│   ├── allresult/page.tsx          # All results transcript
+│   ├── notifications/              # JNTUH notifications
+│   ├── sgpa-calculator/            # SGPA calculator
+│   ├── cgpa-calculator/            # CGPA calculator
+│   ├── grading-system/             # Grade reference
+│   ├── blog/                       # 8 blog articles
+│   ├── about/                      # About page
+│   ├── contact/                    # Contact form
+│   ├── privacy/                    # Privacy policy
+│   ├── terms/                      # Terms of service
+│   ├── disclaimer/                 # Disclaimer
+│   ├── layout.tsx                  # Root layout (SEO, analytics, ads)
+│   ├── globals.css                 # Tailwind + custom theme
+│   ├── sitemap.ts                  # Dynamic sitemap
+│   ├── not-found.tsx               # Custom 404
+│   └── error.tsx                   # Error boundary
 ├── components/
-│   └── ui/
-│       └── accordion.tsx  # ShadCN Accordion component
-├── public/              # Static assets (images, icons)
-├── styles/              # Tailwind global styles
-├── package.json
-└── README.md
+│   ├── blog-post-layout.tsx        # Blog layout with TOC, share, progress
+│   ├── notification-form.tsx       # Notification search form
+│   ├── result-info-section.tsx     # Result page info content
+│   └── ui/                         # ShadCN components
+├── action/
+│   └── results.ts                  # Server actions for API calls
+├── lib/
+│   └── utils.ts                    # Utility functions
+└── .env.local                      # NEXT_PUBLIC_API_URL config
 ```
 
 ---
 
-## Usage
+## Setup
 
-- Click on the feature cards to navigate to **Academic**, **Semester**, or **Class Result** pages.
-- Scroll down to the FAQ section for common queries.
-- Expand/collapse FAQ items to view answers.
-- Fully responsive and mobile-friendly.
+### Prerequisites
+- Node.js 18+
+- pnpm
+- Rust (for backend)
+
+### Frontend
+
+```bash
+git clone https://github.com/Hemant2059/jntuhresult.git
+cd jntuhresult
+pnpm install
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Backend
+
+The Rust API is hosted separately at `jntuh-api-rust/`. See that directory for setup instructions.
 
 ---
 
-## Future Improvements
+## Environment Variables
 
-- Add a **search by roll number** functionality.
-- Connect to a **live JNTUH results API**.
-- Add user authentication for **personalized dashboard**.
-- Add **download PDF** and **print** options for results.
-- Add **light/dark mode** toggle for better UX.
-
----
-
-## License
-
-This project is licensed under the **MIT License**.
+```bash
+# .env.local
+NEXT_PUBLIC_API_URL=https://jntuh-api.onrender.com
+```
 
 ---
 
@@ -132,5 +125,4 @@ This project is licensed under the **MIT License**.
 
 **Hemant Pandey**
 
-- [LinkedIn](https://www.linkedin.com/)
-- [GitHub](https://github.com/)
+- [GitHub](https://github.com/Hemant2059)
