@@ -255,6 +255,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHY CHOOSE US */}
+      <section className="py-20 sm:py-28 bg-gray-50/50 dark:bg-gray-900/50 border-t border-border">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Why Students Trust JNTUH Results
+            </h2>
+            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
+              We built this platform because checking results on the official JNTUH portal was frustrating — slow servers, confusing navigation, and no clear breakdown of grades. Here&apos;s how we solved that.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Instant Results, Zero Wait",
+                content: "Our Rust-powered API scrapes results directly from JNTUH servers and caches them for lightning-fast responses. No more waiting 30 seconds for the official site to load during peak hours. Most results appear in under 2 seconds."
+              },
+              {
+                title: "SGPA & CGPA Calculators",
+                content: "Not sure how your GPA was calculated? Our built-in SGPA and CGPA calculators let you verify your grades manually. Choose between weighted and simple average methods, select your regulation and degree, and get accurate calculations instantly."
+              },
+              {
+                title: "Supports All Regulations",
+                content: "Whether you're under R13, R15, R16, R18, R22, or R25 — we've got you covered. Our system understands the different grading scales for each regulation, including the O/A/B/C/D scale used by R22 and R25 B.Pharmacy students."
+              },
+              {
+                title: "Complete Grade Reference",
+                content: "Confused about what an A+ or B grade means in terms of marks? Our grading system page shows the full 10-point scale with mark ranges, grade points, and pass criteria for every program including B.Tech, B.Pharmacy, MBA, MCA, and M.Tech."
+              },
+              {
+                title: "Class Rankings & Analysis",
+                content: "Compare your performance with classmates. Enter your class and section to see toppers, rank distribution, and statistical charts. Understand where you stand and identify areas for improvement."
+              },
+              {
+                title: "Privacy First Approach",
+                content: "We never store your hall ticket number or results on our servers. All data is fetched in real-time from JNTUH and displayed directly to you. Once you close the page, everything is gone. Your academic data stays completely private."
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 sm:p-8 bg-card dark:bg-card rounded-3xl border border-border shadow-sm"
+              >
+                <h3 className="text-lg font-bold text-foreground mb-3">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.content}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* HOW IT WORKS */}
       <section className="py-20 sm:py-28 bg-gray-50/50 dark:bg-gray-900/50 border-t border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
