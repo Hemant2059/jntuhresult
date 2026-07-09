@@ -58,7 +58,7 @@ export default function ClassResultForm() {
         <CardContent className="p-5 sm:p-6">
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-0.5">
-              <Users className="h-4 w-4 text-purple-600" />
+              <Users className="h-4 w-4 text-primary" />
               <h2 className="text-xl font-bold">Class Analysis</h2>
             </div>
             <p className="text-muted-foreground text-xs">
@@ -137,7 +137,7 @@ export default function ClassResultForm() {
         <Card className="max-w-4xl mx-auto p-8 text-center space-y-3 border-none shadow-none bg-transparent">
           <div className="relative inline-block">
             <div className="absolute inset-0 rounded-full bg-purple-100 dark:bg-purple-900/30 animate-ping opacity-25" />
-            <Loader2 className="h-8 w-8 animate-spin relative text-purple-600" />
+            <Loader2 className="h-8 w-8 animate-spin relative text-primary" />
           </div>
           <div className="space-y-0.5">
             <p className="text-base font-semibold">Processing range</p>

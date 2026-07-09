@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://jntuh-api.onrender.com";
+
 // Helper: convert sgpa/cgpa string to number, defaulting to 0
 function toGpa(v: any): number {
   const n = parseFloat(v);
@@ -102,7 +104,7 @@ export async function academicResult(prevState: any, formData: FormData) {
     const validatedHtno = parsed.data;
 
     const response = await fetch(
-      `https://jntuh-api.onrender.com/academic?htno=${validatedHtno}`,
+      `${API_BASE}/academic?htno=${validatedHtno}`,
       { cache: 'no-store' },
     );
 
@@ -114,17 +116,25 @@ export async function academicResult(prevState: any, formData: FormData) {
       };
     }
 
-    const data = await response.json();
+    const raw = await response.json();
 
-    if (!data || Object.keys(data).length === 0) {
+    if (raw && typeof raw === "object" && "error" in raw) {
       return {
         success: false,
         data: null,
-        error: `No results found for hall ticket: ${hallticket}`,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
       };
     }
 
-    return { success: true, data: transformAcademicResponse(data), error: null };
+    if (!raw || Object.keys(raw).length === 0) {
+      return {
+        success: false,
+        data: null,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
+      };
+    }
+
+    return { success: true, data: transformAcademicResponse(raw), error: null };
   } catch (error) {
     return {
       success: false,
@@ -159,7 +169,7 @@ export async function semesterResult(prevState: any, formData: FormData) {
       };
 
     const response = await fetch(
-      `https://jntuh-api.onrender.com/sem?htno=${validatedHtno}&sem=${semester}`,
+      `${API_BASE}/sem?htno=${validatedHtno}&sem=${semester}`,
       { cache: 'no-store' },
     );
 
@@ -170,17 +180,25 @@ export async function semesterResult(prevState: any, formData: FormData) {
         error: "Failed to fetch semester results.",
       };
 
-    const data = await response.json();
+    const raw = await response.json();
 
-    if (!data || Object.keys(data).length === 0) {
+    if (raw && typeof raw === "object" && "error" in raw) {
       return {
         success: false,
         data: null,
-        error: `No results found for hall ticket: ${validatedHtno}, Semester: ${semester}`,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
       };
     }
 
-    return { success: true, data: transformSemesterResponse(data), error: null };
+    if (!raw || Object.keys(raw).length === 0) {
+      return {
+        success: false,
+        data: null,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
+      };
+    }
+
+    return { success: true, data: transformSemesterResponse(raw), error: null };
   } catch (error) {
     return {
       success: false,
@@ -208,7 +226,7 @@ export async function classResult(prevState: any, formData: FormData) {
     const { start: validatedStart, end: validatedEnd } = parsed.data;
 
     const response = await fetch(
-      `https://jntuh-api.onrender.com/classresult?sem=${semester}&start_htno=${validatedStart}&end_htno=${validatedEnd}`,
+      `${API_BASE}/classresult?sem=${semester}&start_htno=${validatedStart}&end_htno=${validatedEnd}`,
       { cache: 'no-store' },
     );
 
@@ -252,7 +270,7 @@ export async function allResult(prevState: any, formData: FormData) {
     const validatedHtno = parsed.data;
 
     const response = await fetch(
-      `https://jntuh-api.onrender.com/allresult?htno=${validatedHtno}`,
+      `${API_BASE}/allresult?htno=${validatedHtno}`,
       { cache: 'no-store' },
     );
 
@@ -264,13 +282,23 @@ export async function allResult(prevState: any, formData: FormData) {
       };
     }
 
-    const data = transformAllResultResponse(await response.json());
+    const raw = await response.json();
+
+    if (raw && typeof raw === "object" && "error" in raw) {
+      return {
+        success: false,
+        data: null,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
+      };
+    }
+
+    const data = transformAllResultResponse(raw);
 
     if (!data || !data.Results || Object.keys(data.Results).length === 0) {
       return {
         success: false,
         data: null,
-        error: `No results found for hall ticket: ${validatedHtno}`,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
       };
     }
 
@@ -316,7 +344,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
     if (grad) params.append("grad", grad);
 
     const response = await fetch(
-      `https://jntuh-api.onrender.com/specificresult?${params.toString()}`,
+      `${API_BASE}/specificresult?${params.toString()}`,
       { cache: 'no-store' },
     );
 
@@ -329,6 +357,15 @@ export async function notificationResult(prevState: any, formData: FormData) {
     }
 
     const raw = await response.json();
+
+    if (raw && typeof raw === "object" && "error" in raw) {
+      return {
+        success: false,
+        data: null,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
+      };
+    }
+
     const data = transformSpecificResultResponse(raw);
 
     if (
@@ -339,7 +376,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
       return {
         success: false,
         data: null,
-        error: `No results found for hall ticket: ${validatedHtno}`,
+        error: "Hall ticket not found. Please check your hall ticket number and try again.",
       };
     }
 
@@ -356,7 +393,7 @@ export async function notificationResult(prevState: any, formData: FormData) {
 export async function refreshNotifications() {
   try {
     const response = await fetch(
-      "https://jntuh-api.onrender.com/notifications?refresh=true",
+      `${API_BASE}/notifications?refresh=true`,
       { cache: 'no-store' },
     );
     if (!response.ok) throw new Error("Failed to fetch notifications");
@@ -373,18 +410,18 @@ export async function refreshNotifications() {
 
 export async function clearCacheAndRetry(htno: string, type: "academic" | "semester" | "allresult" | "specificresult", extraParams?: Record<string, string>) {
   try {
-    await fetch("https://jntuh-api.onrender.com/refresh-cache", { cache: 'no-store' });
+    await fetch(`${API_BASE}/refresh-cache`, { cache: 'no-store' });
     
     let url = "";
     switch (type) {
       case "academic":
-        url = `https://jntuh-api.onrender.com/academic?htno=${htno}`;
+        url = `${API_BASE}/academic?htno=${htno}`;
         break;
       case "semester":
-        url = `https://jntuh-api.onrender.com/sem?htno=${htno}&sem=${extraParams?.sem || "1-1"}`;
+        url = `${API_BASE}/sem?htno=${htno}&sem=${extraParams?.sem || "1-1"}`;
         break;
       case "allresult":
-        url = `https://jntuh-api.onrender.com/allresult?htno=${htno}`;
+        url = `${API_BASE}/allresult?htno=${htno}`;
         break;
       case "specificresult":
         const params = new URLSearchParams();
@@ -392,7 +429,7 @@ export async function clearCacheAndRetry(htno: string, type: "academic" | "semes
         if (extraParams) {
           Object.entries(extraParams).forEach(([key, value]) => params.set(key, value));
         }
-        url = `https://jntuh-api.onrender.com/specificresult?${params.toString()}`;
+        url = `${API_BASE}/specificresult?${params.toString()}`;
         break;
     }
 

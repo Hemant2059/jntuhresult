@@ -27,28 +27,31 @@ const Navbar = () => {
     { href: "/semester", label: "Semester" },
     { href: "/allresult", label: "All Results" },
     { href: "/classresult", label: "Class" },
+    { href: "/blog", label: "Blog" },
+    { href: "/sgpa-calculator", label: "SGPA Calc" },
+    { href: "/cgpa-calculator", label: "CGPA Calc" },
   ];
 
   const closeMenu = () => setOpen(false);
 
   const linkClass = (href: string) =>
-    `text-sm font-semibold leading-6 transition-colors hover:text-blue-600 ${
-      pathname === href ? "text-blue-600" : "text-gray-700 dark:text-gray-300"
+    `text-sm font-semibold leading-6 transition-colors hover:text-primary ${
+      pathname === href ? "text-primary" : "text-foreground"
     }`;
 
   const mobileLinkClass = (href: string) =>
     `-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 ${
-      pathname === href ? "text-blue-600" : "text-gray-900 dark:text-gray-100"
+      pathname === href ? "text-primary" : "text-foreground dark:text-foreground"
     }`;
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b border-gray-200/60 dark:border-gray-800/60 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md print:hidden">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-card/80 dark:bg-background/80 backdrop-blur-md print:hidden">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 px-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <Link
               href="/"
-              className="-m-1.5 p-1.5 text-xl sm:text-2xl font-bold tracking-tight text-blue-600 hover:opacity-90 transition-opacity"
+              className="-m-1.5 p-1.5 text-xl sm:text-2xl font-bold tracking-tight text-primary hover:opacity-90 transition-opacity"
             >
               JNTUH RESULT
             </Link>
@@ -65,7 +68,7 @@ const Navbar = () => {
             </button>
             <button
               type="button"
-              className="rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+              className="rounded-md p-2.5 text-foreground"
               onClick={() => setOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
@@ -103,14 +106,14 @@ const Navbar = () => {
       {open && (
         <div className="lg:hidden">
           <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={closeMenu} />
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-card dark:bg-card px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5 text-xl font-bold text-blue-600" onClick={closeMenu}>
+              <Link href="/" className="-m-1.5 p-1.5 text-xl font-bold text-primary" onClick={closeMenu}>
                 JNTUH RESULT
               </Link>
               <button
                 type="button"
-                className="rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+                className="rounded-md p-2.5 text-foreground"
                 onClick={closeMenu}
               >
                 <span className="sr-only">Close menu</span>

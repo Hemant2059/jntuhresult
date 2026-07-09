@@ -52,7 +52,7 @@ export default function NotificationForm({ notification }: NotificationFormProps
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <Link
         href="/notifications"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-blue-600 transition-colors group"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors group"
       >
         <div className="h-8 w-8 rounded-full bg-card border flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 group-hover:border-blue-100 transition-all">
           <ArrowLeft size={16} />
@@ -64,9 +64,9 @@ export default function NotificationForm({ notification }: NotificationFormProps
         {(!state.success || isPending) && (
           <div className="lg:col-span-1 space-y-4">
             <Card className="shadow-md overflow-hidden">
-              <div className="h-1.5 bg-linear-to-r from-blue-600 to-indigo-600" />
+              <div className="h-1.5 bg-linear-to-r from-primary to-primary/80" />
               <CardContent className="p-5">
-                <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mb-4">
+                <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-primary mb-4">
                   <ClipboardList size={22} />
                 </div>
                 <h2 className="text-base font-black leading-tight mb-3">
@@ -74,7 +74,7 @@ export default function NotificationForm({ notification }: NotificationFormProps
                 </h2>
                 <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-xs">
-                    <span className="h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                     <span className="text-muted-foreground font-medium">Degree:</span>
                     <span className="font-bold uppercase">{notification.degree}</span>
                   </div>
@@ -92,7 +92,7 @@ export default function NotificationForm({ notification }: NotificationFormProps
               </CardContent>
             </Card>
 
-            <div className="p-4 bg-blue-50/50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800">
+            <div className="p-4 bg-blue-50/50 dark:bg-blue-900/20 rounded-2xl border border-border">
               <h4 className="flex items-center gap-1.5 text-blue-800 dark:text-blue-300 font-bold text-xs mb-1.5">
                 <GraduationCap size={13} />
                 Need Help?
@@ -133,7 +133,7 @@ export default function NotificationForm({ notification }: NotificationFormProps
                         name="htno"
                         value={hallticket}
                         onChange={(e) => setHallticket(e.target.value.toUpperCase().replace(/\s+/g, ""))}
-                        className="pl-10 h-11 rounded-xl bg-muted/30 focus:bg-card focus:ring-4 focus:ring-blue-500/10 transition-all text-base font-bold tracking-widest placeholder:tracking-normal placeholder:font-normal"
+                        className="pl-10 h-11 rounded-xl bg-muted/30 focus:bg-card focus:ring-4 focus:ring-primary/10 transition-all text-base font-bold tracking-widest placeholder:tracking-normal placeholder:font-normal"
                         disabled={isPending}
                         maxLength={10}
                       />
@@ -143,7 +143,7 @@ export default function NotificationForm({ notification }: NotificationFormProps
                   <Button
                     type="submit"
                     disabled={isPending || hallticket.length !== 10}
-                    className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20 text-sm font-bold transition-all active:scale-[0.98] group"
+                    className="w-full h-11 rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 text-sm font-bold transition-all active:scale-[0.98] group"
                   >
                     {isPending ? (
                       <div className="flex items-center gap-2">
@@ -160,13 +160,13 @@ export default function NotificationForm({ notification }: NotificationFormProps
                 </form>
 
                 {state.error && !isPending && (
-                  <div className="mt-4 p-3 border-destructive/20 bg-destructive/5 rounded-xl flex gap-3">
-                    <div className="h-7 w-7 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
-                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
+                  <div className="mt-4 p-4 border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-900/20 rounded-xl flex gap-3">
+                    <div className="h-7 w-7 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center shrink-0">
+                      <AlertCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
                     </div>
                     <div className="space-y-0.5">
-                      <p className="font-bold text-destructive text-xs leading-tight">Request Failed</p>
-                      <p className="text-xs text-destructive/80 font-medium">{state.error}</p>
+                      <p className="font-bold text-amber-800 dark:text-amber-300 text-xs leading-tight">Not Found</p>
+                      <p className="text-xs text-amber-700/80 dark:text-amber-400/80 font-medium">{state.error}</p>
                     </div>
                   </div>
                 )}

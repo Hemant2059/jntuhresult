@@ -3,33 +3,34 @@ import { AlertTriangle } from "lucide-react";
 export const metadata = {
   title: "Disclaimer",
   description: "Important disclaimers about JNTUH Results.",
+  alternates: { canonical: "https://jntuhresultbp.vercel.app/disclaimer" },
 };
 
 export default function Disclaimer() {
   return (
-    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+    <main className="min-h-screen bg-background dark:bg-background">
+      <div className="bg-card dark:bg-card border-b border-border">
         <div className="max-w-4xl mx-auto px-6 py-14 sm:py-20">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600">
               <AlertTriangle className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Disclaimer</h1>
-              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Important information about our service</p>
+              <h1 className="text-3xl sm:text-4xl font-bold text-foreground">Disclaimer</h1>
+              <p className="text-muted-foreground text-sm mt-1">Important information about our service</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 p-8 sm:p-12 shadow-sm space-y-10">
-          <div className="bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-6 border border-amber-100 dark:border-amber-800">
+        <div className="bg-card dark:bg-card rounded-3xl border border-border p-8 sm:p-12 shadow-sm space-y-10">
+          <div className="bg-secondary dark:bg-secondary rounded-2xl p-6 border border-amber-100 dark:border-amber-800">
             <div className="flex items-start gap-4">
               <AlertTriangle className="h-6 w-6 text-amber-600 shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-1">Important Notice</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                <h3 className="font-bold text-foreground mb-1">Important Notice</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   We are NOT an official university website. We are a results aggregation tool built for student convenience.
                   For official and final results, always refer to the official JNTUH results portal.
                 </p>
@@ -58,7 +59,7 @@ export default function Disclaimer() {
           </Section>
 
           <Section title="6. Result Verification">
-            <p>Students are strongly advised to verify their examination results from the official JNTUH university portal at <a href="http://results.jntuh.ac.in" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">results.jntuh.ac.in</a>. Always cross-check with the official university records before making any decisions based on the results.</p>
+            <p>Students are strongly advised to verify their examination results from the official JNTUH university portal at <a href="http://results.jntuh.ac.in" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">results.jntuh.ac.in</a>. Always cross-check with the official university records before making any decisions based on the results.</p>
           </Section>
 
           <Section title="7. Limitation of Liability">
@@ -73,8 +74,8 @@ export default function Disclaimer() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{title}</h2>
-      <div className="text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">{children}</div>
+      <h2 className="text-xl font-bold text-foreground mb-4">{title}</h2>
+      <div className="text-muted-foreground leading-relaxed space-y-3">{children}</div>
     </section>
   );
 }

@@ -3,27 +3,28 @@ import { Shield } from "lucide-react";
 export const metadata = {
   title: "Privacy Policy",
   description: "JNTUH Results Privacy Policy - how we collect, use, and protect your information.",
+  alternates: { canonical: "https://jntuhresultbp.vercel.app/privacy" },
 };
 
 export default function PrivacyPolicy() {
   return (
-    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+    <main className="min-h-screen bg-background dark:bg-background">
+      <div className="bg-card dark:bg-card border-b border-border">
         <div className="max-w-4xl mx-auto px-6 py-14 sm:py-20">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600">
+            <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-primary">
               <Shield className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Privacy Policy</h1>
-              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+              <h1 className="text-3xl sm:text-4xl font-bold text-foreground">Privacy Policy</h1>
+              <p className="text-muted-foreground text-sm mt-1">Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 p-8 sm:p-12 shadow-sm space-y-10">
+        <div className="bg-card dark:bg-card rounded-3xl border border-border p-8 sm:p-12 shadow-sm space-y-10">
           <Section title="1. Information We Collect">
             <p>When you use our website to search for results, we may collect the following information:</p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
@@ -63,7 +64,7 @@ export default function PrivacyPolicy() {
           </Section>
 
           <Section title="8. Contact">
-            <p>If you have any questions about this Privacy Policy, please contact us at <strong className="text-blue-600">hp2059712@gmail.com</strong>.</p>
+            <p>If you have any questions about this Privacy Policy, please contact us at <strong className="text-primary">hp2059712@gmail.com</strong>.</p>
           </Section>
         </div>
       </div>
@@ -74,8 +75,8 @@ export default function PrivacyPolicy() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{title}</h2>
-      <div className="text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">{children}</div>
+      <h2 className="text-xl font-bold text-foreground mb-4">{title}</h2>
+      <div className="text-muted-foreground leading-relaxed space-y-3">{children}</div>
     </section>
   );
 }

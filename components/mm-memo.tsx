@@ -39,9 +39,9 @@ function Content({ data, semester }: MmMemoProps) {
         </div>
 
         <div className="text-center border-b-2 border-gray-800 pb-4 mb-5 z-10 relative">
-          <h1 className="text-[22px] font-extrabold tracking-wider uppercase mb-2 text-gray-900">Jawaharlal Nehru Technological University Hyderabad</h1>
+          <h1 className="text-[22px] font-extrabold tracking-wider uppercase mb-2 text-foreground">Jawaharlal Nehru Technological University Hyderabad</h1>
           <div className="inline-block border-2 border-gray-800 px-6 py-2 rounded-full bg-white shadow-sm mt-1">
-            <p className="text-[13px] font-extrabold uppercase tracking-widest text-gray-900">Marks Memo (MM)</p>
+            <p className="text-[13px] font-extrabold uppercase tracking-widest text-foreground">Marks Memo (MM)</p>
           </div>
         </div>
 
@@ -57,7 +57,7 @@ function Content({ data, semester }: MmMemoProps) {
         <div className="flex-1 z-10 relative">
           <table className="w-full text-[11px] border-collapse mb-6">
             <thead>
-              <tr className="bg-gray-100 border-t-2 border-b-2 border-gray-800 text-gray-900">
+              <tr className="bg-gray-100 border-t-2 border-b-2 border-gray-800 text-foreground">
                 <th className="border border-gray-400 p-2 text-center w-10 font-bold">Sl.No</th>
                 <th className="border border-gray-400 p-2 text-center w-20 font-bold">Code</th>
                 <th className="border border-gray-400 p-2 text-left font-bold">Name of the Subject</th>
@@ -97,9 +97,9 @@ function Content({ data, semester }: MmMemoProps) {
 
           <div className="mt-2 flex justify-between items-center border-2 border-gray-800 p-4 bg-gray-50/80 rounded-sm">
             <div className="flex gap-8 text-[11.5px]">
-              {Number(data.SGPA) > 0 && <span className="font-bold text-gray-900">Semester Grade Point Average (SGPA): <span className="text-sm ml-1 bg-white px-2 py-0.5 border border-gray-300 rounded">{Number(data.SGPA).toFixed(2)}</span></span>}
+              {Number(data.SGPA) > 0 && <span className="font-bold text-foreground">Semester Grade Point Average (SGPA): <span className="text-sm ml-1 bg-white px-2 py-0.5 border border-gray-300 rounded">{Number(data.SGPA).toFixed(2)}</span></span>}
             </div>
-            <div className="text-[11.5px] font-bold text-gray-900 flex items-center">
+            <div className="text-[11.5px] font-bold text-foreground flex items-center">
               Semester Result: <span className={`ml-2 text-sm px-3 py-1 rounded border ${overallResult === "PASSED" ? "bg-green-100 border-green-400 text-green-800" : "bg-red-100 border-red-400 text-red-800"}`}>{overallResult}</span>
             </div>
           </div>
@@ -139,14 +139,14 @@ export default function MmMemo({ data, semester, onClose }: MmMemoProps) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 flex flex-col" onClick={onClose}>
-      <div className="bg-white dark:bg-gray-900 border-b dark:border-gray-700 flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 z-20 shrink-0" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-card dark:bg-card border-b dark:border-gray-700 flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 z-20 shrink-0" onClick={(e) => e.stopPropagation()}>
         <h3 className="font-bold text-xs sm:text-sm dark:text-white">MM Preview</h3>
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <button onClick={handlePrint} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 text-white text-[10px] sm:text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">Print</button>
+          <button onClick={handlePrint} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-white text-[10px] sm:text-xs font-bold rounded-lg hover:bg-primary/90 transition-colors">Print</button>
           {onClose && <button onClick={onClose} className="px-2 sm:px-3 py-1.5 sm:py-2 text-gray-500 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 text-[10px] sm:text-xs font-bold">Close</button>}
         </div>
       </div>
-      <div className="flex-1 overflow-auto bg-white dark:bg-gray-900" onClick={(e) => e.stopPropagation()}>
+      <div className="flex-1 overflow-auto bg-card dark:bg-card" onClick={(e) => e.stopPropagation()}>
         <div className="inline-block p-2 sm:p-4" ref={ref}>
           <Content data={data} semester={semester} />
         </div>

@@ -20,7 +20,7 @@ export default function AcademicForm() {
   return (
     <div className="space-y-6">
       <Card className="max-w-2xl mx-auto shadow-sm overflow-hidden print:hidden">
-        <div className="h-1 bg-linear-to-r from-blue-600 to-indigo-600" />
+        <div className="h-1 bg-linear-to-r from-primary to-primary/80" />
         <CardContent className="p-5 sm:p-6">
           <div className="mb-4">
             <h2 className="text-xl font-bold">Academic History</h2>
@@ -46,7 +46,7 @@ export default function AcademicForm() {
               <Button
                 type="submit"
                 disabled={isPending || hallticket.length !== 10}
-                className="h-10 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all active:scale-95 w-full sm:w-auto text-sm"
+                className="h-10 px-6 rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-blue-500/20 transition-all active:scale-95 w-full sm:w-auto text-sm"
               >
                 {isPending ? (
                   <>
@@ -66,7 +66,7 @@ export default function AcademicForm() {
         <Card className="max-w-2xl mx-auto p-8 text-center space-y-3 border-none shadow-none bg-transparent">
           <div className="relative inline-block">
             <div className="absolute inset-0 rounded-full bg-blue-100 dark:bg-blue-900/30 animate-ping opacity-25" />
-            <Loader2 className="h-8 w-8 animate-spin relative text-blue-600" />
+            <Loader2 className="h-8 w-8 animate-spin relative text-primary" />
           </div>
           <div className="space-y-0.5">
             <p className="text-base font-semibold">Fetching your results</p>

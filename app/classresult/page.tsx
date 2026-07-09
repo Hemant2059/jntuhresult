@@ -1,4 +1,5 @@
 import ClassResultForm from "@/components/classresult-form";
+import ResultInfoSection from "@/components/result-info-section";
 
 export const metadata = {
   title: "Class Analysis & Batch Performance",
@@ -13,10 +14,11 @@ export const metadata = {
 
 export default function ClassResultPage() {
   return (
-    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+    <main className="min-h-screen bg-background dark:bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
         <ClassResultForm />
       </div>
+      <ResultInfoSection pageType="classresult" />
     </main>
   );
 }

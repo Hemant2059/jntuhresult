@@ -191,7 +191,7 @@ export function DataTableToolbar({
              <DropdownMenuLabel>Export Options</DropdownMenuLabel>
              <DropdownMenuSeparator />
              <DropdownMenuItem onClick={handleDownloadExcel} className="cursor-pointer">
-               <FileSpreadsheet className="mr-2 h-4 w-4 text-green-600" />
+               <FileSpreadsheet className="mr-2 h-4 w-4 text-primary" />
                <span>Excel</span>
              </DropdownMenuItem>
              <DropdownMenuItem onClick={handleDownloadCSV} className="cursor-pointer">
@@ -232,7 +232,7 @@ export function DataTableToolbar({
             <DropdownMenuSeparator />
 
             {/* Subjects */}
-            <DropdownMenuLabel className="text-sm font-semibold px-2 py-1.5 text-blue-600">
+            <DropdownMenuLabel className="text-sm font-semibold px-2 py-1.5 text-primary">
               Select Subjects
             </DropdownMenuLabel>
             {subjects.map((s) => (
@@ -249,7 +249,7 @@ export function DataTableToolbar({
             <DropdownMenuSeparator />
 
             {/* Metrics */}
-            <DropdownMenuLabel className="text-sm font-semibold px-2 py-1.5 text-indigo-600">
+            <DropdownMenuLabel className="text-sm font-semibold px-2 py-1.5 text-primary">
               Metrics
             </DropdownMenuLabel>
             {METRICS.map((metric) => (

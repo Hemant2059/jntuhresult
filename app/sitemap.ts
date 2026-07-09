@@ -3,74 +3,10 @@ import { MetadataRoute } from "next";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://jntuhresultbp.vercel.app";
 
-  const semesters = [
-    // B.Tech R18
-    "btech-1-1-r18",
-    "btech-1-2-r18",
-    "btech-2-1-r18",
-    "btech-2-2-r18",
-    "btech-3-1-r18",
-    "btech-3-2-r18",
-    "btech-4-1-r18",
-    "btech-4-2-r18",
-    // B.Tech R22
-    "btech-1-1-r22",
-    "btech-1-2-r22",
-    "btech-2-1-r22",
-    "btech-2-2-r22",
-    "btech-3-1-r22",
-    "btech-3-2-r22",
-    "btech-4-1-r22",
-    "btech-4-2-r22",
-    // B.Tech R25
-    "btech-1-1-r25",
-    "btech-1-2-r25",
-    "btech-2-1-r25",
-    "btech-2-2-r25",
-    "btech-3-1-r25",
-    "btech-3-2-r25",
-    "btech-4-1-r25",
-    "btech-4-2-r25",
-    // B.Pharmacy R17
-    "bpharmacy-1-1-r17",
-    "bpharmacy-1-2-r17",
-    "bpharmacy-2-1-r17",
-    "bpharmacy-2-2-r17",
-    "bpharmacy-3-1-r17",
-    "bpharmacy-3-2-r17",
-    "bpharmacy-4-1-r17",
-    "bpharmacy-4-2-r17",
-    // B.Pharmacy R22
-    "bpharmacy-1-1-r22",
-    "bpharmacy-1-2-r22",
-    "bpharmacy-2-1-r22",
-    "bpharmacy-2-2-r22",
-    "bpharmacy-3-1-r22",
-    "bpharmacy-3-2-r22",
-    "bpharmacy-4-1-r22",
-    "bpharmacy-4-2-r22",
-    // B.Pharmacy R25
-    "bpharmacy-1-1-r25",
-    "bpharmacy-1-2-r25",
-    "bpharmacy-2-1-r25",
-    "bpharmacy-2-2-r25",
-    "bpharmacy-3-1-r25",
-    "bpharmacy-3-2-r25",
-    "bpharmacy-4-1-r25",
-    "bpharmacy-4-2-r25",
-  ];
-
-  const dynamicRoutes = semesters.map((slug) => ({
-    url: `${baseUrl}/semester`,
-    lastModified: new Date(),
-    changeFrequency: "daily" as const,
-    priority: 0.8,
-  }));
-
   // Fetch notifications for sitemap
   let notificationRoutes: any[] = [];
   try {
-    const res = await fetch("https://jntuh-api.onrender.com/notifications?refresh=true");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://jntuh-api.onrender.com"}/notifications?refresh=true`);
     if (res.ok) {
       const notifications = await res.json();
       notificationRoutes = notifications.map((n: any) => ({
@@ -86,72 +22,143 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: "https://jntuhresultbp.vercel.app/",
+      url: baseUrl,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/semester",
+      url: `${baseUrl}/semester`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/academic",
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    {
-      url: "https://jntuhresultbp.vercel.app/classresult",
+      url: `${baseUrl}/academic`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/allresult",
+      url: `${baseUrl}/classresult`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/notifications",
+      url: `${baseUrl}/allresult`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/notifications`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.8,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/about",
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/contact",
+      url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/privacy",
+      url: `${baseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/terms",
+      url: `${baseUrl}/terms`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: "https://jntuhresultbp.vercel.app/disclaimer",
+      url: `${baseUrl}/disclaimer`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,
     },
-    ...dynamicRoutes,
     ...notificationRoutes,
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/how-to-check-jntuh-results`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/understanding-sgpa-cgpa`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/jntuh-regulations-explained`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/jntuh-backlog-supplementary-exams`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/jntuh-revaluation-process`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/tips-to-improve-jntuh-results`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/btech-vs-bpharmacy`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/download-jntuh-results-pdf`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/sgpa-calculator`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/cgpa-calculator`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/grading-system`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
   ];
 }

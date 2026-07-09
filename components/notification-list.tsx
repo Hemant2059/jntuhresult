@@ -97,14 +97,14 @@ export default function NotificationList({ notifications: initialNotifications }
 
       <div className="flex items-center justify-between px-2">
         <p className="text-sm text-muted-foreground font-medium">
-          Showing <span className="text-blue-600 font-bold">{filteredNotifications.length}</span> notifications
+          Showing <span className="text-primary font-bold">{filteredNotifications.length}</span> notifications
         </p>
         {(search || degreeFilter !== "all" || typeFilter !== "all") && (
           <Button
             variant="ghost"
             size="sm"
             onClick={() => { setSearch(""); setDegreeFilter("all"); setTypeFilter("all"); }}
-            className="text-blue-600 hover:text-blue-700 rounded-lg text-xs"
+            className="text-primary hover:text-primary rounded-lg text-xs"
           >
             Clear Filters
           </Button>
@@ -124,10 +124,10 @@ export default function NotificationList({ notifications: initialNotifications }
             });
             return (
               <Link key={`${notif?.slug || index}-${index}`} href={`/notifications/${parsed.slug}?${searchParams.toString()}`}>
-                <Card className="group border hover:border-blue-200 dark:hover:border-blue-800 transition-all duration-300 hover:shadow-xl rounded-3xl overflow-hidden">
+                <Card className="group border hover:border-primary/30 transition-all duration-300 hover:shadow-xl rounded-3xl overflow-hidden">
                   <CardContent className="p-0">
                     <div className="flex">
-                      <div className="w-2 bg-blue-600 group-hover:w-3 transition-all duration-300" />
+                      <div className="w-2 bg-primary group-hover:w-3 transition-all duration-300" />
                       <div className="flex-1 p-4 md:p-6">
                         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                           <div className="space-y-1.5 md:space-y-3">
@@ -147,7 +147,7 @@ export default function NotificationList({ notifications: initialNotifications }
                                 {parsed.type}
                               </span>
                             </div>
-                            <h3 className="text-base md:text-lg font-bold group-hover:text-blue-600 transition-colors leading-tight">
+                            <h3 className="text-base md:text-lg font-bold group-hover:text-primary transition-colors leading-tight">
                               {notif?.title || "Untitled"}
                             </h3>
                             <div className="flex items-center gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground">
@@ -164,7 +164,7 @@ export default function NotificationList({ notifications: initialNotifications }
                             </div>
                           </div>
                           <div className="hidden md:flex items-center self-end md:self-center">
-                            <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                            <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
                               <ChevronRight className="h-4 w-4 md:h-5 w-5" />
                             </div>
                           </div>

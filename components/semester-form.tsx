@@ -12,7 +12,7 @@ import { useActionState } from "react";
 
 async function clearCacheAndRetry(formData: FormData, retryAction: (formData: FormData) => void) {
   try {
-    await fetch("https://jntuh-api.onrender.com/refresh-cache", { cache: 'no-store' });
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://jntuh-api.onrender.com"}/refresh-cache`, { cache: 'no-store' });
   } catch {
     // silently fail
   }
@@ -58,11 +58,11 @@ export default function SemesterForm() {
   return (
     <div className="space-y-6 my-4">
       <Card className="max-w-2xl mx-auto shadow-sm overflow-hidden print:hidden">
-        <div className="h-1 bg-linear-to-r from-indigo-600 to-blue-600" />
+        <div className="h-1 bg-linear-to-r from-primary to-primary/80" />
         <CardContent className="p-5 sm:p-6">
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-0.5">
-              <BookOpen className="h-4 w-4 text-indigo-600" />
+              <BookOpen className="h-4 w-4 text-primary" />
               <h2 className="text-xl font-bold">Semester Result</h2>
             </div>
             <p className="text-muted-foreground text-xs">
@@ -128,7 +128,7 @@ export default function SemesterForm() {
         <Card className="max-w-2xl mx-auto p-8 text-center space-y-3 border-none shadow-none bg-transparent">
           <div className="relative inline-block">
             <div className="absolute inset-0 rounded-full bg-indigo-100 dark:bg-indigo-900/30 animate-ping opacity-25" />
-            <Loader2 className="h-8 w-8 animate-spin relative text-indigo-600" />
+            <Loader2 className="h-8 w-8 animate-spin relative text-primary" />
           </div>
           <div className="space-y-0.5">
             <p className="text-base font-semibold">Loading semester data</p>

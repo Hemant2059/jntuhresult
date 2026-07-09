@@ -1,4 +1,5 @@
 import AllResultsForm from "@/components/allresult-form";
+import ResultInfoSection from "@/components/result-info-section";
 
 export const metadata = {
   title: "Complete Examination History",
@@ -13,10 +14,11 @@ export const metadata = {
 
 export default function AllResultPage() {
   return (
-    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+    <main className="min-h-screen bg-background dark:bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
         <AllResultsForm />
       </div>
+      <ResultInfoSection pageType="allresult" />
     </main>
   );
 }

@@ -4,7 +4,7 @@ import { GraduationCap, Heart } from "lucide-react";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const sections = [
+  const sections: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
     {
       title: "Results",
       links: [
@@ -12,6 +12,15 @@ const Footer = () => {
         { label: "Semester Result", href: "/semester" },
         { label: "Class Result", href: "/classresult" },
         { label: "All Results", href: "/allresult" },
+      ],
+    },
+    {
+      title: "Tools",
+      links: [
+        { label: "SGPA Calculator", href: "/sgpa-calculator" },
+        { label: "CGPA Calculator", href: "/cgpa-calculator" },
+        { label: "Grading System", href: "/grading-system" },
+        { label: "Blog", href: "/blog" },
       ],
     },
     {
@@ -23,35 +32,35 @@ const Footer = () => {
       ],
     },
     {
-      title: "Company",
+      title: "Official",
       links: [
         { label: "About Us", href: "/about" },
         { label: "Contact Us", href: "/contact" },
         { label: "Notifications", href: "/notifications" },
-        { label: "Official Results", href: "http://results.jntuh.ac.in", external: true },
+        { label: "JNTUH Official Results", href: "http://results.jntuh.ac.in", external: true },
       ],
     },
   ];
 
   return (
-    <footer className="bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 pt-16 pb-8 px-6 lg:px-8 print:hidden">
+    <footer className="bg-card dark:bg-card border-t border-border pt-16 pb-8 px-6 lg:px-8 print:hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="p-2 bg-blue-600 rounded-xl text-white group-hover:rotate-12 transition-transform">
+              <div className="p-2 bg-primary rounded-xl text-white group-hover:rotate-12 transition-transform">
                 <GraduationCap className="h-6 w-6" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">JNTUH RESULT</span>
+              <span className="text-xl font-bold tracking-tight text-foreground">JNTUH RESULT</span>
             </Link>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Fast, accurate academic results for JNTUH students. Built with focus on user experience and data clarity.
             </p>
           </div>
 
           {sections.map((section) => (
             <div key={section.title} className="space-y-4">
-              <h3 className="text-xs font-bold text-gray-900 dark:text-gray-100 uppercase tracking-widest">
+              <h3 className="text-xs font-bold text-foreground dark:text-foreground uppercase tracking-widest">
                 {section.title}
               </h3>
               <ul className="space-y-2.5">
@@ -60,7 +69,7 @@ const Footer = () => {
                     <Link
                       href={link.href}
                       target={link.external ? "_blank" : undefined}
-                      className="text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="text-sm text-muted-foreground hover:text-primary dark:hover:text-blue-400 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -71,7 +80,7 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-center">
           <p className="text-sm text-gray-400 dark:text-gray-500">
             &copy; {currentYear} JNTUH Result Dashboard. Not affiliated with JNTUH.
           </p>

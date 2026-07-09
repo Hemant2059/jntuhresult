@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     siteName: "JNTUH Results",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://jntuhresultbp.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "JNTUH Results - Fast B.Tech B.Pharmacy Results Checker",
@@ -129,7 +129,7 @@ export const metadata: Metadata = {
     title: "JNTUH Results 2026 | B.Tech B.Pharmacy R22 R25",
     description:
       "Instant JNTUH B.Tech B.Pharmacy results checker. Fast, free, accurate.",
-    images: ["/og-image.png"],
+    images: ["https://jntuhresultbp.vercel.app/og-image.png"],
   },
   alternates: {
     canonical: "https://jntuhresultbp.vercel.app",
@@ -186,7 +186,7 @@ export default function RootLayout({
         "@type": "Organization",
         name: "JNTUH Results",
         url: "https://jntuhresultbp.vercel.app",
-        logo: "https://jntuhresultbp.vercel.app/logo.png",
+        logo: "https://jntuhresultbp.vercel.app/og-image.png",
         sameAs: [
           "https://twitter.com/jntuhresults",
         ],

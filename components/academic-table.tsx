@@ -58,7 +58,7 @@ const AcademicTable = (data: AcademicData) => {
           </div>
           <Button
             onClick={() => setShowMemo(true)}
-            className="rounded-full px-5 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 w-full sm:w-auto"
+            className="rounded-full px-5 bg-primary hover:bg-primary/90 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 w-full sm:w-auto"
           >
             <ScrollText className="h-3.5 w-3.5" />
             Download CMM
@@ -72,7 +72,7 @@ const AcademicTable = (data: AcademicData) => {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="hidden md:inline-flex items-center justify-center p-2 sm:p-3 bg-muted rounded-xl mb-3 sm:mb-4">
-            <div className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 flex items-center justify-center">
+            <div className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex items-center justify-center">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 sm:h-6 sm:w-6">
                 <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
                 <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
@@ -80,7 +80,7 @@ const AcademicTable = (data: AcademicData) => {
             </div>
           </div>
           <h1 className="text-base md:text-2xl font-extrabold tracking-tight px-2">{collegeName}</h1>
-          <p className="text-blue-600 font-semibold mt-1.5 tracking-wide uppercase text-xs">{branch}</p>
+          <p className="text-primary font-semibold mt-1.5 tracking-wide uppercase text-xs">{branch}</p>
         </div>
 
         {/* Student Dossier */}
@@ -149,7 +149,7 @@ const AcademicTable = (data: AcademicData) => {
                           <td className="py-3 px-2 text-center text-sm text-muted-foreground font-mono">{sub.external}</td>
                           <td className="py-3 px-2 text-center text-sm font-bold font-mono">{sub.total}</td>
                           <td className="py-3 px-2 text-center">
-                            <span className={`inline-flex items-center justify-center min-w-7 h-7 rounded-lg text-xs font-black ${isFailed ? "bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400" : "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"}`}>
+                            <span className={`inline-flex items-center justify-center min-w-7 h-7 rounded-lg text-xs font-black ${isFailed ? "bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400" : "bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-400"}`}>
                               {sub.grade}
                             </span>
                           </td>
@@ -187,7 +187,7 @@ const AcademicTable = (data: AcademicData) => {
                             <td className="py-1.5 px-1 text-center font-mono text-muted-foreground text-[11px]">{sub.external}</td>
                             <td className="py-1.5 px-1 text-center font-bold text-[11px]">{sub.total}</td>
                             <td className="py-1.5 px-1 text-center">
-                              <span className={`inline-flex items-center justify-center w-6 h-6 rounded text-[10px] font-black ${isFailed ? "bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400" : "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"}`}>
+                              <span className={`inline-flex items-center justify-center w-6 h-6 rounded text-[10px] font-black ${isFailed ? "bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400" : "bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-400"}`}>
                                 {sub.grade}
                               </span>
                             </td>
@@ -209,7 +209,7 @@ const AcademicTable = (data: AcademicData) => {
         </div>
 
         {/* Performance Summary */}
-        <div className="mt-8 sm:mt-10 bg-blue-600 rounded-2xl p-4 sm:p-6 text-white shadow-lg shadow-blue-500/20">
+        <div className="mt-8 sm:mt-10 bg-primary rounded-2xl p-4 sm:p-6 text-white shadow-lg shadow-blue-500/20">
           <div className="grid grid-cols-3 gap-3 sm:gap-6">
             <div className="text-center border-r border-blue-400/30">
               <p className="text-blue-100 text-[9px] font-bold uppercase tracking-widest mb-1">Backlogs</p>

@@ -101,7 +101,7 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
   return (
     <Card className="w-full space-y-6 p-4">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
-        <CardTitle className="text-xl font-bold text-gray-900">
+        <CardTitle className="text-xl font-bold text-foreground">
           Performance Analysis
         </CardTitle>
         <Button
@@ -155,7 +155,7 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
               </ResponsiveContainer>
 
               <div className="text-center text-sm mt-2">
-                <span className="text-green-600 font-medium">
+                <span className="text-primary font-medium">
                   Pass: {item.passPercent.toFixed(1)}%
                 </span>
                 {"  "} |{"  "}
@@ -169,7 +169,7 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
 
         {/* -------- Top 3 Toppers -------- */}
         <div className="mt-12">
-          <h2 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <h2 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-yellow-400" />
             Class Toppers
           </h2>
@@ -178,7 +178,7 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
             {toppers.map((t, index) => (
               <div
                 key={index}
-                className="relative bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="relative bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 {index === 0 && (
                   <div className="absolute -top-3 -right-3 bg-yellow-400 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
@@ -186,7 +186,7 @@ const SubjectPassFailChart: React.FC<Props> = ({ data }) => {
                   </div>
                 )}
                 <div className="text-center">
-                  <p className="font-bold text-gray-900 truncate mb-1">
+                  <p className="font-bold text-foreground truncate mb-1">
                     {t.name}
                   </p>
                   <p className="text-xs text-gray-500 mb-4">

@@ -66,7 +66,7 @@ export default function AllResultsForm() {
         <Card className="max-w-2xl mx-auto p-8 text-center space-y-3 border-none shadow-none bg-transparent">
           <div className="relative inline-block">
             <div className="absolute inset-0 rounded-full bg-green-100 dark:bg-green-900/30 animate-ping opacity-25" />
-            <Loader2 className="h-8 w-8 animate-spin relative text-green-600" />
+            <Loader2 className="h-8 w-8 animate-spin relative text-primary" />
           </div>
           <div className="space-y-0.5">
             <p className="text-base font-semibold">Fetching your results</p>

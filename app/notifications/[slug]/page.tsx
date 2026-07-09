@@ -11,7 +11,7 @@ interface NotificationPageProps {
 async function getNotifications() {
   try {
     const res = await fetch(
-      "https://jntuh-api.onrender.com/notifications?refresh=false",
+      `${process.env.NEXT_PUBLIC_API_URL || "https://jntuh-api.onrender.com"}/notifications?refresh=false`,
       { cache: "no-store" },
     );
     if (!res.ok) return [];
@@ -108,7 +108,7 @@ export default async function NotificationDetailPage({ params, searchParams }: N
   }
 
   return (
-    <main className="min-h-screen bg-[#fafafa] dark:bg-gray-950">
+    <main className="min-h-screen bg-background dark:bg-background">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-50/50 dark:bg-blue-950/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-50/50 dark:bg-indigo-950/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
