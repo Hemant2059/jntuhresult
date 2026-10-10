@@ -2,9 +2,9 @@
 import branches from "@/lib/branch";
 import colleges from "@/lib/college";
 import React from "react";
-import { ScrollText } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
-import MmMemo from "./mm-memo";
+import { downloadMmPdf } from "@/lib/memo-pdf";
 
 type Details = {
   NAME: string;
@@ -50,7 +50,15 @@ const SemesterTable = ({
     .filter(([_, sub]) => sub.grade === "F")
     .map(([subCode]) => subCode);
 
-  const [showMemo, setShowMemo] = React.useState(false);
+  const [isExporting, setIsExporting] = React.useState(false);
+  const handleDownload = () => {
+    setIsExporting(true);
+    try {
+      downloadMmPdf(data, semester);
+    } finally {
+      setTimeout(() => setIsExporting(false), 300);
+    }
+  };
 
   return (
     name && (
@@ -61,11 +69,12 @@ const SemesterTable = ({
             <p className="text-muted-foreground text-xs">Semester performance report</p>
           </div>
           <Button
-            onClick={() => setShowMemo(true)}
+            onClick={handleDownload}
+            disabled={isExporting}
             className="rounded-full px-5 bg-primary hover:bg-primary/90 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 w-full sm:w-auto"
           >
-            <ScrollText className="h-3.5 w-3.5" />
-            Download Memo
+            {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+            {isExporting ? "Generating..." : "Download Memo"}
           </Button>
         </div>
 
@@ -229,9 +238,6 @@ const SemesterTable = ({
           </div>
         </div>
       </div>
-      {showMemo && (
-        <MmMemo data={data} semester={semester} onClose={() => setShowMemo(false)} />
-      )}
       </>
     )
   );

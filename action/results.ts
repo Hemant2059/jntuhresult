@@ -11,10 +11,21 @@ function toGpa(v: any): number {
 }
 
 // Helper: capitalize top-level keys (details→Details, semesters→Semesters, etc.)
+// Sorted by sem key so UI renders 1-1..4-2 deterministically.
+function sortSemKeys(keys: string[]): string[] {
+  return [...keys].sort((a, b) => {
+    const [ay, as_] = a.split("-").map(Number);
+    const [by, bs_] = b.split("-").map(Number);
+    if (ay !== by) return ay - by;
+    return as_ - bs_;
+  });
+}
+
 function transformAcademicResponse(d: any) {
   if (!d || typeof d !== 'object') return d;
   const semesters: Record<string, any> = {};
-  for (const [sem, sd] of Object.entries(d.semesters || {})) {
+  for (const sem of sortSemKeys(Object.keys(d.semesters || {}))) {
+    const sd = (d.semesters as any)[sem];
     semesters[sem] = {
       Result: (sd as any).result,
       SGPA: toGpa((sd as any).sgpa),
@@ -33,7 +44,8 @@ function transformSemesterResponse(d: any) {
 function transformAllResultResponse(d: any) {
   if (!d || typeof d !== 'object') return d;
   const results: Record<string, any[]> = {};
-  for (const [sem, entries] of Object.entries(d.results || {})) {
+  for (const sem of sortSemKeys(Object.keys(d.results || {}))) {
+    const entries = (d.results as any)[sem];
     results[sem] = (entries as any[]).map((e: any) => ({
       exam_code: e.exam_code, type: e.type, result_url: e.result_url, Result: e.result,
     }));

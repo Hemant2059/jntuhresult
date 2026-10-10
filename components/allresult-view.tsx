@@ -3,10 +3,9 @@
 import branches from "@/lib/branch";
 import colleges from "@/lib/college";
 import React from "react";
-import { Download, Loader2, Award, FileText } from "lucide-react";
+import { Download, Loader2, Award } from "lucide-react";
 import { Button } from "./ui/button";
-import { downloadAsPDF } from "@/lib/download-pdf";
-import AllResultMemo from "./allresult-memo";
+import { downloadTranscriptPdf } from "@/lib/memo-pdf";
 
 type SubjectData = {
   name: string;
@@ -46,14 +45,13 @@ const AllResultsView = ({ data }: { data: AllResultsData }) => {
   const branch = branches[branchKey] || "Unknown Branch";
 
   const [isExporting, setIsExporting] = React.useState(false);
-  const [showMemo, setShowMemo] = React.useState(false);
 
-  const handleDownload = async () => {
+  const handleDownload = () => {
     setIsExporting(true);
     try {
-      await downloadAsPDF(`all-results-${rollno}`, `Full_Academic_History_${rollno}`);
+      downloadTranscriptPdf(data);
     } finally {
-      setIsExporting(false);
+      setTimeout(() => setIsExporting(false), 300);
     }
   };
 
@@ -73,19 +71,12 @@ const AllResultsView = ({ data }: { data: AllResultsData }) => {
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <Button
-              onClick={() => setShowMemo(true)}
-              className="rounded-full px-5 bg-amber-600 hover:bg-amber-700 shadow-lg shadow-amber-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 flex-1 sm:flex-none"
-            >
-              <FileText className="h-3.5 w-3.5" />
-              Transcript
-            </Button>
-            <Button
               onClick={handleDownload}
               disabled={isExporting}
               className="rounded-full px-5 bg-primary hover:bg-primary/90 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 flex-1 sm:flex-none"
             >
               {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
-              {isExporting ? "Generating PDF..." : "Download PDF"}
+              {isExporting ? "Generating..." : "Download Transcript"}
             </Button>
           </div>
         </div>
@@ -253,9 +244,6 @@ const AllResultsView = ({ data }: { data: AllResultsData }) => {
           </p>
         </div>
       </div>
-      {showMemo && (
-        <AllResultMemo data={data} onClose={() => setShowMemo(false)} />
-      )}
     </div>
   );
 };

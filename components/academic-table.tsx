@@ -2,9 +2,9 @@
 import React from "react";
 import branches from "@/lib/branch";
 import colleges from "@/lib/college";
-import { ScrollText } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
-import CmmMemo from "./cmm-memo";
+import { downloadCmmPdf } from "@/lib/memo-pdf";
 
 type Details = {
   NAME: string;
@@ -45,7 +45,27 @@ const AcademicTable = (data: AcademicData) => {
   const branchKey = rollno.slice(6, 8) as keyof typeof branches;
   const branch = branches[branchKey] || "Unknown";
 
-  const [showMemo, setShowMemo] = React.useState(false);
+  const [isExporting, setIsExporting] = React.useState(false);
+
+  const sortedSemesters = React.useMemo(
+    () =>
+      Object.keys(Semesters).sort((a, b) => {
+        const [ay, as_] = a.split("-").map(Number);
+        const [by, bs_] = b.split("-").map(Number);
+        if (ay !== by) return ay - by;
+        return as_ - bs_;
+      }),
+    [Semesters],
+  );
+
+  const handleDownload = () => {
+    setIsExporting(true);
+    try {
+      downloadCmmPdf(data);
+    } finally {
+      setTimeout(() => setIsExporting(false), 300);
+    }
+  };
 
   return (
     <div className="max-w-5xl md:mx-auto space-y-8 pb-20 sm:px-0 mx-0 px-0">
@@ -57,11 +77,12 @@ const AcademicTable = (data: AcademicData) => {
             </p>
           </div>
           <Button
-            onClick={() => setShowMemo(true)}
+            onClick={handleDownload}
+            disabled={isExporting}
             className="rounded-full px-5 bg-primary hover:bg-primary/90 shadow-lg shadow-blue-500/20 gap-1.5 h-9 text-xs transition-all active:scale-95 w-full sm:w-auto"
           >
-            <ScrollText className="h-3.5 w-3.5" />
-            Download CMM
+            {isExporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+            {isExporting ? "Generating..." : "Download CMM"}
           </Button>
         </div>
 
@@ -115,7 +136,9 @@ const AcademicTable = (data: AcademicData) => {
 
         {/* Semesters */}
         <div className="space-y-6 sm:space-y-8">
-          {Object.entries(Semesters).map(([semKey, semesterData]) => (
+          {sortedSemesters.map((semKey) => {
+            const semesterData = Semesters[semKey];
+            return (
             <div className="overflow-hidden" key={semKey}>
               <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                 <div className="h-px flex-1 bg-border" />
@@ -205,7 +228,8 @@ const AcademicTable = (data: AcademicData) => {
                 <span className="text-sm sm:text-base font-black">{semesterData.SGPA}</span>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Performance Summary */}
@@ -230,9 +254,6 @@ const AcademicTable = (data: AcademicData) => {
           </div>
         </div>
       </div>
-      {showMemo && (
-        <CmmMemo data={data} onClose={() => setShowMemo(false)} />
-      )}
     </div>
   );
 };
